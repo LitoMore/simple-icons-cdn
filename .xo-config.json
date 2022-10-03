@@ -1,0 +1,6 @@
+{
+  "prettier": true,
+  "rules": {
+    "unicorn/prefer-module": 0
+  }
+}

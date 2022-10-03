@@ -1,0 +1,10 @@
+{
+	"extends": "@sindresorhus/tsconfig",
+	"module": "ES2020",
+	"moduleResolution": "node",
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"outDir": "distribution"
+	},
+	"include": ["source"]
+}

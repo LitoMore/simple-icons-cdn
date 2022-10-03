@@ -1,0 +1,43 @@
+{
+  "private": true,
+  "name": "simple-icons-badgen",
+  "version": "0.0.0",
+  "description": "Simple Icons service for Badgen",
+  "exports": "./distribution/app.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && micro distribution/app.js",
+    "dev": "npm run build && micro-dev distribution/app.js",
+    "test": "xo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LitoMore/simple-icons-badgen.git"
+  },
+  "keywords": [
+    "simple-icons",
+    "badgen",
+    "badges",
+    "shields",
+    "simpleicons",
+    "brands",
+    "logos"
+  ],
+  "author": "LitoMore",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LitoMore/simple-icons-badgen/issues"
+  },
+  "homepage": "https://github.com/LitoMore/simple-icons-badgen#readme",
+  "dependencies": {
+    "micro": "^9.4.1",
+    "simple-icons": "^7.13.0"
+  },
+  "devDependencies": {
+    "@sindresorhus/tsconfig": "^3.0.1",
+    "@types/node": "^18.7.23",
+    "micro-dev": "^3.1.0",
+    "typescript": "^4.8.4",
+    "xo": "^0.52.3"
+  }
+}
