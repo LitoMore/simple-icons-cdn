@@ -6,8 +6,8 @@
   "exports": "./distribution/app.js",
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && micro distribution/app.js",
-    "dev": "npm run build && micro-dev distribution/app.js",
+    "start": "npm run build && node distribution/app.js",
+    "dev": "concurrently 'tsc --watch' 'nodemon -q distribution/app.js'",
     "test": "xo"
   },
   "repository": {
@@ -30,13 +30,16 @@
   },
   "homepage": "https://github.com/LitoMore/simple-icons-badgen#readme",
   "dependencies": {
-    "micro": "^9.4.1",
+    "express": "^4.18.1",
     "simple-icons": "^7.13.0"
   },
   "devDependencies": {
     "@sindresorhus/tsconfig": "^3.0.1",
+    "@types/express": "^4.17.14",
     "@types/node": "^18.7.23",
-    "micro-dev": "^3.1.0",
+    "concurrently": "^7.4.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
     "typescript": "^4.8.4",
     "xo": "^0.52.3"
   }
