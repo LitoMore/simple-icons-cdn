@@ -1,6 +1,6 @@
-# simple-icons-badgen
+# simple-icons-cdn
 
-Simple Icons service for Badgen
+Simple Icons CDN
 
 ## License
 

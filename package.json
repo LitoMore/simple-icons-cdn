@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "simple-icons-badgen",
+  "name": "simple-icons-cdn",
   "version": "0.0.0",
-  "description": "Simple Icons service for Badgen",
+  "description": "Simple Icons CDN",
   "exports": "./distribution/app.js",
   "scripts": {
     "build": "del-cli distribution && tsc",
@@ -10,10 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LitoMore/simple-icons-badgen.git"
+    "url": "git+https://github.com/LitoMore/simple-icons-cdn.git"
   },
   "keywords": [
     "simple-icons",
+    "cdn",
     "badgen",
     "badges",
     "shields",
@@ -24,9 +25,9 @@
   "author": "LitoMore",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/LitoMore/simple-icons-badgen/issues"
+    "url": "https://github.com/LitoMore/simple-icons-cdn/issues"
   },
-  "homepage": "https://github.com/LitoMore/simple-icons-badgen#readme",
+  "homepage": "https://github.com/LitoMore/simple-icons-cdn#readme",
   "dependencies": {
     "my-way": "^2.0.0",
     "simple-icons": "^7.15.0"
