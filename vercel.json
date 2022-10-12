@@ -7,5 +7,8 @@
     "api/*.ts": {
       "memory": 512
     }
+  },
+  "github": {
+    "silent": true
   }
 }
