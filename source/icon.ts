@@ -24,8 +24,6 @@ export const getSimpleIcon = (slug?: string) => {
 };
 
 export const getIconSvg = (icon: SimpleIcon, color = '') => {
-	console.log('color', color)
 	const hex = normalizeColor(color) || `#${icon.hex}`;
-	console.log(hex);
 	return icon.svg.replace('<svg ', `<svg fill="${hex}" `);
 };
