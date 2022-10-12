@@ -29,7 +29,7 @@
   "homepage": "https://github.com/LitoMore/simple-icons-badgen#readme",
   "dependencies": {
     "my-way": "^2.0.0",
-    "simple-icons": "^7.13.0"
+    "simple-icons": "^7.15.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.23",
