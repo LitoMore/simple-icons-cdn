@@ -1,4 +1,4 @@
-import {cssKeywords} from './colors.js';
+import {cssKeywords} from './colors';
 
 export const normalizeColor = (style: string) => {
 	if (style in cssKeywords) {
@@ -8,7 +8,7 @@ export const normalizeColor = (style: string) => {
 	if (/^[a-f\d]{3-8}$/i.test(style)) {
 		let color = style;
 		if (color.length < 6) {
-			color = [...color.slice(0, 3)].map((x) => x.repeat(2)).join('');
+			color = [...color.slice(0, 3)].map(x => x.repeat(2)).join('');
 		} else if (color.length > 6) {
 			color = color.slice(0, 6);
 		}

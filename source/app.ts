@@ -1,28 +1,24 @@
-import express from 'express';
-import {getSimpleIcon, getIconSvg} from './icon.js';
+import type {VercelRequest, VercelResponse} from '@vercel/node';
+import router from 'my-way';
+import {getSimpleIcon, getIconSvg} from './icon';
 
-const app = express();
+const app = (request: VercelRequest, response: VercelResponse) => {
+	if (request.method !== 'GET') {
+		return response.status(403).send('');
+	}
 
-app.get('/:slug/:color?', (request, response) => {
-	const {slug, color} = request.params;
+	const matchRoute = router('/:slug/:color?', request.url ?? '/');
+	const {slug, color} = matchRoute ?? {};
 	const icon = getSimpleIcon(slug);
 
 	if (icon) {
-		response.set({
-			'Content-Type': 'image/svg+xml',
-			'Cache-Control':
-				'public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800',
-		});
-
 		const iconSvg = getIconSvg(icon, color);
-		response.send(iconSvg);
-	} else {
-		response.status(404);
+		response.setHeader('Content-Type', 'image/svg+xml');
+		response.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800');
+		return response.send(iconSvg);
 	}
-});
 
-app.use('*', (_, response) => {
-	response.status(403);
-});
+	return response.status(404).send('');
+};
 
-app.listen(3000);
+export default app;
