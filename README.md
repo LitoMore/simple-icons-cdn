@@ -20,7 +20,7 @@ Optional. Default to the color of icon from [Simple Icons](https://simpleicons.o
 
 ### Example
 
-- <img height="14" src="https://si-cdn.vercel.app/simpleicons"/> - https://si-cdn.vercel.app/simpleicons
+- <picture><source media="(prefers-color-scheme: dark)" srcset="https://si-cdn.vercel.app/simpleicons/eee"><source media="(prefers-color-scheme: light)" srcset="https://si-cdn.vercel.app/simpleicons"><img height="14" src="https://si-cdn.vercel.app/simpleicons"/></picture> - https://icons.ly/simpleicons
 - <img height="14" src="https://si-cdn.vercel.app/simpleicons/blue"/> - https://si-cdn.vercel.app/simpleicons/blue
 - <img height="14" src="https://si-cdn.vercel.app/simpleicons/hotpink"/> - https://si-cdn.vercel.app/simpleicons/hotpink
 - <img height="14" src="https://si-cdn.vercel.app/simpleicons/00ccff"/> - https://si-cdn.vercel.app/simpleicons/00ccff
