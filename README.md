@@ -5,7 +5,7 @@ Simple Icons CDN
 ## Usage
 
 ```
-GET https://icons.ly/:icon_slug/:color?
+GET https://si-cdn.vercel.app/:icon_slug/:color?
 ```
 
 ### Parameters
@@ -20,18 +20,11 @@ Optional. Default to the color of icon from [Simple Icons](https://simpleicons.o
 
 ### Example
 
-- <picture><source media="(prefers-color-scheme: dark)" srcset="https://si-cdn.vercel.app/simpleicons/eee"><source media="(prefers-color-scheme: light)" srcset="https://si-cdn.vercel.app/simpleicons"><img height="14" src="https://icons.ly/simpleicons"/></picture> - https://icons.ly/simpleicons
-- <img height="14" src="https://icons.ly/simpleicons/blue"/> - https://icons.ly/simpleicons/blue
-- <img height="14" src="https://icons.ly/simpleicons/hotpink"/> - https://icons.ly/simpleicons/hotpink
-- <img height="14" src="https://icons.ly/simpleicons/00ccff"/> - https://icons.ly/simpleicons/00ccff
-- <img height="14" src="https://icons.ly/simpleicons/f9c"/> - https://icons.ly/simpleicons/f9c
-
-
-### Domain aliases
-
-- icons.ly
-- si-cdn.vercel.app
-- si-cdn.now.sh
+- <img height="14" src="https://si-cdn.vercel.app/simpleicons"/> - https://si-cdn.vercel.app/simpleicons
+- <img height="14" src="https://si-cdn.vercel.app/simpleicons/blue"/> - https://si-cdn.vercel.app/simpleicons/blue
+- <img height="14" src="https://si-cdn.vercel.app/simpleicons/hotpink"/> - https://si-cdn.vercel.app/simpleicons/hotpink
+- <img height="14" src="https://si-cdn.vercel.app/simpleicons/00ccff"/> - https://si-cdn.vercel.app/simpleicons/00ccff
+- <img height="14" src="https://si-cdn.vercel.app/simpleicons/f9c"/> - https://si-cdn.vercel.app/simpleicons/f9c
 
 ## License
 
