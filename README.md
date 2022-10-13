@@ -26,6 +26,12 @@ Optional. Default to the color of icon from [Simple Icons](https://simpleicons.o
 - <img height="14" src="https://si-cdn.vercel.app/simpleicons/00ccff"/> - https://si-cdn.vercel.app/simpleicons/00ccff
 - <img height="14" src="https://si-cdn.vercel.app/simpleicons/f9c"/> - https://si-cdn.vercel.app/simpleicons/f9c
 
+### Domain aliases
+
+- si-cdn.vercel.app
+- si-cdn.now.sh
+- icons.ly (using Cloudflare DNS)
+
 ## License
 
 MIT
