@@ -4,10 +4,11 @@ import {getSimpleIcon, getIconSvg} from './icon';
 
 const app = (request: VercelRequest, response: VercelResponse) => {
 	if (request.method !== 'GET') {
-		return response.status(403).send('');
+		return response.status(403).send({status: 403, message: 'forbidden'});
 	}
 
-	const matchRoute = router('/:slug/:color?', request.url ?? '/');
+	const requestUrl = request.url ?? '/';
+	const matchRoute = router('/:slug/:color?', requestUrl);
 	const {slug, color} = matchRoute ?? {};
 	const icon = getSimpleIcon(slug);
 
@@ -18,7 +19,15 @@ const app = (request: VercelRequest, response: VercelResponse) => {
 		return response.send(iconSvg);
 	}
 
-	return response.status(404).send('');
+	if (slug) {
+		return response.status(404).send({status: 404, message: 'icon not found'});
+	}
+
+	if (requestUrl === '/') {
+		return response.redirect('https://github.com/LitoMore/simple-icons-cdn');
+	}
+
+	return response.status(403).send({status: 403, message: 'forbidden'});
 };
 
 export default app;
