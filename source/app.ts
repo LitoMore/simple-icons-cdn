@@ -17,7 +17,6 @@ const app = (request: VercelRequest, response: VercelResponse) => {
 	if (icon) {
 		const iconSvg = getIconSvg(icon, color);
 		response.setHeader('Content-Type', 'image/svg+xml');
-
 		return response.send(iconSvg);
 	}
 
