@@ -6,7 +6,7 @@ const app = (request: VercelRequest, response: VercelResponse) => {
 	response.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800');
 
 	if (request.method !== 'GET') {
-		return response.status(403).send({status: 403, message: 'forbidden'});
+		return response.status(404).send({status: 404});
 	}
 
 	const requestUrl = request.url ?? '/';
@@ -21,14 +21,14 @@ const app = (request: VercelRequest, response: VercelResponse) => {
 	}
 
 	if (slug) {
-		return response.status(404).send({status: 404, message: 'icon not found'});
+		return response.status(404).send({status: 404});
 	}
 
 	if (requestUrl === '/') {
-		return response.redirect('https://github.com/LitoMore/simple-icons-cdn');
+		return response.redirect(308, 'https://github.com/LitoMore/simple-icons-cdn');
 	}
 
-	return response.status(403).send({status: 403, message: 'forbidden'});
+	return response.status(404).send({status: 404});
 };
 
 export default app;
