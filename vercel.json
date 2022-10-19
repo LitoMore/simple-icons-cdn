@@ -11,5 +11,7 @@
   "github": {
     "silent": true
   },
-  "outputDirectory": "distribution"
+  "buildCommand": "npm run build",
+  "outputDirectory": "distribution",
+  "installCommand": "npm install"
 }
