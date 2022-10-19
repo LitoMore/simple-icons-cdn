@@ -9,8 +9,8 @@ export const normalizeColor = (style: string) => {
 		let color = style;
 		if (color.length < 6) {
 			color = [...color.slice(0, 3)].map(x => x.repeat(2)).join('');
-		} else if (color.length > 6) {
-			color = color.slice(0, 6);
+		} else if (color.length > 8) {
+			color = color.slice(0, 8);
 		}
 
 		return '#' + color;

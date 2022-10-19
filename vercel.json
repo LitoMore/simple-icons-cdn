@@ -10,5 +10,6 @@
   },
   "github": {
     "silent": true
-  }
+  },
+  "outputDirectory": "distribution"
 }
