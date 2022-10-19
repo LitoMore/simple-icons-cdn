@@ -23,8 +23,9 @@ Optional. Default to the color of icon from [Simple Icons](https://simpleicons.o
 - <picture><source media="(prefers-color-scheme: dark)" srcset="https://si-cdn.vercel.app/simpleicons/eee"><source media="(prefers-color-scheme: light)" srcset="https://si-cdn.vercel.app/simpleicons"><img height="14" src="https://si-cdn.vercel.app/simpleicons"/></picture> - https://si-cdn.vercel.app/simpleicons
 - <img height="14" src="https://si-cdn.vercel.app/simpleicons/blue"/> - https://si-cdn.vercel.app/simpleicons/blue
 - <img height="14" src="https://si-cdn.vercel.app/simpleicons/hotpink"/> - https://si-cdn.vercel.app/simpleicons/hotpink
+- <img height="14" src="https://si-cdn.vercel.app/simpleicons/0cf"/> - https://si-cdn.vercel.app/simpleicons/0cf
 - <img height="14" src="https://si-cdn.vercel.app/simpleicons/00ccff"/> - https://si-cdn.vercel.app/simpleicons/00ccff
-- <img height="14" src="https://si-cdn.vercel.app/simpleicons/f9c"/> - https://si-cdn.vercel.app/simpleicons/f9c
+- <img height="14" src="https://si-cdn.vercel.app/simpleicons/00ccff99"/> - https://si-cdn.vercel.app/simpleicons/00ccff99
 
 ### Domain aliases
 
