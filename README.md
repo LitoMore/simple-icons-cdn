@@ -29,8 +29,8 @@ Optional. Default to the color of icon from [Simple Icons](https://simpleicons.o
 
 ### Domain aliases
 
-- cdn.simpleicons.org
-- icons.ly (using Cloudflare DNS)
+- [cdn.simpleicons.org](https://cdn.simpleicons.org/simpleicons)
+- [icons.ly](https://icons.ly/simpleicons) (using Cloudflare DNS)
 
 ## License
 
