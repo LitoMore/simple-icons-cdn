@@ -5,7 +5,7 @@ Simple Icons CDN
 ## Usage
 
 ```
-GET https://si-cdn.vercel.app/:icon_slug/:color?
+GET https://cdn.simpleicons.org/:icon_slug/:color?
 ```
 
 ### Parameters
@@ -20,17 +20,16 @@ Optional. Default to the color of icon from [Simple Icons](https://simpleicons.o
 
 ### Example
 
-- <picture><source media="(prefers-color-scheme: dark)" srcset="https://si-cdn.vercel.app/simpleicons/eee"><source media="(prefers-color-scheme: light)" srcset="https://si-cdn.vercel.app/simpleicons"><img height="14" src="https://si-cdn.vercel.app/simpleicons"/></picture> - https://si-cdn.vercel.app/simpleicons
-- <img height="14" src="https://si-cdn.vercel.app/simpleicons/blue"/> - https://si-cdn.vercel.app/simpleicons/blue
-- <img height="14" src="https://si-cdn.vercel.app/simpleicons/hotpink"/> - https://si-cdn.vercel.app/simpleicons/hotpink
-- <img height="14" src="https://si-cdn.vercel.app/simpleicons/0cf"/> - https://si-cdn.vercel.app/simpleicons/0cf
-- <img height="14" src="https://si-cdn.vercel.app/simpleicons/00ccff"/> - https://si-cdn.vercel.app/simpleicons/00ccff
-- <img height="14" src="https://si-cdn.vercel.app/simpleicons/00ccff99"/> - https://si-cdn.vercel.app/simpleicons/00ccff99
+- <picture><source media="(prefers-color-scheme: dark)" srcset="https://cdn.simpleicons.org/simpleicons/eee"><source media="(prefers-color-scheme: light)" srcset="https://cdn.simpleicons.org/simpleicons"><img height="14" src="https://cdn.simpleicons.org/simpleicons"/></picture> - https://cdn.simpleicons.org/simpleicons
+- <img height="14" src="https://cdn.simpleicons.org/simpleicons/blue"/> - https://cdn.simpleicons.org/simpleicons/blue
+- <img height="14" src="https://cdn.simpleicons.org/simpleicons/hotpink"/> - https://cdn.simpleicons.org/simpleicons/hotpink
+- <img height="14" src="https://cdn.simpleicons.org/simpleicons/0cf"/> - https://cdn.simpleicons.org/simpleicons/0cf
+- <img height="14" src="https://cdn.simpleicons.org/simpleicons/00ccff"/> - https://cdn.simpleicons.org/simpleicons/00ccff
+- <img height="14" src="https://cdn.simpleicons.org/simpleicons/00ccff99"/> - https://cdn.simpleicons.org/simpleicons/00ccff99
 
 ### Domain aliases
 
-- si-cdn.vercel.app
-- si-cdn.now.sh
+- cdn.simpleicons.org
 - icons.ly (using Cloudflare DNS)
 
 ## License
