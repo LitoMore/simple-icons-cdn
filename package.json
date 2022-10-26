@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LitoMore/simple-icons-cdn.git"
+    "url": "git+https://github.com/simple-icons/simple-icons-cdn.git"
   },
   "keywords": [
     "simple-icons",
@@ -22,12 +22,12 @@
     "brands",
     "logos"
   ],
-  "author": "LitoMore",
+  "author": "Simple Icons Collaborators",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/LitoMore/simple-icons-cdn/issues"
+    "url": "https://github.com/simple-icons/simple-icons-cdn/issues"
   },
-  "homepage": "https://github.com/LitoMore/simple-icons-cdn#readme",
+  "homepage": "https://github.com/simple-icons/simple-icons-cdn#readme",
   "dependencies": {
     "my-way": "^2.0.0",
     "simple-icons": "^7.17.0"
