@@ -16,7 +16,7 @@ All icon slugs can be found at [slugs.md](https://github.com/simple-icons/simple
 
 #### `color`
 
-Optional. Default to the color of icon from [Simple Icons](https://simpleicons.org).
+Optional. Default to the color of icon from https://simpleicons.org.
 
 ### Example
 
