@@ -16,7 +16,7 @@ All icon slugs can be found at [slugs.md](https://github.com/simple-icons/simple
 
 #### `color`
 
-Optional. Default to the color of icon from https://simpleicons.org. It supports [hex triplet](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) and [CSS keywords](https://www.w3.org/wiki/CSS/Properties/color/keywords).
+Optional. Default to the color of icon from [Simpleicons.org](https://simpleicons.org). It supports [hex triplet](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) and [CSS keywords](https://www.w3.org/wiki/CSS/Properties/color/keywords).
 
 ### Example
 
