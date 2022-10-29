@@ -16,7 +16,7 @@ All icon slugs can be found at [slugs.md](https://github.com/simple-icons/simple
 
 #### `color`
 
-Optional. Default to the color of icon from [Simpleicons.org](https://simpleicons.org). It supports [hex triplet](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) and [CSS keywords](https://www.w3.org/wiki/CSS/Properties/color/keywords).
+Optional. Default to the color of icon from [Simpleicons.org](https://simpleicons.org). It supports [hex colors](https://developer.mozilla.org/en-US/docs/Web/CSS/hex-color) and [CSS keywords](https://www.w3.org/wiki/CSS/Properties/color/keywords).
 
 ### Example
 
@@ -24,6 +24,7 @@ Optional. Default to the color of icon from [Simpleicons.org](https://simpleicon
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/blue"/> - https://cdn.simpleicons.org/simpleicons/blue
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/hotpink"/> - https://cdn.simpleicons.org/simpleicons/hotpink
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/0cf"/> - https://cdn.simpleicons.org/simpleicons/0cf
+- <img height="14" src="https://cdn.simpleicons.org/simpleicons/0cf9"/> - https://cdn.simpleicons.org/simpleicons/0cf9
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/00ccff"/> - https://cdn.simpleicons.org/simpleicons/00ccff
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/00ccff99"/> - https://cdn.simpleicons.org/simpleicons/00ccff99
 
