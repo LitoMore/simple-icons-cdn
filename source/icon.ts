@@ -16,7 +16,8 @@ export const getSimpleIcon = (slug?: string) => {
 		+ normaizedSlug.charAt(0).toUpperCase()
 		+ normaizedSlug.slice(1)) as keyof typeof simpleIcons;
 
-	if (iconKey in simpleIcons) {
+	// @ts-expect-error: Expetected `default` condition
+	if (iconKey in simpleIcons && iconKey !== 'default') {
 		return simpleIcons[iconKey];
 	}
 
