@@ -1,5 +1,5 @@
 import type {SimpleIcon} from 'simple-icons';
-import * as simpleIcons from 'simple-icons/icons'; // eslint-disable-line n/file-extension-in-import
+import * as simpleIcons from 'simple-icons';
 import {normalizeColor} from './utils';
 
 export const getSimpleIcon = (slug?: string) => {
