@@ -33,11 +33,11 @@
     "simple-icons": "^8.4.0"
   },
   "devDependencies": {
-    "@types/node": "^18.7.23",
-    "@vercel/node": "^2.5.24",
+    "@types/node": "^18.13.0",
+    "@vercel/node": "^2.9.2",
     "del-cli": "^5.0.0",
-    "typescript": "^4.8.4",
-    "xo": "^0.52.3"
+    "typescript": "^4.9.5",
+    "xo": "^0.53.1"
   },
   "xo": {
     "rules": {
