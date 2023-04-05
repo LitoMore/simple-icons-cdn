@@ -12,7 +12,7 @@ GET https://cdn.simpleicons.org/:icon_slug/:color?
 
 #### `icon_slug`
 
-You can simply click the icon title on [simpleicons.org](https://simpleicons.org) to copy the slug to your clipboard.
+You can simply click the icon title on [simpleicons.org](https://simpleicons.org) to copy the slug.
 
 All icon slugs can be found at [slugs.md](https://github.com/simple-icons/simple-icons/blob/master/slugs.md).
 
