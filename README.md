@@ -12,11 +12,13 @@ GET https://cdn.simpleicons.org/:icon_slug/:color?
 
 #### `icon_slug`
 
+You can simply click the icon title on [simpleicons.org](https://simpleicons.org) to copy the slug to your clipboard.
+
 All icon slugs can be found at [slugs.md](https://github.com/simple-icons/simple-icons/blob/master/slugs.md).
 
 #### `color`
 
-Optional. Default to the color of icon from [Simpleicons.org](https://simpleicons.org). It supports [hex colors](https://developer.mozilla.org/en-US/docs/Web/CSS/hex-color) and [CSS keywords](https://www.w3.org/wiki/CSS/Properties/color/keywords).
+Optional. Default to the color of icon from [simpleicons.org](https://simpleicons.org). It supports [hex colors](https://developer.mozilla.org/en-US/docs/Web/CSS/hex-color) and [CSS keywords](https://www.w3.org/wiki/CSS/Properties/color/keywords).
 
 ### Example
 
