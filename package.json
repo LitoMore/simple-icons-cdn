@@ -30,7 +30,7 @@
   "homepage": "https://github.com/LitoMore/simple-icons-cdn#readme",
   "dependencies": {
     "my-way": "^2.0.0",
-    "simple-icons": "^9.0.0"
+    "simple-icons": "^9.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.2.5",
