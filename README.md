@@ -2,6 +2,8 @@
 
 Simple Icons CDN
 
+![Powered by Vercel](https://shields.io/badge/Powered_by_Vercel-black?logo=vercel&style=flat-square)
+
 ## Usage
 
 ```
