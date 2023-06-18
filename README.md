@@ -1,7 +1,5 @@
 <h1 align="center">simple-icons-cdn</h1>
 
-<p align="center">Simple Icons CDN</p>
-
 <p align="center">
   <a href="https://vercel.com">
     <img src="https://shields.io/badge/Powered_by_Vercel-black?logo=vercel&style=flat-square" />
