@@ -3,7 +3,9 @@
 <p align="center">Simple Icons CDN</p>
 
 <p align="center">
-  <img src="https://shields.io/badge/Powered_by_Vercel-black?logo=vercel&style=flat-square" />
+  <a href="https://vercel.com">
+    <img src="https://shields.io/badge/Powered_by_Vercel-black?logo=vercel&style=flat-square" />
+  </a>
 </p>
 
 ## Usage
