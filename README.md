@@ -1,8 +1,10 @@
-# simple-icons-cdn
+<h1 align="center">simple-icons-cdn</h1>
 
-Simple Icons CDN
+<p align="center">Simple Icons CDN</p>
 
-![Powered by Vercel](https://shields.io/badge/Powered_by_Vercel-black?logo=vercel&style=flat-square)
+<p align="center">
+  <img src="https://shields.io/badge/Powered_by_Vercel-black?logo=vercel&style=flat-square" />
+</p>
 
 ## Usage
 
