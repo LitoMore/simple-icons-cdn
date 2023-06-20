@@ -2,7 +2,11 @@
 
 <p align="center">
   <a href="https://vercel.com">
-    <img src="https://shields.io/badge/Powered_by_Vercel-black?logo=vercel&style=flat-square" />
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://shields.io/badge/Powered_by_Vercel-white?logo=vercel&style=flat-square&logoColor=black" />
+      <source media="(prefers-color-scheme: light)" srcset="https://shields.io/badge/Powered_by_Vercel-black?logo=vercel&style=flat-square" />
+      <img src="https://shields.io/badge/Powered_by_Vercel-black?logo=vercel&style=flat-square" alt="Powered by Vercel" />
+    </picture>
   </a>
 </p>
 
