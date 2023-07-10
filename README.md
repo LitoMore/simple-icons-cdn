@@ -13,7 +13,7 @@
 ## Usage
 
 ```
-GET https://cdn.simpleicons.org/:icon_slug/:color?
+GET https://cdn.simpleicons.org/:icon_slug/:color?/:dark_mode_color?
 ```
 
 ### Parameters
@@ -26,17 +26,23 @@ All icon slugs can be found at [slugs.md](https://github.com/simple-icons/simple
 
 #### `color`
 
-Optional. Default to the color of icon from [simpleicons.org](https://simpleicons.org). It supports [hex colors](https://developer.mozilla.org/en-US/docs/Web/CSS/hex-color) and [CSS keywords](https://www.w3.org/wiki/CSS/Properties/color/keywords).
+Optional. Default to the color of icon from [simpleicons.org](https://simpleicons.org). It supports [hex colors](https://developer.mozilla.org/en-US/docs/Web/CSS/hex-color) and [CSS keywords](https://www.w3.org/wiki/CSS/Properties/color/keywords). Passing in an invalid value will use the default color as a fallback.
+
+#### `dark_mode_color`
+
+Optional. It's used for dark mode and has the same function as `color`. The [CSS prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) will be used when a value is specified.
 
 ### Example
 
-- <picture><source media="(prefers-color-scheme: dark)" srcset="https://cdn.simpleicons.org/simpleicons/eee"><source media="(prefers-color-scheme: light)" srcset="https://cdn.simpleicons.org/simpleicons"><img height="14" src="https://cdn.simpleicons.org/simpleicons"/></picture> - https://cdn.simpleicons.org/simpleicons
+- <img height="14" src="https://cdn.simpleicons.org/simpleicons/111/eee"/> - https://cdn.simpleicons.org/simpleicons
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/blue"/> - https://cdn.simpleicons.org/simpleicons/blue
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/hotpink"/> - https://cdn.simpleicons.org/simpleicons/hotpink
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/0cf"/> - https://cdn.simpleicons.org/simpleicons/0cf
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/0cf9"/> - https://cdn.simpleicons.org/simpleicons/0cf9
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/00ccff"/> - https://cdn.simpleicons.org/simpleicons/00ccff
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/00ccff99"/> - https://cdn.simpleicons.org/simpleicons/00ccff99
+- <img height="14" src="https://cdn.simpleicons.org/simpleicons/orange/pink"> - https://cdn.simpleicons.org/simpleicons/orange/pink
+- <img height="14" src="https://cdn.simpleicons.org/simpleicons/_/eee"> - https://cdn.simpleicons.org/simpleicons/_/eee
 
 ### Domain aliases
 

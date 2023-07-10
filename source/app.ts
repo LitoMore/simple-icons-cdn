@@ -10,12 +10,12 @@ const app = (request: VercelRequest, response: VercelResponse) => {
 	}
 
 	const requestUrl = request.url ?? '/';
-	const matchRoute = router('/:slug/:color?', requestUrl);
-	const {slug, color} = matchRoute ?? {};
+	const matchRoute = router('/:slug/:color?/:darkModeColor?', requestUrl);
+	const {slug, color, darkModeColor} = matchRoute ?? {};
 	const icon = getSimpleIcon(slug);
 
 	if (icon) {
-		const iconSvg = getIconSvg(icon, color);
+		const iconSvg = getIconSvg(icon, color, darkModeColor);
 		response.setHeader('Content-Type', 'image/svg+xml');
 		return response.send(iconSvg);
 	}
