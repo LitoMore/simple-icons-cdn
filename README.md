@@ -10,6 +10,10 @@
   </a>
 </p>
 
+## Disclaimer
+
+We ask that all users read the [legal disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md) before using icons from Simple Icons.
+
 ## Usage
 
 ```
