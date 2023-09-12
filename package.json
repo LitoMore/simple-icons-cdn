@@ -37,11 +37,6 @@
     "@vercel/node": "^2.14.3",
     "del-cli": "^5.0.0",
     "typescript": "^5.0.4",
-    "xo": "^0.54.2"
-  },
-  "xo": {
-    "rules": {
-      "import/extensions": 0
-    }
+    "xo": "^0.56.0"
   }
 }

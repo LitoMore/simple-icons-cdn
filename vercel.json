@@ -1,10 +1,10 @@
 {
   "version": 2,
   "routes": [
-    { "src": "/.*", "dest": "api/index.ts" }
+    { "src": "/.*", "dest": "api/index.js" }
   ],
   "functions": {
-    "api/*.ts": {
+    "api/*.js": {
       "memory": 512
     }
   },

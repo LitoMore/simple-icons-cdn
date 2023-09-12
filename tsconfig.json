@@ -3,16 +3,16 @@
     "outDir": "distribution",
 		"module": "CommonJS",
 		"moduleResolution": "node",
-		"target": "ES2020",
+		"target": "ESNext",
 		"lib": [
 			"DOM",
 			"DOM.Iterable",
-			"ES2020"
+			"ESNext"
 		],
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": false,
 		"jsx": "react",
-		"declaration": true,
+		"declaration": false,
 		"pretty": true,
 		"newLine": "lf",
 		"stripInternal": true,
