@@ -1,5 +1,4 @@
 import type {VercelRequest, VercelResponse} from '@vercel/node';
-import router from 'my-way';
 import {getSimpleIcon, getIconSvg} from './icon.js';
 
 const app = (request: VercelRequest, response: VercelResponse) => {
@@ -12,10 +11,12 @@ const app = (request: VercelRequest, response: VercelResponse) => {
 		return response.status(404).send({status: 404});
 	}
 
-	const requestUrl = request.url ?? '/';
-	const matchRoute = router('/:slug/:color?/:darkModeColor?', requestUrl);
-	const {slug, color, darkModeColor} = matchRoute ?? {};
-	const icon = getSimpleIcon(slug);
+	const {iconSlug, color, darkModeColor} = request.query as {
+		iconSlug?: string;
+		color?: string;
+		darkModeColor?: string;
+	};
+	const icon = getSimpleIcon(iconSlug);
 
 	if (icon) {
 		const iconSvg = getIconSvg(icon, color, darkModeColor);
@@ -23,15 +24,8 @@ const app = (request: VercelRequest, response: VercelResponse) => {
 		return response.send(iconSvg);
 	}
 
-	if (slug) {
+	if (iconSlug) {
 		return response.status(404).send({status: 404});
-	}
-
-	if (requestUrl === '/') {
-		return response.redirect(
-			308,
-			'https://github.com/LitoMore/simple-icons-cdn',
-		);
 	}
 
 	return response.status(404).send({status: 404});

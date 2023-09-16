@@ -1,13 +1,18 @@
 {
   "version": 2,
-  "routes": [
-    { "src": "/.*", "dest": "api/index.js" }
-  ],
-  "functions": {
-    "api/*.js": {
-      "memory": 512
+  "rewrites": [
+    {
+      "source": "/:iconSlug/:color?/:darkModeColor?",
+      "destination": "/api"
     }
-  },
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://github.com/LitoMore/simple-icons-cdn",
+      "permanent": false
+    }
+  ],
   "github": {
     "silent": true
   },
