@@ -1,7 +1,4 @@
 {
   "prettier": true,
-  "ignores": ["app/index.js"],
-  "rules": {
-    "import/extensions": 0
-  }
+  "ignores": ["app/index.js"]
 }

@@ -1,6 +1,6 @@
 import type {VercelRequest, VercelResponse} from '@vercel/node';
 import router from 'my-way';
-import {getSimpleIcon, getIconSvg} from './icon';
+import {getSimpleIcon, getIconSvg} from './icon.js';
 
 const app = (request: VercelRequest, response: VercelResponse) => {
 	response.setHeader(

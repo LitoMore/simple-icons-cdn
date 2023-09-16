@@ -1,4 +1,4 @@
-import {cssKeywords} from './colors';
+import {cssKeywords} from './colors.js';
 
 export const normalizeColor = (style: string) => {
 	if (style in cssKeywords) {

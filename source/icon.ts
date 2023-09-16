@@ -1,6 +1,6 @@
 import type {SimpleIcon} from 'simple-icons';
 import * as simpleIcons from 'simple-icons';
-import {normalizeColor} from './utils';
+import {normalizeColor} from './utils.js';
 
 export const getSimpleIcon = (slug?: string) => {
 	if (!slug) {
