@@ -16,7 +16,5 @@
   "github": {
     "silent": true
   },
-  "buildCommand": "npm run build",
-  "outputDirectory": "distribution",
-  "installCommand": "npm install"
+  "installCommand": "npm ci --omit=dev"
 }

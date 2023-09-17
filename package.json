@@ -4,9 +4,8 @@
   "version": "0.0.0",
   "description": "Simple Icons CDN",
   "type": "module",
-  "exports": "./distribution/app.js",
+  "exports": "./source/app.js",
   "scripts": {
-    "build": "del-cli distribution && tsc",
     "test": "xo"
   },
   "repository": {
@@ -33,10 +32,6 @@
     "simple-icons": "^9.15.0"
   },
   "devDependencies": {
-    "@types/node": "^20.2.5",
-    "@vercel/node": "^2.14.3",
-    "del-cli": "^5.0.0",
-    "typescript": "^5.0.4",
     "xo": "^0.56.0"
   }
 }

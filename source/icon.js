@@ -1,8 +1,7 @@
-import type {SimpleIcon} from 'simple-icons';
 import * as simpleIcons from 'simple-icons';
 import {normalizeColor} from './utils.js';
 
-export const getSimpleIcon = (slug?: string) => {
+export const getSimpleIcon = (slug) => {
 	if (!slug) {
 		return null;
 	}
@@ -12,9 +11,8 @@ export const getSimpleIcon = (slug?: string) => {
 		.replaceAll('+', 'plus')
 		.replaceAll('.', 'dot');
 
-	const iconKey = ('si' +
-		normaizedSlug.charAt(0).toUpperCase() +
-		normaizedSlug.slice(1)) as keyof typeof simpleIcons;
+	const iconKey =
+		'si' + normaizedSlug.charAt(0).toUpperCase() + normaizedSlug.slice(1);
 
 	if (iconKey in simpleIcons) {
 		return simpleIcons[iconKey];
@@ -23,11 +21,7 @@ export const getSimpleIcon = (slug?: string) => {
 	return null;
 };
 
-export const getIconSvg = (
-	icon: SimpleIcon,
-	color = '',
-	darkModeColor = '',
-) => {
+export const getIconSvg = (icon, color = '', darkModeColor = '') => {
 	const hex = normalizeColor(color) || `#${icon.hex}`;
 	const darkModeHex = normalizeColor(darkModeColor);
 
