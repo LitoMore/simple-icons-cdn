@@ -16,5 +16,5 @@
   "github": {
     "silent": true
   },
-  "installCommand": "npm ci --omit=dev"
+  "installCommand": "npm i --omit=dev"
 }
