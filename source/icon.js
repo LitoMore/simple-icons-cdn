@@ -8,6 +8,7 @@ export const getSimpleIcon = (slug) => {
 
 	const normaizedSlug = slug
 		.toLowerCase()
+		.replaceAll(' ', 'plus')
 		.replaceAll('+', 'plus')
 		.replaceAll('.', 'dot');
 
