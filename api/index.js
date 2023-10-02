@@ -1,1 +1,3 @@
-export {default} from '../source/app.js';
+const app = require('../source/app.js');
+
+module.exports = app;

@@ -1,6 +1,6 @@
-import {cssKeywords} from './colors.js';
+const {cssKeywords} = require('./colors.js');
 
-export const normalizeColor = (style) => {
+const normalizeColor = (style) => {
 	if (style in cssKeywords) {
 		return cssKeywords[style];
 	}
@@ -10,4 +10,8 @@ export const normalizeColor = (style) => {
 	}
 
 	return '';
+};
+
+module.exports = {
+	normalizeColor,
 };
