@@ -3,6 +3,8 @@
   "name": "simple-icons-cdn",
   "version": "0.0.0",
   "description": "Simple Icons CDN",
+  "type": "module",
+  "exports": "./source/app.js",
   "scripts": {
     "test": "xo"
   },

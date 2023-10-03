@@ -1,4 +1,4 @@
-const {getSimpleIcon, getIconSvg} = require('./icon.js');
+import {getSimpleIcon, getIconSvg} from './icon.js';
 
 const app = (request, response) => {
 	response.setHeader(

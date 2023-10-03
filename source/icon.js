@@ -1,7 +1,7 @@
-const simpleIcons = require('simple-icons');
-const {normalizeColor} = require('./utils.js');
+import * as simpleIcons from 'simple-icons';
+import {normalizeColor} from './utils.js';
 
-const getSimpleIcon = (slug) => {
+export const getSimpleIcon = (slug) => {
 	if (!slug) {
 		return null;
 	}
@@ -22,7 +22,7 @@ const getSimpleIcon = (slug) => {
 	return null;
 };
 
-const getIconSvg = (icon, color = '', darkModeColor = '') => {
+export const getIconSvg = (icon, color = '', darkModeColor = '') => {
 	const hex = normalizeColor(color) || `#${icon.hex}`;
 	const darkModeHex = normalizeColor(darkModeColor);
 
@@ -34,9 +34,4 @@ const getIconSvg = (icon, color = '', darkModeColor = '') => {
 	}
 
 	return icon.svg.replace('<svg ', `<svg fill="${hex}" `);
-};
-
-module.exports = {
-	getSimpleIcon,
-	getIconSvg,
 };

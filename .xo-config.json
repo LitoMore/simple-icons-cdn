@@ -1,7 +1,4 @@
 {
   "prettier": true,
-  "ignores": ["app/index.js"],
-  "rules": {
-    "unicorn/prefer-module": "off"
-  }
+  "ignores": ["app/index.js"]
 }
