@@ -1,4 +1,4 @@
-import * as simpleIcons from 'simple-icons';
+import * as simpleIcons from 'simple-icons/index.mjs';
 import {normalizeColor} from './utils.js';
 
 export const getSimpleIcon = (slug) => {
