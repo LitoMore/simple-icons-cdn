@@ -13,9 +13,6 @@
       "permanent": false
     }
   ],
-  "github": {
-    "silent": true
-  },
   "trailingSlash": false,
   "installCommand": "npm i --omit=dev"
 }
