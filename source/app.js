@@ -19,10 +19,6 @@ const app = (request, response) => {
 		return response.send(iconSvg);
 	}
 
-	if (iconSlug) {
-		return response.status(404).send({status: 404});
-	}
-
 	return response.status(404).send({status: 404});
 };
 
