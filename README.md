@@ -48,6 +48,14 @@ Optional. It's used for dark mode and has the same function as `color`. The [CSS
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/orange/pink"> - https://cdn.simpleicons.org/simpleicons/orange/pink
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/_/eee"> - https://cdn.simpleicons.org/simpleicons/_/eee
 
+### Other usages
+
+#### Notion
+
+You can use this icon CDN anywhere in Notion which allows you to insert a custom image or icon.
+
+<img width="400" src="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot.png" />
+
 ### Domain aliases
 
 - [cdn.simpleicons.org](https://cdn.simpleicons.org/simpleicons)
