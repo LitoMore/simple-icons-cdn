@@ -54,7 +54,9 @@ Optional. It's used for dark mode and has the same function as `color`. The [CSS
 
 You can use this icon CDN anywhere in Notion which allows you to insert a custom image or icon.
 
-<img width="400" src="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot.png" />
+<p align="center">
+  <img width="400" src="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot.png" />
+</p>
 
 ### Domain aliases
 
