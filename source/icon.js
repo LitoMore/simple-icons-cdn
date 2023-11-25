@@ -24,9 +24,9 @@ export const getSimpleIcon = (slug) => {
 
 export const getIconSvg = (icon, color = '', darkModeColor = '') => {
 	const hex = normalizeColor(color) || `#${icon.hex}`;
-	const darkModeHex = normalizeColor(darkModeColor);
+	const darkModeHex = darkModeColor === 'brand' ? `#${icon.hex}` : normalizeColor(darkModeColor);
 
-	if (darkModeColor && hex !== darkModeHex) {
+	if (hex !== darkModeHex) {
 		return icon.svg.replace(
 			'<path ',
 			`<style>path{fill:${hex}} @media (prefers-color-scheme:dark){path{fill:${darkModeHex}}}</style><path `,
