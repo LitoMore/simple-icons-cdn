@@ -1,4 +1,4 @@
-import * as simpleIcons from 'simple-icons/index.mjs';
+import * as simpleIcons from 'simple-icons';
 import {normalizeColor} from './utils.js';
 
 export const getSimpleIcon = (slug) => {
@@ -24,7 +24,7 @@ export const getSimpleIcon = (slug) => {
 
 export const getIconSvg = (icon, color = '', darkModeColor = '') => {
 	const hex = normalizeColor(color) || `#${icon.hex}`;
-	const darkModeHex = normalizeColor(darkModeColor);
+	const darkModeHex = normalizeColor(darkModeColor) || `#${icon.hex}`;
 
 	if (darkModeColor && hex !== darkModeHex) {
 		return icon.svg.replace(
