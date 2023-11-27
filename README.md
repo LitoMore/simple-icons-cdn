@@ -47,7 +47,7 @@ Optional. It's used for dark mode and has the same function as `color`. The [CSS
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/00ccff99"/> - https://cdn.simpleicons.org/simpleicons/00ccff99
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/orange/pink"/> - https://cdn.simpleicons.org/simpleicons/orange/pink
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/_/eee"/> - https://cdn.simpleicons.org/simpleicons/_/eee
-- <img height="14" src="https://cdn.simpleicons.org/simpleicons/eee/_"/> - https://cdn.simpleicons.org/simpleicons/eee/_
+- <img height="14" src="https://cdn.simpleicons.org/simpleicons/eee/_"/> - [https://cdn.simpleicons.org/simpleicons/eee/\_](https://cdn.simpleicons.org/simpleicons/eee/_)
 
 ### Other usages
 
