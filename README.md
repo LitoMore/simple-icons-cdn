@@ -51,6 +51,16 @@ Optional. It's used for dark mode and has the same function as `color`. The [CSS
 
 ### Other usages
 
+#### Raycast
+
+Easily browse, search, and copy icon SVG source, brand color, guidelines, and CDN links with Raycast.
+
+<p align="center">
+  <a title="Install simple-icons Raycast Extension" href="https://www.raycast.com/litomore/simple-icons">
+      <img src="https://www.raycast.com/litomore/simple-icons/install_button@2x.png?v=1.1" height="64" alt="" style="height: 64px;">
+  </a>
+</p>
+
 #### Notion
 
 You can use this icon CDN anywhere in Notion which allows you to insert a custom image or icon.
