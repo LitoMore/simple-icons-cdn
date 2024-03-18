@@ -32,6 +32,6 @@
     "simple-icons": "^11.9.0"
   },
   "devDependencies": {
-    "xo": "^0.56.0"
+    "xo": "^0.58.0"
   }
 }
