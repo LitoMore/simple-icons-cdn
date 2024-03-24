@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/LitoMore/simple-icons-cdn#readme",
   "dependencies": {
-    "simple-icons": "^11.9.0"
+    "simple-icons": "^11.10.0"
   },
   "devDependencies": {
     "xo": "^0.58.0"
