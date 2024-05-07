@@ -28,16 +28,19 @@ export const getIconSize = (path) => {
 	return {width, height};
 };
 
-export const resetIconPosition = (path, height) => {
-	const scale = 24 / height;
-	const pathRescale = new SVGPathCommander(path).transform({scale}).toString();
+export const resetIconPosition = (path, iconWidth, iconHeight) => {
+	const scale = 24 / iconHeight;
+	const pathRescale =
+		iconWidth > iconHeight
+			? new SVGPathCommander(path).transform({scale}).toString()
+			: path;
 	const {x: offsetX, y: offsetY} = SVGPathCommander.getPathBBox(pathRescale);
 	const pathReset = new SVGPathCommander(pathRescale)
 		.transform({
 			translate: [-offsetX, -offsetY],
 		})
 		.toString();
-	return pathReset;
+	return {path: pathReset, scale};
 };
 
 export const getIconSvg = (icon, color = '', darkModeColor = '', viewbox) => {
@@ -48,16 +51,13 @@ export const getIconSvg = (icon, color = '', darkModeColor = '', viewbox) => {
 	if (viewbox === 'auto') {
 		const {width: iconWidth, height: iconHeight} = getIconSize(icon.path);
 
-		if (iconWidth > iconHeight) {
-			const scale = 24 / iconHeight;
-			const path = resetIconPosition(icon.path, iconHeight);
-			iconSvg = iconSvg
-				.replace(
-					'viewBox="0 0 24 24"',
-					`viewBox="0 0 ${(iconWidth * scale).toFixed(2)} 24"`,
-				)
-				.replace(/<path d=".*"\/>/, `<path d="${path}"/>`);
-		}
+		const {path, scale} = resetIconPosition(icon.path, iconWidth, iconHeight);
+		iconSvg = iconSvg
+			.replace(
+				'viewBox="0 0 24 24"',
+				`viewBox="0 0 ${iconWidth > iconHeight ? iconWidth * scale : iconWidth} 24"`,
+			)
+			.replace(/<path d=".*"\/>/, `<path d="${path}"/>`);
 	}
 
 	if (darkModeColor && hex !== darkModeHex) {
