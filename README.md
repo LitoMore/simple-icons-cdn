@@ -36,7 +36,11 @@ Optional. Default to the color of icon from [simpleicons.org](https://simpleicon
 
 Optional. It's used for dark mode and has the same function as `color`. The [CSS prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) will be used when a value is specified.
 
-### Example
+#### `viewbox`
+
+Optional. The icon is placed in a square viewBox by default. Use the query parameter `viewbox=auto` to adjust the viewBox to the same aspect ratio as the shape.
+
+### Examples
 
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/111/eee"/> - https://cdn.simpleicons.org/simpleicons
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/blue"/> - https://cdn.simpleicons.org/simpleicons/blue
@@ -48,6 +52,8 @@ Optional. It's used for dark mode and has the same function as `color`. The [CSS
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/orange/pink"/> - https://cdn.simpleicons.org/simpleicons/orange/pink
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/_/eee"/> - https://cdn.simpleicons.org/simpleicons/_/eee
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/eee/_"/> - [https://cdn.simpleicons.org/simpleicons/eee/\_](https://cdn.simpleicons.org/simpleicons/eee/_)
+- <img height="14" src="https://cdn.simpleicons.org/jsr"/> - https://cdn.simpleicons.org/jsr
+- <img height="14" src="https://cdn.simpleicons.org/jsr?viewbox=auto"/> - https://cdn.simpleicons.org/jsr?viewbox=auto
 
 ### Other usages
 

@@ -1,4 +1,5 @@
 import * as simpleIcons from 'simple-icons';
+import SVGPathCommander from 'svg-path-commander';
 import {normalizeColor} from './utils.js';
 
 export const getSimpleIcon = (slug) => {
@@ -22,16 +23,49 @@ export const getSimpleIcon = (slug) => {
 	return null;
 };
 
-export const getIconSvg = (icon, color = '', darkModeColor = '') => {
+export const getIconSize = (path) => {
+	const {width, height} = SVGPathCommander.getPathBBox(path);
+	return {width, height};
+};
+
+export const resetIconPosition = (path, height) => {
+	const scale = 24 / height;
+	const pathRescale = new SVGPathCommander(path).transform({scale}).toString();
+	const {x: offsetX, y: offsetY} = SVGPathCommander.getPathBBox(pathRescale);
+	const pathReset = new SVGPathCommander(pathRescale)
+		.transform({
+			translate: [-offsetX, -offsetY],
+		})
+		.toString();
+	return pathReset;
+};
+
+export const getIconSvg = (icon, color = '', darkModeColor = '', viewbox) => {
 	const hex = normalizeColor(color) || `#${icon.hex}`;
 	const darkModeHex = normalizeColor(darkModeColor) || `#${icon.hex}`;
+	let iconSvg = icon.svg;
+
+	if (viewbox === 'auto') {
+		const {width: iconWidth, height: iconHeight} = getIconSize(icon.path);
+
+		if (iconWidth > iconHeight) {
+			const scale = 24 / iconHeight;
+			const path = resetIconPosition(icon.path, iconHeight);
+			iconSvg = iconSvg
+				.replace(
+					'viewBox="0 0 24 24"',
+					`viewBox="0 0 ${(iconWidth * scale).toFixed(2)} 24"`,
+				)
+				.replace(/<path d=".*"\/>/, `<path d="${path}"/>`);
+		}
+	}
 
 	if (darkModeColor && hex !== darkModeHex) {
-		return icon.svg.replace(
+		return iconSvg.replace(
 			'<path ',
 			`<style>path{fill:${hex}} @media (prefers-color-scheme:dark){path{fill:${darkModeHex}}}</style><path `,
 		);
 	}
 
-	return icon.svg.replace('<svg ', `<svg fill="${hex}" `);
+	return iconSvg.replace('<svg ', `<svg fill="${hex}" `);
 };

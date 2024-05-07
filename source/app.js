@@ -10,11 +10,11 @@ const app = (request, response) => {
 		return response.status(404).send({status: 404});
 	}
 
-	const {iconSlug, color, darkModeColor} = request.query;
+	const {iconSlug, color, darkModeColor, viewbox} = request.query;
 	const icon = getSimpleIcon(iconSlug);
 
 	if (icon) {
-		const iconSvg = getIconSvg(icon, color, darkModeColor);
+		const iconSvg = getIconSvg(icon, color, darkModeColor, viewbox);
 		response.setHeader('Content-Type', 'image/svg+xml');
 		return response.send(iconSvg);
 	}
