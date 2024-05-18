@@ -59,8 +59,8 @@ This can be used if you want all icons rendered with consitent size.
 
 ```markdown
 <img height="20" src="https://cdn.simpleicons.org/github?viewbox=auto" />
+<img height="20" src="https://cdn.simpleicons.org/simpleicons?viewbox=auto" />
 <img height="20" src="https://cdn.simpleicons.org/awesomelists?viewbox=auto" />
-<img height="20" src="https://cdn.simpleicons.org/jsr?viewbox=auto" />
 ```
 
 <p align="center">
