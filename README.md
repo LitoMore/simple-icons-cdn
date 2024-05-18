@@ -52,8 +52,22 @@ Optional. The icon is placed in a square viewBox by default. Use the query param
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/orange/pink"/> - https://cdn.simpleicons.org/simpleicons/orange/pink
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/_/eee"/> - https://cdn.simpleicons.org/simpleicons/_/eee
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/eee/_"/> - [https://cdn.simpleicons.org/simpleicons/eee/\_](https://cdn.simpleicons.org/simpleicons/eee/_)
-- <img height="14" src="https://cdn.simpleicons.org/jsr"/> - https://cdn.simpleicons.org/jsr
-- <img height="14" src="https://cdn.simpleicons.org/jsr?viewbox=auto"/> - https://cdn.simpleicons.org/jsr?viewbox=auto
+
+#### Auto-sized
+
+This can be used if you want all icons rendered with consitent size.
+
+```markdown
+<img height="20" src="https://cdn.simpleicons.org/github?viewbox=auto" />
+<img height="20" src="https://cdn.simpleicons.org/awesomelists?viewbox=auto" />
+<img height="20" src="https://cdn.simpleicons.org/jsr?viewbox=auto" />
+```
+
+<p align="center">
+  <img height="20" src="https://cdn.simpleicons.org/github?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/simpleicons?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/awesomelists?viewbox=auto" />
+</p>
 
 ### Other usages
 
