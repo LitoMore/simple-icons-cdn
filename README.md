@@ -55,7 +55,7 @@ Optional. The icon is placed in a square viewBox by default. Use the query param
 
 #### Auto-sized
 
-This can be used if you want all icons rendered with consitent size.
+This is useful if you want all icons rendered with consitent size.
 
 ```markdown
 <img height="20" src="https://cdn.simpleicons.org/github?viewbox=auto" />
