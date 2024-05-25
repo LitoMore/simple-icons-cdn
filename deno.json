@@ -1,0 +1,11 @@
+{
+  "tasks": {
+    "update-lockfile": "deno cache --reload --lock-write source/app.js source/colors.js source/icon.js source/utils.js",
+    "dev": "deno run --allow-net --watch source/app.js"
+  },
+  "imports": {
+    "@oak/oak": "jsr:@oak/oak@^16.0.0",
+    "simple-icons": "npm:simple-icons@^12.1.0",
+    "svg-path-commander": "npm:svg-path-commander@^2.0.9"
+  }
+}

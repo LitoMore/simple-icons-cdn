@@ -1,13 +1,7 @@
 <h1 align="center">simple-icons-cdn</h1>
 
 <p align="center">
-  <a href="https://vercel.com">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://shields.io/badge/Powered_by_Vercel-white?logo=vercel&style=flat-square&logoColor=black" />
-      <source media="(prefers-color-scheme: light)" srcset="https://shields.io/badge/Powered_by_Vercel-black?logo=vercel&style=flat-square" />
-      <img src="https://shields.io/badge/Powered_by_Vercel-black?logo=vercel&style=flat-square" alt="Powered by Vercel" />
-    </picture>
-  </a>
+  <img src="https://img.shields.io/badge/Powered%20by%20Fly.io-6044B2?style=flat-square" />
 </p>
 
 ## Disclaimer

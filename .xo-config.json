@@ -1,4 +1,0 @@
-{
-  "prettier": true,
-  "ignores": ["app/index.js"]
-}
