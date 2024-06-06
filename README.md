@@ -63,8 +63,8 @@ This is useful if you want all icons rendered with consitent size.
 ```
 
 <p align="center">
-  <img height="20" src="https://cdn.simpleicons.org/github?viewbox=auto" />
-  <img height="20" src="https://cdn.simpleicons.org/simpleicons?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/github/_/white?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/simpleicons/_/white?viewbox=auto" />
   <img height="20" src="https://cdn.simpleicons.org/awesomelists?viewbox=auto" />
 </p>
 
