@@ -91,7 +91,7 @@ You can use this icon CDN anywhere in Notion which allows you to insert a custom
 ### Domain aliases
 
 - [cdn.simpleicons.org](https://cdn.simpleicons.org/simpleicons)
-- [icons.ly](https://icons.ly/simpleicons) (using Cloudflare DNS)
+- [icons.ly](https://icons.ly/simpleicons)
 
 ## License
 
