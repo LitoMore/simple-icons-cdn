@@ -5,7 +5,7 @@
   },
   "imports": {
     "@oak/oak": "jsr:@oak/oak@^16.0.0",
-    "simple-icons": "npm:simple-icons@^12.1.0",
+    "simple-icons": "npm:simple-icons@^12.2.0",
     "svg-path-commander": "npm:svg-path-commander@^2.0.9"
   }
 }
