@@ -20,7 +20,6 @@ router.get("/favicon.ico", (ctx) => {
   ctx.response.status = 204;
 });
 router.get("/:iconSlug/:color?/:darkModeColor?", (ctx) => {
-  const { method, url } = ctx.request;
   ctx.response.headers.set("Access-Control-Allow-Origin", "*");
   ctx.response.headers.set(
     "Cache-Control",
@@ -35,12 +34,10 @@ router.get("/:iconSlug/:color?/:darkModeColor?", (ctx) => {
     const iconSvg = getIconSvg(icon, color, darkModeColor, viewbox);
     ctx.response.headers.set("Content-Type", "image/svg+xml");
     ctx.response.body = iconSvg;
-    console.log([method, url, 200].join("\t"));
     return;
   }
 
   ctx.response.status = 404;
-  console.log([method, url, 404].join("\t"));
   return;
 });
 
