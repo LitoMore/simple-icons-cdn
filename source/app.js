@@ -21,7 +21,7 @@ router.get("/favicon.ico", (ctx) => {
 });
 router.get("/:iconSlug/:color?/:darkModeColor?", (ctx) => {
   const { method, url } = ctx.request;
-
+  ctx.response.headers.set("Access-Control-Allow-Origin", "*");
   ctx.response.headers.set(
     "Cache-Control",
     "public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800",
