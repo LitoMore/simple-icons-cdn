@@ -16,13 +16,13 @@
       "jsr:@std/encoding@1.0.0-rc.2": "jsr:@std/encoding@1.0.0-rc.2",
       "jsr:@std/encoding@^0.223.0": "jsr:@std/encoding@0.223.0",
       "jsr:@std/http@0.223": "jsr:@std/http@0.223.0",
-      "jsr:@std/http@0.224": "jsr:@std/http@0.224.4",
+      "jsr:@std/http@0.224": "jsr:@std/http@0.224.5",
       "jsr:@std/io@0.223": "jsr:@std/io@0.223.0",
       "jsr:@std/media-types@0.223": "jsr:@std/media-types@0.223.0",
       "jsr:@std/media-types@0.224": "jsr:@std/media-types@0.224.1",
       "jsr:@std/path@0.223": "jsr:@std/path@0.223.0",
       "npm:path-to-regexp@6.2.1": "npm:path-to-regexp@6.2.1",
-      "npm:simple-icons": "npm:simple-icons@12.3.0",
+      "npm:simple-icons": "npm:simple-icons@12.4.0",
       "npm:svg-path-commander": "npm:svg-path-commander@2.0.9"
     },
     "jsr": {
@@ -91,8 +91,8 @@
           "jsr:@std/encoding@^0.223.0"
         ]
       },
-      "@std/http@0.224.4": {
-        "integrity": "7bcae028e408ab65d6802805ee9a807766c9d20a2959de576126e2f25c17ec04",
+      "@std/http@0.224.5": {
+        "integrity": "b03b5d1529f6c423badfb82f6640f9f2557b4034cd7c30655ba5bb447ff750a4",
         "dependencies": [
           "jsr:@std/encoding@1.0.0-rc.2"
         ]
@@ -125,8 +125,8 @@
         "integrity": "sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==",
         "dependencies": {}
       },
-      "simple-icons@12.3.0": {
-        "integrity": "sha512-sJNnw4t1/dsPy9KBQhR/DWrVP5sd0b1GO2axdxn4kZU4xUa53kdc3dzXNrxwbgdJfD+R7dpY2mPaBfZ+cvAPrg==",
+      "simple-icons@12.4.0": {
+        "integrity": "sha512-2uL8PHFDyBLQGhZsAvYcaHqm5KjNzIepPshTLZky9Dc6HgPFI83SAVC8of3KYtr+7O8zJggrGYTxyUu/9hyYgA==",
         "dependencies": {}
       },
       "svg-path-commander@2.0.9": {
@@ -141,7 +141,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@oak/oak@^16.1.0",
-      "npm:simple-icons@^12.3.0",
+      "npm:simple-icons@^12.4.0",
       "npm:svg-path-commander@^2.0.9"
     ]
   }
