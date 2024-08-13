@@ -85,7 +85,7 @@ Easily browse, search, and copy icon SVG source, brand color, guidelines, and CD
 You can use this icon CDN anywhere in Notion which allows you to insert a custom image or icon.
 
 <p align="center">
-  <img width="400" src="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot.png" />
+  <img width="400" src="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot.webp" />
 </p>
 
 ### Domain aliases
