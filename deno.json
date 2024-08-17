@@ -1,12 +1,12 @@
 {
   "tasks": {
     "dev": "deno run --allow-net --watch source/app.js",
-    "bump": "deno add npm:simple-icons",
+    "bump": "deno add npm:simple-icons-extreme",
     "update-lockfile": "deno cache --reload --lock-write source/app.js source/colors.js source/icon.js source/utils.js"
   },
   "imports": {
     "@oak/oak": "jsr:@oak/oak@^16.1.0",
-    "simple-icons": "npm:simple-icons@^13.5.0",
+    "simple-icons-extreme": "npm:simple-icons-extreme@^0.1.0",
     "svg-path-commander": "npm:svg-path-commander@^2.0.9"
   }
 }
