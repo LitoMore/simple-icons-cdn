@@ -22,8 +22,8 @@
       "jsr:@std/media-types@0.224": "jsr:@std/media-types@0.224.1",
       "jsr:@std/path@0.223": "jsr:@std/path@0.223.0",
       "npm:path-to-regexp@6.2.1": "npm:path-to-regexp@6.2.1",
-      "npm:simple-icons": "npm:simple-icons@13.5.0",
-      "npm:svg-path-commander": "npm:svg-path-commander@2.0.9"
+      "npm:simple-icons": "npm:simple-icons@13.6.0",
+      "npm:svg-path-commander": "npm:svg-path-commander@2.0.10"
     },
     "jsr": {
       "@oak/commons@0.11.0": {
@@ -117,22 +117,22 @@
       }
     },
     "npm": {
-      "@thednp/dommatrix@2.0.6": {
-        "integrity": "sha512-DXQq4Rs/akYzeXYGkNy3KiJ4JoD8+SYr1QRWTXtAGoZ0+vJcyBt0aeqA1K4CxPaBaIfKdOTE+Te1HV9sAQ4I4A==",
+      "@thednp/dommatrix@2.0.7": {
+        "integrity": "sha512-d5p07ZYa1Z6opXIGwKpBVvzxQity43T0kVnDXMbZNsMzaOrJGKtemRJA8Puj2GtvWQ5+JiNPkiwBWSk6plLVtA==",
         "dependencies": {}
       },
       "path-to-regexp@6.2.1": {
         "integrity": "sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==",
         "dependencies": {}
       },
-      "simple-icons@13.5.0": {
-        "integrity": "sha512-6VrM4xSty8EesmQbjI++Lk8FkV+gl3Ve+DnTQVc7ovZryKpc9JZSuZA8NNc7lC3Mqbh0GLlX3WXdITZlDu7bSQ==",
+      "simple-icons@13.6.0": {
+        "integrity": "sha512-hKhxwp9SDjMjEE+aFL3gzh2XZBQSN5xlIygpsKgiMcn+65BtWoUIS0nmIkmDQ15Ge+2AXGfHCrjn5vE55UdjDg==",
         "dependencies": {}
       },
-      "svg-path-commander@2.0.9": {
-        "integrity": "sha512-VfRLznHewlpQvuahtBK0MT/PlWAapbTx8RSytqgaVwD3US2keKcc3WYYlBBk4vIOR+jB3nQu/NAVlWHKlo0Fjw==",
+      "svg-path-commander@2.0.10": {
+        "integrity": "sha512-DGYaXpW6cD0ML3Qj/Md/2al4p44wm/THVQMd2wL5w5LlbFWM/iU8BMvWjUDRzJXe8tpQG3LVsuEQftzdjQE+Vg==",
         "dependencies": {
-          "@thednp/dommatrix": "@thednp/dommatrix@2.0.6"
+          "@thednp/dommatrix": "@thednp/dommatrix@2.0.7"
         }
       }
     }
@@ -141,7 +141,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@oak/oak@^16.1.0",
-      "npm:simple-icons@^13.5.0",
+      "npm:simple-icons@^13.6.0",
       "npm:svg-path-commander@^2.0.9"
     ]
   }
