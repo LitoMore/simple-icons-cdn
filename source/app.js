@@ -7,7 +7,7 @@ const router = new Router();
 router.get("/", (ctx) => {
   ctx.response.headers.set(
     "Cache-Control",
-    "public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800"
+    "public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800",
   );
   ctx.response.status = 307;
   ctx.response.redirect("https://github.com/LitoMore/simple-icons-cdn");
@@ -15,7 +15,7 @@ router.get("/", (ctx) => {
 router.get("/favicon.ico", (ctx) => {
   ctx.response.headers.set(
     "Cache-Control",
-    "public, max-age=31536000, s-maxage=31536000, immutable"
+    "public, max-age=31536000, s-maxage=31536000, immutable",
   );
   ctx.response.status = 204;
 });
@@ -23,7 +23,7 @@ router.get("/:iconSlug/:color?/:darkModeColor?", (ctx) => {
   ctx.response.headers.set("Access-Control-Allow-Origin", "*");
   ctx.response.headers.set(
     "Cache-Control",
-    "public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800"
+    "public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800",
   );
 
   const { iconSlug, color, darkModeColor } = ctx.params;

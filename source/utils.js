@@ -11,5 +11,3 @@ export const normalizeColor = (style) => {
 
   return "";
 };
-
-export const svgToPath = (svg) => svg.split('"', 8)[7];

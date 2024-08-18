@@ -1,6 +1,6 @@
-import * as simpleIcons from "npm:simple-icons-extreme";
+import * as simpleIcons from "npm:simple-icons";
 import SVGPathCommander from "npm:svg-path-commander";
-import { normalizeColor, svgToPath } from "./utils.js";
+import { normalizeColor } from "./utils.js";
 
 export const getSimpleIcon = (slug) => {
   if (!slug) {
@@ -13,8 +13,8 @@ export const getSimpleIcon = (slug) => {
     .replaceAll("+", "plus")
     .replaceAll(".", "dot");
 
-  const iconKey =
-    "si" + normaizedSlug.charAt(0).toUpperCase() + normaizedSlug.slice(1);
+  const iconKey = "si" + normaizedSlug.charAt(0).toUpperCase() +
+    normaizedSlug.slice(1);
 
   if (iconKey in simpleIcons) {
     return simpleIcons[iconKey];
@@ -30,10 +30,9 @@ export const getIconSize = (path) => {
 
 export const resetIconPosition = (path, iconWidth, iconHeight) => {
   const scale = 24 / iconHeight;
-  const pathRescale =
-    iconWidth > iconHeight
-      ? new SVGPathCommander(path).transform({ scale }).toString()
-      : path;
+  const pathRescale = iconWidth > iconHeight
+    ? new SVGPathCommander(path).transform({ scale }).toString()
+    : path;
   const { x: offsetX, y: offsetY } = SVGPathCommander.getPathBBox(pathRescale);
   const pathReset = new SVGPathCommander(pathRescale)
     .transform({
@@ -49,15 +48,15 @@ export const getIconSvg = (icon, color = "", darkModeColor = "", viewbox) => {
   let iconSvg = icon.svg;
 
   if (viewbox === "auto") {
-    const iconPath = svgToPath(iconSvg);
-    const { width: iconWidth, height: iconHeight } = getIconSize(iconPath);
-    const { path, scale } = resetIconPosition(iconPath, iconWidth, iconHeight);
+    const { width: iconWidth, height: iconHeight } = getIconSize(icon.path);
+
+    const { path, scale } = resetIconPosition(icon.path, iconWidth, iconHeight);
     iconSvg = iconSvg
       .replace(
         'viewBox="0 0 24 24"',
         `viewBox="0 0 ${
           iconWidth > iconHeight ? iconWidth * scale : iconWidth
-        } 24"`
+        } 24"`,
       )
       .replace(/<path d=".*"\/>/, `<path d="${path}"/>`);
   }
@@ -65,7 +64,7 @@ export const getIconSvg = (icon, color = "", darkModeColor = "", viewbox) => {
   if (darkModeColor && hex !== darkModeHex) {
     return iconSvg.replace(
       "<path ",
-      `<style>path{fill:${hex}} @media (prefers-color-scheme:dark){path{fill:${darkModeHex}}}</style><path `
+      `<style>path{fill:${hex}} @media (prefers-color-scheme:dark){path{fill:${darkModeHex}}}</style><path `,
     );
   }
 
