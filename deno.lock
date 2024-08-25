@@ -22,7 +22,7 @@
       "jsr:@std/media-types@0.224": "jsr:@std/media-types@0.224.1",
       "jsr:@std/path@0.223": "jsr:@std/path@0.223.0",
       "npm:path-to-regexp@6.2.1": "npm:path-to-regexp@6.2.1",
-      "npm:simple-icons": "npm:simple-icons@13.6.0",
+      "npm:simple-icons": "npm:simple-icons@13.7.0",
       "npm:svg-path-commander": "npm:svg-path-commander@2.0.10"
     },
     "jsr": {
@@ -125,8 +125,8 @@
         "integrity": "sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==",
         "dependencies": {}
       },
-      "simple-icons@13.6.0": {
-        "integrity": "sha512-hKhxwp9SDjMjEE+aFL3gzh2XZBQSN5xlIygpsKgiMcn+65BtWoUIS0nmIkmDQ15Ge+2AXGfHCrjn5vE55UdjDg==",
+      "simple-icons@13.7.0": {
+        "integrity": "sha512-vEBRehBv/DSypfBGx0Dqplch1Ik2sQidebLeAWoaXxZTZiiw1JPRpk9/GwQh1+I8vRHhzIRIcQ7Ng8hm4hB01A==",
         "dependencies": {}
       },
       "svg-path-commander@2.0.10": {
@@ -141,7 +141,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@oak/oak@^16.1.0",
-      "npm:simple-icons@^13.6.0",
+      "npm:simple-icons@^13.7.0",
       "npm:svg-path-commander@^2.0.9"
     ]
   }
