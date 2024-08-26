@@ -103,7 +103,7 @@ imgcat -u 'https://cdn.simpleicons.org/go?viewbox=auto&size=48'
 ```
 
 <p align="center">
-  <img height="200" src="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/imgcat-screenshot.webp" />
+  <img height="250" src="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/imgcat-screenshot.webp" />
 </p>
 
 ### Domain aliases
