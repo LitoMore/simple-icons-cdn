@@ -30,16 +30,21 @@ export const getIconSize = (path) => {
 
 export const resetIconPosition = (path, iconWidth, iconHeight) => {
   const scale = 24 / iconHeight;
+  const actualViewboxWidth = iconWidth > iconHeight
+    ? iconWidth * scale
+    : iconWidth;
+  const betterViewboxWidth = Math.ceil(actualViewboxWidth);
+  const betterOffset = (betterViewboxWidth - actualViewboxWidth) / 2;
   const pathRescale = iconWidth > iconHeight
     ? new SVGPathCommander(path).transform({ scale }).toString()
     : path;
   const { x: offsetX, y: offsetY } = SVGPathCommander.getPathBBox(pathRescale);
   const pathReset = new SVGPathCommander(pathRescale)
     .transform({
-      translate: [-offsetX, -offsetY],
+      translate: [-offsetX + betterOffset, -offsetY],
     })
     .toString();
-  return { path: pathReset, scale };
+  return { path: pathReset, betterViewboxWidth };
 };
 
 export const getIconSvg = (icon, color = "", darkModeColor = "", viewbox) => {
@@ -50,13 +55,15 @@ export const getIconSvg = (icon, color = "", darkModeColor = "", viewbox) => {
   if (viewbox === "auto") {
     const { width: iconWidth, height: iconHeight } = getIconSize(icon.path);
 
-    const { path, scale } = resetIconPosition(icon.path, iconWidth, iconHeight);
+    const { path, betterViewboxWidth } = resetIconPosition(
+      icon.path,
+      iconWidth,
+      iconHeight,
+    );
     iconSvg = iconSvg
       .replace(
         'viewBox="0 0 24 24"',
-        `viewBox="0 0 ${
-          iconWidth > iconHeight ? iconWidth * scale : iconWidth
-        } 24"`,
+        `viewBox="0 0 ${betterViewboxWidth} 24"`,
       )
       .replace(/<path d=".*"\/>/, `<path d="${path}"/>`);
   }
