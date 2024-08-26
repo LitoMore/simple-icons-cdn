@@ -47,14 +47,19 @@ export const resetIconPosition = (path, iconWidth, iconHeight) => {
   return { path: pathReset, betterViewboxWidth };
 };
 
-export const getIconSvg = (icon, color = "", darkModeColor = "", viewbox) => {
+export const getIconSvg = (
+  icon,
+  color = "",
+  darkModeColor = "",
+  viewbox,
+  size,
+) => {
   const hex = normalizeColor(color) || `#${icon.hex}`;
   const darkModeHex = normalizeColor(darkModeColor) || `#${icon.hex}`;
   let iconSvg = icon.svg;
 
   if (viewbox === "auto") {
     const { width: iconWidth, height: iconHeight } = getIconSize(icon.path);
-
     const { path, betterViewboxWidth } = resetIconPosition(
       icon.path,
       iconWidth,
@@ -66,6 +71,25 @@ export const getIconSvg = (icon, color = "", darkModeColor = "", viewbox) => {
         `viewBox="0 0 ${betterViewboxWidth} 24"`,
       )
       .replace(/<path d=".*"\/>/, `<path d="${path}"/>`);
+  }
+
+  const iconSize = parseInt(size, 10);
+  if (iconSize && iconSize > 0) {
+    const sizePattern = /viewBox="0 0 (?<width>\d+) (?<height>\d+)"/;
+    const sizeMatch = sizePattern.exec(iconSvg);
+    const width = sizeMatch?.groups?.width;
+    const height = sizeMatch?.groups?.height;
+    if (Number(width) && Number(height)) {
+      const maxScale = (2 ** 14 - 1) / 24;
+      const minScale = 3 / 24;
+      const scale = Math.max(Math.min(maxScale, iconSize / 24), minScale);
+      const iconWidth = Math.round(width * scale);
+      const iconHeight = Math.round(height * scale);
+      iconSvg = iconSvg.replace(
+        "<svg ",
+        `<svg width="${iconWidth}" height="${iconHeight}" `,
+      );
+    }
   }
 
   if (darkModeColor && hex !== darkModeHex) {

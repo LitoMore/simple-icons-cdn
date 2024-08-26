@@ -39,6 +39,10 @@ Optional. It's used for dark mode and has the same function as `color`. The [CSS
 
 Optional. The icon is placed in a square viewBox by default. Use the query parameter `viewbox=auto` to adjust the viewBox to the same aspect ratio as the shape.
 
+#### `size`
+
+Optional. It's used for customizing the icon size. Icon will be scaled with its original aspect ratio.
+
 ### Examples
 
 - <img height="14" src="https://cdn.simpleicons.org/simpleicons/111/eee"/> - https://cdn.simpleicons.org/simpleicons

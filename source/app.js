@@ -35,10 +35,10 @@ router.get("/:iconSlug/:color?/:darkModeColor?", (ctx) => {
   cacheForSevenDays(ctx);
   const { iconSlug, color, darkModeColor } = ctx.params;
   const viewbox = ctx.request.url.searchParams.get("viewbox");
+  const size = ctx.request.url.searchParams.get("size");
   const icon = getSimpleIcon(iconSlug);
-
   if (icon) {
-    const iconSvg = getIconSvg(icon, color, darkModeColor, viewbox);
+    const iconSvg = getIconSvg(icon, color, darkModeColor, viewbox, size);
     ctx.response.headers.set("Content-Type", "image/svg+xml");
     ctx.response.body = iconSvg;
     return;
