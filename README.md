@@ -92,6 +92,20 @@ You can use this icon CDN anywhere in Notion which allows you to insert a custom
   <img width="400" src="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot.webp" />
 </p>
 
+#### Terminal
+
+It's possible to use icons from the terminal emulator since iTerm2 has [special image support](https://www.iterm2.com/documentation-images.html).
+
+```shell
+imgcat -u 'https://cdn.simpleicons.org/go'
+imgcat -u 'https://cdn.simpleicons.org/go?viewbox=auto'
+imgcat -u 'https://cdn.simpleicons.org/go?viewbox=auto&size=48'
+```
+
+<p align="center">
+  <img height="200" src="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/imgcat-screenshot.webp" />
+</p>
+
 ### Domain aliases
 
 - [cdn.simpleicons.org](https://cdn.simpleicons.org/simpleicons)
