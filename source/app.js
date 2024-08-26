@@ -6,6 +6,13 @@ const allowCrossOrigin = (ctx) => {
   ctx.response.headers.set("Access-Control-Allow-Origin", "*");
 };
 
+const cacheForOneYear = (ctx) => {
+  ctx.response.headers.set(
+    "Cache-Control",
+    "public, max-age=31536000, s-maxage=31536000, immutable",
+  );
+};
+
 const cacheForSevenDays = (ctx) => {
   ctx.response.headers.set(
     "Cache-Control",
