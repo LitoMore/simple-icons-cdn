@@ -41,7 +41,7 @@ Optional. The icon is placed in a square viewBox by default. Use the query param
 
 #### `size`
 
-Optional. It's used for customizing the icon size. Icon will be scaled with its original aspect ratio.
+Optional. It's used for customizing the icon size. Use the query parameter `size` to scale with its original aspect ratio.
 
 ### Examples
 
