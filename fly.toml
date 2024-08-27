@@ -7,7 +7,7 @@ primary_region = 'sjc'
   PORT = '8080'
 
 [processes]
-  app = 'run --allow-net ./source/app.js'
+  app = '--allow-net ./source/app.js'
 
 [http_service]
   internal_port = 8080
