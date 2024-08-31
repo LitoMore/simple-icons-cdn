@@ -60,16 +60,28 @@ Optional. It's used for customizing the icon size. Use the query parameter `size
 
 This is useful if you want all icons rendered with consitent size.
 
-```markdown
-<img height="20" src="https://cdn.simpleicons.org/github?viewbox=auto" />
-<img height="20" src="https://cdn.simpleicons.org/simpleicons?viewbox=auto" />
-<img height="20" src="https://cdn.simpleicons.org/awesomelists?viewbox=auto" />
+```html
+<img height="20" src="https://cdn.simpleicons.org/javascript?viewbox=auto" />
+<img height="20" src="https://cdn.simpleicons.org/python?viewbox=auto" />
+<img height="20" src="https://cdn.simpleicons.org/kotlin?viewbox=auto" />
+<img height="20" src="https://cdn.simpleicons.org/dart?viewbox=auto" />
+<img height="20" src="https://cdn.simpleicons.org/r?viewbox=auto" />
+<img height="20" src="https://cdn.simpleicons.org/swift?viewbox=auto" />
+<img height="20" src="https://cdn.simpleicons.org/julia?viewbox=auto" />
+<img height="20" src="https://cdn.simpleicons.org/haskell?viewbox=auto" />
+<img height="20" src="https://cdn.simpleicons.org/clojure?viewbox=auto" />
 ```
 
 <p align="center">
-  <img height="20" src="https://cdn.simpleicons.org/github/_/white?viewbox=auto" />
-  <img height="20" src="https://cdn.simpleicons.org/simpleicons/_/white?viewbox=auto" />
-  <img height="20" src="https://cdn.simpleicons.org/awesomelists?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/javascript?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/python?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/kotlin?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/dart?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/r?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/swift?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/julia?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/haskell?viewbox=auto" />
+  <img height="20" src="https://cdn.simpleicons.org/clojure?viewbox=auto" />
 </p>
 
 ### Other usages
