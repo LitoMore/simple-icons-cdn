@@ -3,7 +3,7 @@
   "packages": {
     "specifiers": {
       "jsr:@oak/commons@0.11": "jsr:@oak/commons@0.11.0",
-      "jsr:@oak/oak": "jsr:@oak/oak@16.1.0",
+      "jsr:@oak/oak@^16.1.0": "jsr:@oak/oak@16.1.0",
       "jsr:@std/assert@0.223": "jsr:@std/assert@0.223.0",
       "jsr:@std/assert@0.226": "jsr:@std/assert@0.226.0",
       "jsr:@std/assert@^0.223.0": "jsr:@std/assert@0.223.0",
@@ -22,8 +22,8 @@
       "jsr:@std/media-types@0.224": "jsr:@std/media-types@0.224.1",
       "jsr:@std/path@0.223": "jsr:@std/path@0.223.0",
       "npm:path-to-regexp@6.2.1": "npm:path-to-regexp@6.2.1",
-      "npm:simple-icons": "npm:simple-icons@13.7.0",
-      "npm:svg-path-commander": "npm:svg-path-commander@2.0.10"
+      "npm:simple-icons@^13.7.0": "npm:simple-icons@13.7.0",
+      "npm:svg-path-commander@^2.0.9": "npm:svg-path-commander@2.0.10"
     },
     "jsr": {
       "@oak/commons@0.11.0": {
