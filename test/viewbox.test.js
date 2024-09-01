@@ -1,8 +1,6 @@
 import * as si from "npm:simple-icons";
 import { getIconSize, resetIconPosition } from "../source/icon.js";
 
-const knownIssues = ["Create React App", "Google News"];
-
 const checkAutoViewboxPath = (icon) => {
   const start = performance.now();
   try {
@@ -25,12 +23,12 @@ const checkAutoViewboxPath = (icon) => {
 const result = Object.values(si).map(checkAutoViewboxPath);
 const iconsFailed = result.filter((r) => r.fail);
 
-console.log("Top 20 slow icons:");
-console.table(result.sort((a, b) => b.time - a.time).slice(0, 20));
-console.log(`Failed icons:`);
-console.table(iconsFailed);
+console.log("Top 10 slow icons:");
+console.table(result.sort((a, b) => b.time - a.time).slice(0, 10));
 
-if (iconsFailed.filter((icon) => knownIssues.includes(icon.title))) {
+if (iconsFailed.length > 0) {
+  console.log(`Failed icons:`);
+  console.table(iconsFailed);
   Deno.exit(1);
 } else {
   console.log("All icons passed");
