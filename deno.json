@@ -2,7 +2,7 @@
   "tasks": {
     "dev": "deno --allow-net --watch source/app.js",
     "bump": "deno add npm:simple-icons@latest",
-    "update-lockfile": "deno cache --reload source/app.js source/colors.js source/icon.js source/utils.js test/viewbox.js"
+    "update-lockfile": "deno cache --reload source/app.js source/colors.js source/icon.js source/utils.js test/viewbox.test.js"
   },
   "imports": {
     "@oak/oak": "jsr:@oak/oak@^16.1.0",
