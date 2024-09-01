@@ -2,11 +2,12 @@
   "tasks": {
     "dev": "deno --allow-net --watch source/app.js",
     "bump": "deno add npm:simple-icons@latest",
-    "update-lockfile": "deno cache --reload source/app.js source/colors.js source/icon.js source/utils.js"
+    "update-lockfile": "deno cache --reload source/app.js source/colors.js source/icon.js source/utils.js test/viewbox.js"
   },
   "imports": {
     "@oak/oak": "jsr:@oak/oak@^16.1.0",
     "simple-icons": "npm:simple-icons@^13.8.0",
-    "svg-path-commander": "npm:svg-path-commander@^2.0.9"
+    "svg-path-bbox": "npm:svg-path-bbox@^2.0.0",
+    "svgpath": "npm:svgpath@^2.6.0"
   }
 }

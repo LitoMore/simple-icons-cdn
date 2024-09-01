@@ -1,5 +1,6 @@
 import * as simpleIcons from "npm:simple-icons";
-import SVGPathCommander from "npm:svg-path-commander";
+import { svgPathBbox } from "svg-path-bbox";
+import svgpath from "svgpath";
 import { normalizeColor } from "./utils.js";
 
 export const getSimpleIcon = (slug) => {
@@ -24,8 +25,8 @@ export const getSimpleIcon = (slug) => {
 };
 
 export const getIconSize = (path) => {
-  const { width, height } = SVGPathCommander.getPathBBox(path);
-  return { width, height };
+  const [x0, y0, x1, y1] = svgPathBbox(path);
+  return { width: x1 - x0, height: y1 - y0 };
 };
 
 export const resetIconPosition = (path, iconWidth, iconHeight) => {
@@ -36,13 +37,13 @@ export const resetIconPosition = (path, iconWidth, iconHeight) => {
   const betterViewboxWidth = Math.ceil(actualViewboxWidth);
   const betterOffset = (betterViewboxWidth - actualViewboxWidth) / 2;
   const pathRescale = iconWidth > iconHeight
-    ? new SVGPathCommander(path).transform({ scale }).toString()
+    ? svgpath(path).scale(scale).toString()
     : path;
-  const { x: offsetX, y: offsetY } = SVGPathCommander.getPathBBox(pathRescale);
-  const pathReset = new SVGPathCommander(pathRescale)
-    .transform({
-      translate: [-offsetX + betterOffset, -offsetY],
-    })
+  const [offsetX, offsetY] = svgPathBbox(pathRescale);
+  const pathReset = svgpath(pathRescale).translate(
+    -offsetX + betterOffset,
+    -offsetY,
+  )
     .toString();
   return { path: pathReset, betterViewboxWidth };
 };
