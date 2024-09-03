@@ -12,5 +12,6 @@ jobs:
           deno-version: v1.x
       - run: deno --version
       - run: |
+          deno fmt --check
           deno lint
           deno test
