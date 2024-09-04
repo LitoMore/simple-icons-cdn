@@ -12,7 +12,7 @@
 	"imports": {
 		"@oak/oak": "jsr:@oak/oak@^16.1.0",
 		"simple-icons": "npm:simple-icons@^13.8.0",
-		"svg-path-bbox": "npm:svg-path-bbox@^2.0.0",
+		"svg-path-bbox": "npm:svg-path-bbox@^2.1.0",
 		"svgpath": "npm:svgpath@^2.6.0"
 	}
 }

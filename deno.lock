@@ -4,6 +4,7 @@
     "specifiers": {
       "jsr:@oak/commons@0.11": "jsr:@oak/commons@0.11.0",
       "jsr:@oak/oak": "jsr:@oak/oak@16.1.0",
+      "jsr:@oak/oak@^16.1.0": "jsr:@oak/oak@16.1.0",
       "jsr:@std/assert@0.223": "jsr:@std/assert@0.223.0",
       "jsr:@std/assert@0.226": "jsr:@std/assert@0.226.0",
       "jsr:@std/assert@^0.223.0": "jsr:@std/assert@0.223.0",
@@ -23,7 +24,8 @@
       "jsr:@std/path@0.223": "jsr:@std/path@0.223.0",
       "npm:path-to-regexp@6.2.1": "npm:path-to-regexp@6.2.1",
       "npm:simple-icons": "npm:simple-icons@13.8.0",
-      "npm:svg-path-bbox@^2.0.0": "npm:svg-path-bbox@2.0.0",
+      "npm:simple-icons@^13.8.0": "npm:simple-icons@13.8.0",
+      "npm:svg-path-bbox@^2.1.0": "npm:svg-path-bbox@2.1.0",
       "npm:svgpath@^2.6.0": "npm:svgpath@2.6.0"
     },
     "jsr": {
@@ -126,8 +128,8 @@
         "integrity": "sha512-z5l9A6X0BNEQbNS9pQ/X5eVHL4vYM0s0K/5Hl8mIG4zZB1ofTzDl5fsMzjTgpmfplgmx2pFW0mDUMFguXgfy+w==",
         "dependencies": {}
       },
-      "svg-path-bbox@2.0.0": {
-        "integrity": "sha512-DP/dcKuwjfJ2GXiM1RsIKcWv+aGazBXTYPuAH9pWYZVm5+pZ6ho70BeLB0inqUGDCCHDmcUlQ2OcLlGuwhmkKQ==",
+      "svg-path-bbox@2.1.0": {
+        "integrity": "sha512-PEoSQFbBvL7FOCE4cN8Knej6L7bXdNkjPcUYsfMMpq0HpnqiO0sE2mcXTd7LX160aOyh5HbaeN/SoY8thMk5Kg==",
         "dependencies": {
           "svgpath": "svgpath@2.6.0"
         }
@@ -143,7 +145,7 @@
     "dependencies": [
       "jsr:@oak/oak@^16.1.0",
       "npm:simple-icons@^13.8.0",
-      "npm:svg-path-bbox@^2.0.0",
+      "npm:svg-path-bbox@^2.1.0",
       "npm:svgpath@^2.6.0"
     ]
   }
