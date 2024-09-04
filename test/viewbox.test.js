@@ -24,7 +24,12 @@ const result = Object.values(si).map(checkAutoViewboxPath);
 const iconsFailed = result.filter((r) => r.fail);
 
 console.log('Top 10 slow icons:');
-console.table(result.sort((a, b) => b.time - a.time).slice(0, 10));
+console.table(
+	result.sort((a, b) => b.time - a.time).slice(0, 10).map((x) => ({
+		title: x.title,
+		['time (ms)']: x.time,
+	})),
+);
 
 if (iconsFailed.length > 0) {
 	console.log(`Failed icons:`);
