@@ -38,9 +38,9 @@ export const resetIconPosition = (path, iconWidth, iconHeight) => {
 	const betterOffset = (betterViewboxWidth - actualViewboxWidth) / 2;
 	const pathRescale = iconWidth > iconHeight
 		? svgpath(path).scale(scale)
-		: path;
+		: svgpath(path);
 	const [offsetX, offsetY] = svgPathBbox(pathRescale);
-	const pathReset = svgpath(pathRescale).translate(
+	const pathReset = pathRescale.translate(
 		-offsetX + betterOffset,
 		-offsetY,
 	)
@@ -66,6 +66,7 @@ export const getIconSvg = (
 			iconWidth,
 			iconHeight,
 		);
+
 		iconSvg = iconSvg
 			.replace(
 				'viewBox="0 0 24 24"',
