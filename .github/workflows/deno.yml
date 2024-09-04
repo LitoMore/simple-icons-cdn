@@ -6,12 +6,9 @@ jobs:
     name: Deno
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
+      - uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x
-      - run: deno --version
-      - run: |
-          deno fmt --check
-          deno lint
-          deno test
+      - run: deno fmt --check
+      - run: deno lint
+      - run: deno test
