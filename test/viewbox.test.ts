@@ -4,15 +4,17 @@ import { getIconSize, resetIconPosition } from '../source/icon.ts';
 const checkAutoViewboxPath = (icon: si.SimpleIcon) => {
 	const start = performance.now();
 	try {
-		const { path } = icon;
-		const { width, height } = getIconSize(path);
-		resetIconPosition(
-			path,
+		const { width, height } = getIconSize(icon.path);
+		const { path } = resetIconPosition(
+			icon.path,
 			width,
 			height,
 		);
 		const end = performance.now();
-		return { title: icon.title, time: end - start };
+		if (path) {
+			return { title: icon.title, time: end - start };
+		}
+		throw new Error('Path is empty');
 	} catch (e) {
 		const end = performance.now();
 		console.error(`Error in icon: ${icon.title}: ${e.message}`);
