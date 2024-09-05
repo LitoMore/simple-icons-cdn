@@ -1,7 +1,7 @@
 import * as si from 'npm:simple-icons';
-import { getIconSize, resetIconPosition } from '../source/icon.js';
+import { getIconSize, resetIconPosition } from '../source/icon.ts';
 
-const checkAutoViewboxPath = (icon) => {
+const checkAutoViewboxPath = (icon: si.SimpleIcon) => {
 	const start = performance.now();
 	try {
 		const { path } = icon;
@@ -20,7 +20,9 @@ const checkAutoViewboxPath = (icon) => {
 	}
 };
 
-const result = Object.values(si).map(checkAutoViewboxPath);
+const result = Object.values(si).map((icon) =>
+	checkAutoViewboxPath(icon as si.SimpleIcon)
+);
 const iconsFailed = result.filter((r) => r.fail);
 
 console.log('Top 10 slow icons:');

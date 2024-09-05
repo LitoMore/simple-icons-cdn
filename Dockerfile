@@ -23,4 +23,4 @@ WORKDIR /deno-dir
 COPY . .
 
 ENTRYPOINT ["/bin/deno"]
-CMD ["--allow-net", "https://deno.land/std/examples/echo_server.ts"]
+CMD ["run", "serve"]

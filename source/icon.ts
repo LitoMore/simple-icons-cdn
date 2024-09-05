@@ -1,35 +1,39 @@
 import * as simpleIcons from 'npm:simple-icons';
+import type { SimpleIcon } from 'npm:simple-icons';
 import { svgPathBbox } from 'svg-path-bbox';
 import svgpath from 'svgpath';
-import { normalizeColor } from './utils.js';
+import { normalizeColor } from './utils.ts';
 
-export const getSimpleIcon = (slug) => {
+export const getSimpleIcon = (slug?: string) => {
 	if (!slug) {
 		return null;
 	}
 
 	const normaizedSlug = slug
 		.toLowerCase()
-		.replaceAll(' ', 'plus')
-		.replaceAll('+', 'plus')
+		.replaceAll(/[ +]/g, 'plus')
 		.replaceAll('.', 'dot');
 
 	const iconKey = 'si' + normaizedSlug.charAt(0).toUpperCase() +
-		normaizedSlug.slice(1);
+		normaizedSlug.slice(1) as keyof typeof simpleIcons;
 
 	if (iconKey in simpleIcons) {
-		return simpleIcons[iconKey];
+		return simpleIcons[iconKey] as SimpleIcon;
 	}
 
 	return null;
 };
 
-export const getIconSize = (path) => {
+export const getIconSize = (path: string) => {
 	const [x0, y0, x1, y1] = svgPathBbox(path);
 	return { width: x1 - x0, height: y1 - y0 };
 };
 
-export const resetIconPosition = (path, iconWidth, iconHeight) => {
+export const resetIconPosition = (
+	path: string,
+	iconWidth: number,
+	iconHeight: number,
+) => {
 	const scale = 24 / iconHeight;
 	const actualViewboxWidth = iconWidth > iconHeight
 		? iconWidth * scale
@@ -49,11 +53,11 @@ export const resetIconPosition = (path, iconWidth, iconHeight) => {
 };
 
 export const getIconSvg = (
-	icon,
+	icon: SimpleIcon,
 	color = '',
 	darkModeColor = '',
-	viewbox,
-	size,
+	viewbox = '',
+	size = '',
 ) => {
 	const hex = normalizeColor(color) || `#${icon.hex}`;
 	const darkModeHex = normalizeColor(darkModeColor) || `#${icon.hex}`;
@@ -79,9 +83,9 @@ export const getIconSvg = (
 	if (iconSize && iconSize > 0) {
 		const sizePattern = /viewBox="0 0 (?<width>\d+) (?<height>\d+)"/;
 		const sizeMatch = sizePattern.exec(iconSvg);
-		const width = sizeMatch?.groups?.width;
-		const height = sizeMatch?.groups?.height;
-		if (Number(width) && Number(height)) {
+		const width = Number(sizeMatch?.groups?.width);
+		const height = Number(sizeMatch?.groups?.height);
+		if (width && height) {
 			const maxScale = (2 ** 14 - 1) / 24;
 			const minScale = 3 / 24;
 			const scale = Math.max(Math.min(maxScale, iconSize / 24), minScale);

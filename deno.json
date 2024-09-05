@@ -1,16 +1,19 @@
 {
 	"tasks": {
-		"dev": "deno --allow-net --watch source/app.js",
+		"serve": "deno serve source/app.ts",
+		"dev": "deno serve --watch source/app.ts",
 		"bump": "deno add npm:simple-icons@latest",
-		"update-lockfile": "deno cache --reload source/app.js source/colors.js source/icon.js source/utils.js test/viewbox.test.js"
+		"update-lockfile": "deno cache --reload source/app.ts source/colors.ts source/icon.ts source/utils.ts test/viewbox.test.ts"
 	},
 	"fmt": {
 		"useTabs": true,
 		"singleQuote": true,
-		"exclude": ["README.md"]
+		"exclude": [
+			"README.md"
+		]
 	},
 	"imports": {
-		"@oak/oak": "jsr:@oak/oak@^16.1.0",
+		"@std/http": "jsr:@std/http@^1.0.5",
 		"simple-icons": "npm:simple-icons@^13.8.0",
 		"svg-path-bbox": "npm:svg-path-bbox@^2.1.0",
 		"svgpath": "npm:svgpath@^2.6.0"
