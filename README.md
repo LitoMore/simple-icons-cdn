@@ -110,7 +110,7 @@ You can use this icon CDN anywhere in Notion which allows you to insert a custom
 	<picture>
 		<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot-dark.webp">
   	<source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot-light.webp">
-		<img width="400" src="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot-light.png" />
+		<img width="400" src="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot-light.webp" />
 	</picture>
 </p>
 
