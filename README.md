@@ -102,12 +102,6 @@ You can use this icon CDN anywhere in Notion which allows you to insert a custom
 
 <p align="center">
 	<picture>
-		<source media="(prefers-color-scheme: dark)" srcset="https://cdn.simpleicons.org/simpleicons/fff">
-  	<source media="(prefers-color-scheme: light)" srcset="https://cdn.simpleicons.org/simpleicons">
-		<img width="125" src="https://cdn.simpleicons.org/simpleicons" />
-	</picture>
-	<br />
-	<picture>
 		<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot-dark.webp">
   	<source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot-light.webp">
 		<img width="400" src="https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/notion-screenshot-light.webp" />
