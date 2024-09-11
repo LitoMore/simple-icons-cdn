@@ -24,13 +24,13 @@ export const getSimpleIcon = (slug?: string) => {
 	return null;
 };
 
-export const getIconSize = (path: string) => {
+export const getIconSize = (path: typeof svgpath) => {
 	const [x0, y0, x1, y1] = svgPathBbox(path);
 	return { width: x1 - x0, height: y1 - y0 };
 };
 
 export const resetIconPosition = (
-	path: string,
+	pathInstance: typeof svgpath,
 	iconWidth: number,
 	iconHeight: number,
 ) => {
@@ -41,8 +41,8 @@ export const resetIconPosition = (
 	const betterViewboxWidth = Math.ceil(actualViewboxWidth);
 	const betterOffset = (betterViewboxWidth - actualViewboxWidth) / 2;
 	const pathRescale = iconWidth > iconHeight
-		? svgpath(path).scale(scale)
-		: svgpath(path);
+		? pathInstance.scale(scale)
+		: pathInstance;
 	const [offsetX, offsetY] = svgPathBbox(pathRescale);
 	const pathReset = pathRescale.translate(
 		-offsetX + betterOffset,
@@ -64,9 +64,10 @@ export const getIconSvg = (
 	let iconSvg = icon.svg;
 
 	if (viewbox === 'auto') {
-		const { width: iconWidth, height: iconHeight } = getIconSize(icon.path);
+		const pathInstance = svgpath(icon.path);
+		const { width: iconWidth, height: iconHeight } = getIconSize(pathInstance);
 		const { path, betterViewboxWidth } = resetIconPosition(
-			icon.path,
+			pathInstance,
 			iconWidth,
 			iconHeight,
 		);

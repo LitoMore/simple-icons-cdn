@@ -1,12 +1,14 @@
 import * as si from 'npm:simple-icons';
+import svgpath from 'svgpath';
 import { getIconSize, resetIconPosition } from '../source/icon.ts';
 
 const checkAutoViewboxPath = (icon: si.SimpleIcon) => {
 	const start = performance.now();
+	const pathInstance = svgpath(icon.path);
 	try {
-		const { width, height } = getIconSize(icon.path);
+		const { width, height } = getIconSize(pathInstance);
 		const { path } = resetIconPosition(
-			icon.path,
+			pathInstance,
 			width,
 			height,
 		);
