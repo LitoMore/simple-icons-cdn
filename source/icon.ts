@@ -48,6 +48,7 @@ export const resetIconPosition = (
 		-offsetX + betterOffset,
 		-offsetY,
 	)
+		.round(3)
 		.toString();
 	return { path: pathReset, betterViewboxWidth };
 };
