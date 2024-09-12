@@ -34,9 +34,7 @@ const routes: Route[] = [
 		},
 	},
 	{
-		pattern: new URLPattern({
-			pathname: '/:iconSlug/:color?/:darkModeColor?{/}?',
-		}),
+		pattern: new URLPattern({ pathname: '/:iconSlug/:color?/:darkModeColor?' }),
 		handler: (request, _info, params) => {
 			const url = new URL(request.url);
 			const viewbox = url.searchParams.get('viewbox') || undefined;
