@@ -92,7 +92,7 @@ Easily browse, search, and copy icon SVG source, brand color, guidelines, and CD
 
 <p align="center">
 	<a title="Install simple-icons Raycast Extension" href="https://www.raycast.com/litomore/simple-icons">
-			<img src="https://www.raycast.com/litomore/simple-icons/install_button@2x.png?v=1.1" height="64" alt="" style="height: 64px;">
+		<img src="https://www.raycast.com/litomore/simple-icons/install_button@2x.png?v=1.1" width="256" style="width: 256px;">
 	</a>
 </p>
 
