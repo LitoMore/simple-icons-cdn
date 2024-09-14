@@ -17,9 +17,13 @@ const checkAutoViewboxPath = (icon: si.SimpleIcon) => {
 			return { title: icon.title, time: end - start };
 		}
 		throw new Error('Path is empty');
-	} catch (e) {
+	} catch (error) {
 		const end = performance.now();
-		console.error(`Error in icon: ${icon.title}: ${e.message}`);
+		console.error(
+			`Error in icon: ${icon.title}: ${
+				error instanceof Error ? error.message : 'Unknown error'
+			}`,
+		);
 		return { title: icon.title, time: end - start, fail: true };
 	}
 };
