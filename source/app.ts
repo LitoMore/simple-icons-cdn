@@ -1,5 +1,4 @@
-import { Route } from '@std/http/route';
-import { route } from './route.ts';
+import { EnhancedRoute, route } from './route.ts';
 import {
 	defaultHandler,
 	faviconHandler,
@@ -7,7 +6,7 @@ import {
 	iconHandler,
 } from './handlers.ts';
 
-const routes: Route[] = [
+const routes: EnhancedRoute[] = [
 	{
 		pattern: new URLPattern({ pathname: '/' }),
 		handler: homepageHandler,
@@ -17,6 +16,7 @@ const routes: Route[] = [
 		handler: faviconHandler,
 	},
 	{
+		method: ['GET', 'HEAD'],
 		pattern: new URLPattern({ pathname: '/:iconSlug/:color?/:darkModeColor?' }),
 		handler: iconHandler,
 	},

@@ -1,7 +1,11 @@
 import { Route } from '@std/http/route';
 
+export type EnhancedRoute = Omit<Route, 'method'> & {
+	method?: string | string[];
+};
+
 export function route(
-	routes: Route[],
+	routes: EnhancedRoute[],
 	defaultHandler: (
 		request: Request,
 		info?: Deno.ServeHandlerInfo,
@@ -14,8 +18,10 @@ export function route(
 		for (const route of routes) {
 			const match = route.pattern.exec(request.url);
 			if (
-				// This always allows HEAD requests to be handled
-				match && ['HEAD', route.method ?? 'GET'].includes(request.method)
+				match &&
+				(Array.isArray(route.method)
+					? route.method.includes(request.method)
+					: (route.method ?? 'GET') === request.method)
 			) {
 				return route.handler(request, info, match);
 			}
