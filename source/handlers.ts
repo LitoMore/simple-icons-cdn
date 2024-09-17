@@ -53,14 +53,21 @@ export const iconHandler: Handler = (request, _info, params) => {
 	const darkModeColor = params?.pathname.groups.darkModeColor;
 	const icon = getSimpleIcon(iconSlug);
 	if (icon) {
+		const isHeadRequestMethod = request.method === 'HEAD';
 		const iconSvg = getIconSvg(icon, color, darkModeColor, viewbox, size);
-		return new Response(iconSvg, {
+		const response = new Response(isHeadRequestMethod ? null : iconSvg, {
 			headers: {
 				'Access-Control-Allow-Origin': '*',
-				'Content-Type': 'image/svg+xml',
 				'Cache-Control': cacheForSevenDaysHeader,
+				'Content-Type': 'image/svg+xml',
 			},
 		});
+		if (isHeadRequestMethod) {
+			// Only manully set the Content-Length when the request method is HEAD.
+			// Because the Content-Length is automatically set by the Response constructor.
+			response.headers.set('Content-Length', iconSvg.length.toString());
+		}
+		return response;
 	}
 
 	return new Response(null, {
