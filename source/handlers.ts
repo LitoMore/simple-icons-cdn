@@ -6,10 +6,10 @@ const cacheForOneYearHeader =
 const cacheForSevenDaysHeader =
 	'public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800';
 
-export const defaultHandler = () => {
+export const defaultHandler: Handler = (request) => {
 	return new Response(null, {
 		headers: { 'Cache-Control': cacheForSevenDaysHeader },
-		status: 405,
+		status: ['GET', 'HEAD'].includes(request.method) ? 404 : 405,
 	});
 };
 
