@@ -1,5 +1,5 @@
-import * as simpleIcons from 'npm:simple-icons';
-import type { SimpleIcon } from 'npm:simple-icons';
+import * as simpleIcons from 'simple-icons';
+import type { SimpleIcon } from 'simple-icons';
 import { svgPathBbox } from 'svg-path-bbox';
 import svgpath from 'svgpath';
 import { normalizeColor } from './utils.ts';

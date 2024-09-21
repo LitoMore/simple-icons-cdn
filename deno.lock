@@ -10,7 +10,6 @@
       "jsr:@std/net@^1.0.2": "jsr:@std/net@1.0.2",
       "jsr:@std/path@^1.0.4": "jsr:@std/path@1.0.4",
       "jsr:@std/streams@^1.0.4": "jsr:@std/streams@1.0.4",
-      "npm:simple-icons": "npm:simple-icons@13.10.0",
       "npm:simple-icons@^13.10.0": "npm:simple-icons@13.10.0",
       "npm:svg-path-bbox@^2.1.0": "npm:svg-path-bbox@2.1.0",
       "npm:svgpath@^2.6.0": "npm:svgpath@2.6.0"

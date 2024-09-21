@@ -1,4 +1,4 @@
-import * as si from 'npm:simple-icons';
+import * as si from 'simple-icons';
 import svgpath from 'svgpath';
 import { getIconSize, resetIconPosition } from '../source/icon.ts';
 
