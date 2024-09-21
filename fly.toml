@@ -7,7 +7,7 @@ primary_region = 'sjc'
   PORT = '8000'
 
 [processes]
-  app = 'run serve'
+  app = 'task serve'
 
 [http_service]
   internal_port = 8000

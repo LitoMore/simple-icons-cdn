@@ -23,4 +23,4 @@ WORKDIR /deno-dir
 COPY . .
 
 ENTRYPOINT ["/bin/deno"]
-CMD ["run", "serve"]
+CMD ["task", "serve"]
