@@ -2,51 +2,14 @@
   "version": "3",
   "packages": {
     "specifiers": {
-      "jsr:@std/cli@^1.0.5": "jsr:@std/cli@1.0.5",
-      "jsr:@std/encoding@^1.0.4": "jsr:@std/encoding@1.0.4",
-      "jsr:@std/fmt@^1.0.2": "jsr:@std/fmt@1.0.2",
-      "jsr:@std/http@^1.0.5": "jsr:@std/http@1.0.5",
-      "jsr:@std/media-types@^1.0.3": "jsr:@std/media-types@1.0.3",
-      "jsr:@std/net@^1.0.2": "jsr:@std/net@1.0.2",
-      "jsr:@std/path@^1.0.4": "jsr:@std/path@1.0.4",
-      "jsr:@std/streams@^1.0.4": "jsr:@std/streams@1.0.4",
+      "jsr:@std/http@^1.0.6": "jsr:@std/http@1.0.6",
       "npm:simple-icons@^13.10.0": "npm:simple-icons@13.10.0",
       "npm:svg-path-bbox@^2.1.0": "npm:svg-path-bbox@2.1.0",
       "npm:svgpath@^2.6.0": "npm:svgpath@2.6.0"
     },
     "jsr": {
-      "@std/cli@1.0.5": {
-        "integrity": "c93cce26ffd26f617c15a12874e1bfeabc90b1eee86017c9639093734c2bf587"
-      },
-      "@std/encoding@1.0.4": {
-        "integrity": "2266cd516b32369e3dc5695717c96bf88343a1f761d6e6187a02a2bbe2af86ae"
-      },
-      "@std/fmt@1.0.2": {
-        "integrity": "87e9dfcdd3ca7c066e0c3c657c1f987c82888eb8103a3a3baa62684ffeb0f7a7"
-      },
-      "@std/http@1.0.5": {
-        "integrity": "afa1cf4f0c19e224534df3288a84de4fdfffe8a26308dfe3794166e4fafe0f3d",
-        "dependencies": [
-          "jsr:@std/cli@^1.0.5",
-          "jsr:@std/encoding@^1.0.4",
-          "jsr:@std/fmt@^1.0.2",
-          "jsr:@std/media-types@^1.0.3",
-          "jsr:@std/net@^1.0.2",
-          "jsr:@std/path@^1.0.4",
-          "jsr:@std/streams@^1.0.4"
-        ]
-      },
-      "@std/media-types@1.0.3": {
-        "integrity": "b12d30a7852f7578f4d210622df713bbfd1cbdd9b4ec2eaf5c1845ab70bab159"
-      },
-      "@std/net@1.0.2": {
-        "integrity": "520c18ddb7f67d3830a1adfef03a155d496fe9683a9cb63bb823b5afb86484dc"
-      },
-      "@std/path@1.0.4": {
-        "integrity": "48dd5d8389bcfcd619338a01bdf862cb7799933390146a54ae59356a0acc7105"
-      },
-      "@std/streams@1.0.4": {
-        "integrity": "a1a5b01c74ca1d2dcaacfe1d4bbb91392e765946d82a3471bd95539adc6da83a"
+      "@std/http@1.0.6": {
+        "integrity": "20a6f3fa4a914fbb19ea96572f2519b656232597092581ed706cd865d842d0d0"
       }
     },
     "npm": {
@@ -69,7 +32,7 @@
   "remote": {},
   "workspace": {
     "dependencies": [
-      "jsr:@std/http@^1.0.5",
+      "jsr:@std/http@^1.0.6",
       "npm:simple-icons@^13.10.0",
       "npm:svg-path-bbox@^2.1.0",
       "npm:svgpath@^2.6.0"

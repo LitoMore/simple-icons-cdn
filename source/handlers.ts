@@ -1,4 +1,4 @@
-import { Handler } from '@std/http/route';
+import { Handler } from '@std/http/unstable-route';
 import { getIconSvg, getSimpleIcon } from './icon.ts';
 
 const cacheForOneYearHeader =

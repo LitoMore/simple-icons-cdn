@@ -1,4 +1,4 @@
-import { Route } from '@std/http/route';
+import { type Route } from '@std/http/unstable-route';
 
 export type EnhancedRoute = Omit<Route, 'method'> & {
 	method?: string | string[];
