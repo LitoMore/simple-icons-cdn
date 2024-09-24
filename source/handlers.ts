@@ -13,15 +13,6 @@ export const defaultHandler: Handler = (request) => {
 	});
 };
 
-export const headHandler: Handler = () => {
-	return new Response(null, {
-		headers: {
-			'Cache-Control': cacheForSevenDaysHeader,
-		},
-		status: 200,
-	});
-};
-
 export const homepageHandler: Handler = () => {
 	return new Response(
 		null,
