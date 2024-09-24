@@ -13,7 +13,7 @@
 		]
 	},
 	"imports": {
-		"@std/http": "jsr:@std/http@^1.0.6",
+		"@std/http": "jsr:@std/http@^1.0.7",
 		"simple-icons": "npm:simple-icons@^13.11.0",
 		"svg-path-bbox": "npm:svg-path-bbox@^2.1.0",
 		"svgpath": "npm:svgpath@^2.6.0"

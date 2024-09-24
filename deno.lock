@@ -5,11 +5,11 @@
       "jsr:@std/cli@^1.0.6": "jsr:@std/cli@1.0.6",
       "jsr:@std/encoding@^1.0.5": "jsr:@std/encoding@1.0.5",
       "jsr:@std/fmt@^1.0.2": "jsr:@std/fmt@1.0.2",
-      "jsr:@std/http@^1.0.6": "jsr:@std/http@1.0.6",
+      "jsr:@std/http@^1.0.7": "jsr:@std/http@1.0.7",
       "jsr:@std/media-types@^1.0.3": "jsr:@std/media-types@1.0.3",
-      "jsr:@std/net@^1.0.3": "jsr:@std/net@1.0.4",
-      "jsr:@std/path@^1.0.5": "jsr:@std/path@1.0.6",
-      "jsr:@std/streams@^1.0.5": "jsr:@std/streams@1.0.5",
+      "jsr:@std/net@^1.0.4": "jsr:@std/net@1.0.4",
+      "jsr:@std/path@^1.0.6": "jsr:@std/path@1.0.6",
+      "jsr:@std/streams@^1.0.6": "jsr:@std/streams@1.0.6",
       "npm:simple-icons@^13.11.0": "npm:simple-icons@13.11.0",
       "npm:svg-path-bbox@^2.1.0": "npm:svg-path-bbox@2.1.0",
       "npm:svgpath@^2.6.0": "npm:svgpath@2.6.0"
@@ -24,16 +24,16 @@
       "@std/fmt@1.0.2": {
         "integrity": "87e9dfcdd3ca7c066e0c3c657c1f987c82888eb8103a3a3baa62684ffeb0f7a7"
       },
-      "@std/http@1.0.6": {
-        "integrity": "20a6f3fa4a914fbb19ea96572f2519b656232597092581ed706cd865d842d0d0",
+      "@std/http@1.0.7": {
+        "integrity": "9b904fc256678a5c9759f1a53a24a3fdcc59d83dc62099bb472683b6f819194c",
         "dependencies": [
           "jsr:@std/cli@^1.0.6",
           "jsr:@std/encoding@^1.0.5",
           "jsr:@std/fmt@^1.0.2",
           "jsr:@std/media-types@^1.0.3",
-          "jsr:@std/net@^1.0.3",
-          "jsr:@std/path@^1.0.5",
-          "jsr:@std/streams@^1.0.5"
+          "jsr:@std/net@^1.0.4",
+          "jsr:@std/path@^1.0.6",
+          "jsr:@std/streams@^1.0.6"
         ]
       },
       "@std/media-types@1.0.3": {
@@ -45,8 +45,8 @@
       "@std/path@1.0.6": {
         "integrity": "ab2c55f902b380cf28e0eec501b4906e4c1960d13f00e11cfbcd21de15f18fed"
       },
-      "@std/streams@1.0.5": {
-        "integrity": "74e5c73d7d68eeab0d7fba3b05cbee3ba4ac5ae37c5f4e675f67e62f8f53edc4"
+      "@std/streams@1.0.6": {
+        "integrity": "022ed94e380d06b4d91c49eb70241b7289ab78b8c2b4c4bbb7eb265e4997c25c"
       }
     },
     "npm": {
@@ -69,7 +69,7 @@
   "remote": {},
   "workspace": {
     "dependencies": [
-      "jsr:@std/http@^1.0.6",
+      "jsr:@std/http@^1.0.7",
       "npm:simple-icons@^13.11.0",
       "npm:svg-path-bbox@^2.1.0",
       "npm:svgpath@^2.6.0"

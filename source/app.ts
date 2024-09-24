@@ -1,4 +1,4 @@
-import { EnhancedRoute, route } from './route.ts';
+import { Route, route } from '@std/http/unstable-route';
 import {
 	defaultHandler,
 	faviconHandler,
@@ -6,12 +6,14 @@ import {
 	iconHandler,
 } from './handlers.ts';
 
-const routes: EnhancedRoute[] = [
+const routes: Route[] = [
 	{
+		method: ['GET', 'HEAD'],
 		pattern: new URLPattern({ pathname: '/' }),
 		handler: homepageHandler,
 	},
 	{
+		method: ['GET', 'HEAD'],
 		pattern: new URLPattern({ pathname: '/favicon.ico' }),
 		handler: faviconHandler,
 	},
