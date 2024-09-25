@@ -37,7 +37,7 @@ console.log('Top 10 slow icons:');
 console.table(
 	result.sort((a, b) => b.time - a.time).slice(0, 10).map((x) => ({
 		title: x.title,
-		['time (ms)']: x.time,
+		['time (ms)']: Number(x.time.toFixed(3)),
 	})),
 );
 
