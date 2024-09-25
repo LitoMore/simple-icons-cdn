@@ -9,6 +9,4 @@ jobs:
       - uses: denoland/setup-deno@v1
         with:
           deno-version: canary
-      - run: deno fmt --check
-      - run: deno lint
-      - run: deno test
+      - run: deno task test

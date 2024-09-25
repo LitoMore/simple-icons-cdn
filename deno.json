@@ -3,7 +3,8 @@
 		"serve": "deno serve source/app.ts",
 		"dev": "deno serve --watch source/app.ts",
 		"bump": "deno add npm:simple-icons@latest",
-		"update-lockfile": "deno cache --reload source/*.ts test/*.ts"
+		"update-lockfile": "deno cache --reload source/*.ts test/*.ts",
+		"test": "deno fmt --check && deno lint && deno check source/*.ts test/*.ts && deno test"
 	},
 	"fmt": {
 		"useTabs": true,
