@@ -1,5 +1,5 @@
 <h1 align="center">simple-icons-cdn</h1>
-
+<p align="center">Colorable and customizable CDN for Simple Icons</p>
 <p align="center">
 	<a href="https://github.com/LitoMore/simple-icons-cdn/actions">
 		<img src="https://img.shields.io/github/actions/workflow/status/LitoMore/simple-icons-cdn/deno.yml?branch=main&logo=deno&logoColor=000&label=Deno&labelColor=fff"/>
