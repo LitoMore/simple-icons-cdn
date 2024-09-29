@@ -41,6 +41,16 @@ console.table(
 	})),
 );
 
+const iconArgs = Deno.args;
+if (iconArgs.length > 0) {
+	console.table(
+		result.filter((r) => iconArgs.includes(r.title)).map((x) => ({
+			title: x.title,
+			['time (ms)']: Number(x.time.toFixed(3)),
+		})),
+	);
+}
+
 if (iconsFailed.length > 0) {
 	console.log(`Failed icons:`);
 	console.table(iconsFailed);
