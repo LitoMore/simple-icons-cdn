@@ -53,13 +53,14 @@ export const resetIconPosition = (
 	return { path: pathReset, betterViewboxWidth };
 };
 
-export const getIconSvg = (
-	icon: SimpleIcon,
-	color = '',
-	darkModeColor = '',
-	viewbox = '',
-	size = '',
-) => {
+export const getIconSvg = (icon: SimpleIcon, options?: {
+	color?: string;
+	darkModeColor?: string;
+	viewbox?: string;
+	size?: string;
+}) => {
+	const { color = '', darkModeColor = '', viewbox = '', size = '' } = options ||
+		{};
 	const hex = normalizeColor(color) || `#${icon.hex}`;
 	const darkModeHex = normalizeColor(darkModeColor) || `#${icon.hex}`;
 	let iconSvg = icon.svg;
@@ -67,18 +68,20 @@ export const getIconSvg = (
 	if (viewbox === 'auto') {
 		const pathInstance = svgpath(icon.path);
 		const { width: iconWidth, height: iconHeight } = getIconSize(pathInstance);
-		const { path, betterViewboxWidth } = resetIconPosition(
-			pathInstance,
-			iconWidth,
-			iconHeight,
-		);
+		if (iconWidth !== iconHeight) {
+			const { path, betterViewboxWidth } = resetIconPosition(
+				pathInstance,
+				iconWidth,
+				iconHeight,
+			);
 
-		iconSvg = iconSvg
-			.replace(
-				'viewBox="0 0 24 24"',
-				`viewBox="0 0 ${betterViewboxWidth} 24"`,
-			)
-			.replace(/<path d=".*"\/>/, `<path d="${path}"/>`);
+			iconSvg = iconSvg
+				.replace(
+					'viewBox="0 0 24 24"',
+					`viewBox="0 0 ${betterViewboxWidth} 24"`,
+				)
+				.replace(/<path d=".*"\/>/, `<path d="${path}"/>`);
+		}
 	}
 
 	const iconSize = parseInt(size, 10);

@@ -1,19 +1,12 @@
 import * as si from 'simple-icons';
-import svgpath from 'svgpath';
-import { getIconSize, resetIconPosition } from '../source/icon.ts';
+import { getIconSvg } from '../source/icon.ts';
 
 const checkAutoViewboxPath = (icon: si.SimpleIcon) => {
 	const start = performance.now();
-	const pathInstance = svgpath(icon.path);
 	try {
-		const { width, height } = getIconSize(pathInstance);
-		const { path } = resetIconPosition(
-			pathInstance,
-			width,
-			height,
-		);
+		const iconSvg = getIconSvg(icon, { viewbox: 'auto' });
 		const end = performance.now();
-		if (path) {
+		if (iconSvg) {
 			return { title: icon.title, time: end - start };
 		}
 		throw new Error('Path is empty');

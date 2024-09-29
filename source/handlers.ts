@@ -45,7 +45,7 @@ export const iconHandler: Handler = (request, _info, params) => {
 	const icon = getSimpleIcon(iconSlug);
 	if (icon) {
 		const isHeadRequestMethod = request.method === 'HEAD';
-		const iconSvg = getIconSvg(icon, color, darkModeColor, viewbox, size);
+		const iconSvg = getIconSvg(icon, { color, darkModeColor, viewbox, size });
 		return new Response(isHeadRequestMethod ? null : iconSvg, {
 			headers: {
 				'Access-Control-Allow-Origin': '*',
