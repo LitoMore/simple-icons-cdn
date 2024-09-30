@@ -4,6 +4,8 @@ import { svgPathBbox } from 'svg-path-bbox';
 import svgpath from 'svgpath';
 import { normalizeColor } from './utils.ts';
 
+const icons = new Map(Object.entries(simpleIcons));
+
 export const getSimpleIcon = (slug?: string) => {
 	if (!slug) {
 		return null;
@@ -17,8 +19,8 @@ export const getSimpleIcon = (slug?: string) => {
 	const iconKey = 'si' + normaizedSlug.charAt(0).toUpperCase() +
 		normaizedSlug.slice(1) as keyof typeof simpleIcons;
 
-	if (iconKey in simpleIcons) {
-		return simpleIcons[iconKey] as SimpleIcon;
+	if (icons.has(iconKey)) {
+		return icons.get(iconKey) as SimpleIcon;
 	}
 
 	return null;
