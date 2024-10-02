@@ -55,16 +55,18 @@ export const resetIconPosition = (
 	return { path: pathReset, betterViewboxWidth };
 };
 
-export const getIconSvg = (icon: SimpleIcon, options?: {
+export const getIconSvg = (icon: SimpleIcon, options: {
 	color?: string;
 	darkModeColor?: string;
 	viewbox?: string;
 	size?: string;
 }) => {
-	const { color = '', darkModeColor = '', viewbox = '', size = '' } = options ||
-		{};
-	const hex = normalizeColor(color) || `#${icon.hex}`;
-	const darkModeHex = normalizeColor(darkModeColor) || `#${icon.hex}`;
+	const defaultColor = `#${icon.hex}`;
+	const { color = '', darkModeColor = '', viewbox = '', size = '' } = options;
+	const hex = color ? normalizeColor(color, defaultColor) : defaultColor;
+	const darkModeHex = darkModeColor
+		? normalizeColor(darkModeColor, defaultColor)
+		: defaultColor;
 	let iconSvg = icon.svg;
 
 	if (viewbox === 'auto') {
