@@ -5,7 +5,7 @@ export const normalizeColor = (style: string, fallback: string) => {
 		return cssKeywords.get(style);
 	}
 
-	if (/^([a-f\d]{3,4}){1,2}$/i.test(style)) {
+	if (/^([a-f\d]{3,4}|[a-f\d]{6}|[a-f\d]{8})$/i.test(style)) {
 		return `#${style}`;
 	}
 
