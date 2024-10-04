@@ -2,7 +2,7 @@
 	"tasks": {
 		"serve": "deno serve source/app.ts",
 		"dev": "deno serve --watch source/app.ts",
-		"bump": "deno add npm:simple-icons@latest",
+		"bump": "deno add jsr:@std/http npm:simple-icons@latest npm:svg-path-bbox npm:svgpath",
 		"update-lockfile": "deno cache --reload source/*.ts test/*.ts",
 		"test": "deno fmt --check && deno lint && deno check source/*.ts test/*.ts && deno test"
 	},
