@@ -130,6 +130,11 @@ imgcat -u 'https://cdn.simpleicons.org/go?viewbox=auto&size=48'
 - [cdn.simpleicons.org](https://cdn.simpleicons.org/simpleicons)
 - [icons.ly](https://icons.ly/simpleicons)
 
+## Related
+
+- [Simple Icons](https://github.com/simple-icons/simple-icons) - Icon provider of the CDN service
+- [Brand Icons](https://raycast.com/litomore/simple-icons) - Raycast extension that makes it easy to search and copy CDN links
+
 ## License
 
 MIT
