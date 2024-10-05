@@ -7,6 +7,9 @@
 	<a href="https://fly.io">
 		<img src="https://img.shields.io/badge/Powered_by_Fly.io-24175B?logo=flydotio&logoColor=fff" />
 	</a>
+	<a href="https://cloudflare.com">
+		<img src="https://img.shields.io/badge/Boosted_by_Cloudflare-F38020?logo=cloudflare&logoColor=fff&logoSize=auto&logoWidth=20" />
+	</a>
 </p>
 
 ## Disclaimer
