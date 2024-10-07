@@ -7,7 +7,7 @@ const icons = new Map<string, si.SimpleIcon>(
 	) => [k.slice(2).toLowerCase(), v as si.SimpleIcon]),
 );
 
-Deno.test('test auto-viewbox', () => {
+Deno.test('check auto-viewbox', () => {
 	const result: Array<{ title: string; time: number; fail: boolean }> = [];
 	for (const [, icon] of icons) {
 		const start = performance.now();

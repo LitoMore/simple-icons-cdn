@@ -4,7 +4,8 @@
 		"dev": "deno serve --watch source/app.ts",
 		"bump": "deno add jsr:@std/http npm:simple-icons@latest npm:svg-path-bbox npm:svgpath",
 		"update-lockfile": "deno cache --reload source/*.ts test/*.ts",
-		"test": "deno fmt --check && deno lint && deno check source/*.ts test/*.ts && deno test"
+		"test": "deno fmt --check && deno lint && deno check source/*.ts test/*.ts && deno test --clean --coverage && deno coverage",
+		"coverage": "deno test --clean --coverage && deno coverage --lcov --output=coverage/cov.lcov && genhtml -o coverage/html coverage/cov.lcov"
 	},
 	"fmt": {
 		"useTabs": true,
@@ -16,6 +17,7 @@
 		]
 	},
 	"imports": {
+		"@std/assert": "jsr:@std/assert@^1.0.6",
 		"@std/http": "jsr:@std/http@^1.0.7",
 		"simple-icons": "npm:simple-icons@^13.13.0",
 		"svg-path-bbox": "npm:svg-path-bbox@^2.1.0",

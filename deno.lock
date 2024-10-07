@@ -1,10 +1,12 @@
 {
 	"version": "4",
 	"specifiers": {
+		"jsr:@std/assert@^1.0.6": "1.0.6",
 		"jsr:@std/cli@^1.0.6": "1.0.6",
 		"jsr:@std/encoding@^1.0.5": "1.0.5",
 		"jsr:@std/fmt@^1.0.2": "1.0.2",
 		"jsr:@std/http@^1.0.7": "1.0.7",
+		"jsr:@std/internal@^1.0.4": "1.0.4",
 		"jsr:@std/media-types@^1.0.3": "1.0.3",
 		"jsr:@std/net@^1.0.4": "1.0.4",
 		"jsr:@std/path@^1.0.6": "1.0.6",
@@ -14,6 +16,12 @@
 		"npm:svgpath@^2.6.0": "2.6.0"
 	},
 	"jsr": {
+		"@std/assert@1.0.6": {
+			"integrity": "1904c05806a25d94fe791d6d883b685c9e2dcd60e4f9fc30f4fc5cf010c72207",
+			"dependencies": [
+				"jsr:@std/internal"
+			]
+		},
 		"@std/cli@1.0.6": {
 			"integrity": "d22d8b38c66c666d7ad1f2a66c5b122da1704f985d3c47f01129f05abb6c5d3d"
 		},
@@ -34,6 +42,9 @@
 				"jsr:@std/path",
 				"jsr:@std/streams"
 			]
+		},
+		"@std/internal@1.0.4": {
+			"integrity": "62e8e4911527e5e4f307741a795c0b0a9e6958d0b3790716ae71ce085f755422"
 		},
 		"@std/media-types@1.0.3": {
 			"integrity": "b12d30a7852f7578f4d210622df713bbfd1cbdd9b4ec2eaf5c1845ab70bab159"
@@ -64,6 +75,7 @@
 	},
 	"workspace": {
 		"dependencies": [
+			"jsr:@std/assert@^1.0.6",
 			"jsr:@std/http@^1.0.7",
 			"npm:simple-icons@^13.13.0",
 			"npm:svg-path-bbox@^2.1.0",
