@@ -1,12 +1,12 @@
 import { Handler } from '@std/http/unstable-route';
 import { getIconSvg, getSimpleIcon } from './icon.ts';
 
-const cacheForOneYearHeader =
+export const cacheForOneYearHeader =
 	'public, max-age=31536000, s-maxage=31536000, immutable';
-const cacheForSevenDaysHeader =
+export const cacheForSevenDaysHeader =
 	'public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800';
 
-export const defaultHandler: Handler = (request) => {
+export const defaultHandler = (request: Request) => {
 	return new Response(null, {
 		headers: { 'Cache-Control': cacheForSevenDaysHeader },
 		status: ['GET', 'HEAD'].includes(request.method) ? 404 : 405,
