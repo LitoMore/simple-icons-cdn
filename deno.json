@@ -12,6 +12,7 @@
 		"exclude": [
 			".vscode",
 			"coverage",
+			"CONTRIBUTING.md",
 			"README.md"
 		]
 	},
