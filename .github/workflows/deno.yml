@@ -6,7 +6,5 @@ jobs:
     name: Deno
     steps:
       - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v1
-        with:
-          deno-version: v2.x
+      - uses: denoland/setup-deno@v2
       - run: deno task test
