@@ -1,23 +1,23 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@std/assert@^1.0.6": "1.0.6",
+    "jsr:@std/assert@^1.0.7": "1.0.7",
     "jsr:@std/cli@^1.0.6": "1.0.6",
     "jsr:@std/encoding@^1.0.5": "1.0.5",
     "jsr:@std/fmt@^1.0.3": "1.0.3",
     "jsr:@std/http@^1.0.9": "1.0.9",
-    "jsr:@std/internal@^1.0.4": "1.0.4",
+    "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/media-types@^1.0.3": "1.0.3",
     "jsr:@std/net@^1.0.4": "1.0.4",
-    "jsr:@std/path@^1.0.7": "1.0.7",
-    "jsr:@std/streams@^1.0.7": "1.0.7",
-    "npm:simple-icons@^13.15.0": "13.15.0",
+    "jsr:@std/path@^1.0.7": "1.0.8",
+    "jsr:@std/streams@^1.0.7": "1.0.8",
+    "npm:simple-icons@^13.16.0": "13.16.0",
     "npm:svg-path-bbox@^2.1.0": "2.1.0",
     "npm:svgpath@^2.6.0": "2.6.0"
   },
   "jsr": {
-    "@std/assert@1.0.6": {
-      "integrity": "1904c05806a25d94fe791d6d883b685c9e2dcd60e4f9fc30f4fc5cf010c72207",
+    "@std/assert@1.0.7": {
+      "integrity": "64ce9fac879e0b9f3042a89b3c3f8ccfc9c984391af19e2087513a79d73e28c3",
       "dependencies": [
         "jsr:@std/internal"
       ]
@@ -43,8 +43,8 @@
         "jsr:@std/streams"
       ]
     },
-    "@std/internal@1.0.4": {
-      "integrity": "62e8e4911527e5e4f307741a795c0b0a9e6958d0b3790716ae71ce085f755422"
+    "@std/internal@1.0.5": {
+      "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
     },
     "@std/media-types@1.0.3": {
       "integrity": "b12d30a7852f7578f4d210622df713bbfd1cbdd9b4ec2eaf5c1845ab70bab159"
@@ -55,13 +55,19 @@
     "@std/path@1.0.7": {
       "integrity": "76a689e07f0e15dcc6002ec39d0866797e7156629212b28f27179b8a5c3b33a1"
     },
+    "@std/path@1.0.8": {
+      "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
+    },
     "@std/streams@1.0.7": {
       "integrity": "1a93917ca0c58c01b2bfb93647189229b1702677f169b6fb61ad6241cd2e499b"
+    },
+    "@std/streams@1.0.8": {
+      "integrity": "b41332d93d2cf6a82fe4ac2153b930adf1a859392931e2a19d9fabfb6f154fb3"
     }
   },
   "npm": {
-    "simple-icons@13.15.0": {
-      "integrity": "sha512-8SzFj9CvPlDnjDLISsAWTvpCs7om2zbSJZ1hNLRo6quWKLqFwjCD9opS24Q/yD0bdsnVHPpF0N3hitpHrY5u9w=="
+    "simple-icons@13.16.0": {
+      "integrity": "sha512-aMg1efZ0IvYPKdvqUW0woVGSJwb199y9z7j1+6D5zPMn95eMQN0xzKAHefsqQW2K/5LwfgtFK3Gxn9n1eafX0A=="
     },
     "svg-path-bbox@2.1.0": {
       "integrity": "sha512-PEoSQFbBvL7FOCE4cN8Knej6L7bXdNkjPcUYsfMMpq0HpnqiO0sE2mcXTd7LX160aOyh5HbaeN/SoY8thMk5Kg==",
@@ -75,9 +81,9 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/assert@^1.0.6",
+      "jsr:@std/assert@^1.0.7",
       "jsr:@std/http@^1.0.9",
-      "npm:simple-icons@^13.15.0",
+      "npm:simple-icons@^13.16.0",
       "npm:svg-path-bbox@^2.1.0",
       "npm:svgpath@^2.6.0"
     ]
