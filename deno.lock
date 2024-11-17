@@ -1,23 +1,23 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@std/assert@^1.0.7": "1.0.7",
+    "jsr:@std/assert@^1.0.8": "1.0.8",
     "jsr:@std/cli@^1.0.6": "1.0.6",
     "jsr:@std/encoding@^1.0.5": "1.0.5",
     "jsr:@std/fmt@^1.0.3": "1.0.3",
-    "jsr:@std/http@^1.0.9": "1.0.9",
+    "jsr:@std/http@^1.0.10": "1.0.10",
     "jsr:@std/internal@^1.0.5": "1.0.5",
-    "jsr:@std/media-types@^1.0.3": "1.0.3",
+    "jsr:@std/media-types@^1.1.0": "1.1.0",
     "jsr:@std/net@^1.0.4": "1.0.4",
-    "jsr:@std/path@^1.0.7": "1.0.8",
-    "jsr:@std/streams@^1.0.7": "1.0.8",
-    "npm:simple-icons@^13.16.0": "13.16.0",
+    "jsr:@std/path@^1.0.8": "1.0.8",
+    "jsr:@std/streams@^1.0.8": "1.0.8",
+    "npm:simple-icons@^13.17.0": "13.17.0",
     "npm:svg-path-bbox@^2.1.0": "2.1.0",
     "npm:svgpath@^2.6.0": "2.6.0"
   },
   "jsr": {
-    "@std/assert@1.0.7": {
-      "integrity": "64ce9fac879e0b9f3042a89b3c3f8ccfc9c984391af19e2087513a79d73e28c3",
+    "@std/assert@1.0.8": {
+      "integrity": "ebe0bd7eb488ee39686f77003992f389a06c3da1bbd8022184804852b2fa641b",
       "dependencies": [
         "jsr:@std/internal"
       ]
@@ -31,8 +31,8 @@
     "@std/fmt@1.0.3": {
       "integrity": "97765c16aa32245ff4e2204ecf7d8562496a3cb8592340a80e7e554e0bb9149f"
     },
-    "@std/http@1.0.9": {
-      "integrity": "d409fc319a5e8d4a154e576c758752e9700282d74f31357a12fec6420f9ecb6c",
+    "@std/http@1.0.10": {
+      "integrity": "4e32d11493ab04e3ef09f104f0cb9beb4228b1d4b47c5469573c2c294c0d3692",
       "dependencies": [
         "jsr:@std/cli",
         "jsr:@std/encoding",
@@ -46,8 +46,8 @@
     "@std/internal@1.0.5": {
       "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
     },
-    "@std/media-types@1.0.3": {
-      "integrity": "b12d30a7852f7578f4d210622df713bbfd1cbdd9b4ec2eaf5c1845ab70bab159"
+    "@std/media-types@1.1.0": {
+      "integrity": "c9d093f0c05c3512932b330e3cc1fe1d627b301db33a4c2c2185c02471d6eaa4"
     },
     "@std/net@1.0.4": {
       "integrity": "2f403b455ebbccf83d8a027d29c5a9e3a2452fea39bb2da7f2c04af09c8bc852"
@@ -66,8 +66,8 @@
     }
   },
   "npm": {
-    "simple-icons@13.16.0": {
-      "integrity": "sha512-aMg1efZ0IvYPKdvqUW0woVGSJwb199y9z7j1+6D5zPMn95eMQN0xzKAHefsqQW2K/5LwfgtFK3Gxn9n1eafX0A=="
+    "simple-icons@13.17.0": {
+      "integrity": "sha512-pn37igWUYFeTBLckTGjFpwvEYbZuIXc9AB2lza+bzxc/h/sxlNn323dxGlXKglxqMNgLkbnpX75hT6kgsgb5CQ=="
     },
     "svg-path-bbox@2.1.0": {
       "integrity": "sha512-PEoSQFbBvL7FOCE4cN8Knej6L7bXdNkjPcUYsfMMpq0HpnqiO0sE2mcXTd7LX160aOyh5HbaeN/SoY8thMk5Kg==",
@@ -81,9 +81,9 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/assert@^1.0.7",
-      "jsr:@std/http@^1.0.9",
-      "npm:simple-icons@^13.16.0",
+      "jsr:@std/assert@^1.0.8",
+      "jsr:@std/http@^1.0.10",
+      "npm:simple-icons@^13.17.0",
       "npm:svg-path-bbox@^2.1.0",
       "npm:svgpath@^2.6.0"
     ]
