@@ -35,7 +35,7 @@ export const faviconHandler: Handler = () => {
 	});
 };
 
-export const iconHandler: Handler = (request, _info, params) => {
+export const iconHandler: Handler = (request, params) => {
 	const url = new URL(request.url);
 	const viewbox = url.searchParams.get('viewbox') || undefined;
 	const size = url.searchParams.get('size') || undefined;
