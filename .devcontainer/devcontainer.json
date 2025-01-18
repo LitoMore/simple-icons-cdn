@@ -1,0 +1,14 @@
+{
+	"name": "Deno",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"denoland.vscode-deno"
+			]
+		}
+	},
+	"forwardPorts": [8000]
+}
