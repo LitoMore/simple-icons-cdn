@@ -108,6 +108,12 @@ You can use this icon CDN anywhere in Notion which allows you to insert a custom
 	</picture>
 </p>
 
+#### Kando
+
+This is also useful to customize your icon color for [Kando](https://kando.menu) menu items:
+
+![](https://raw.githubusercontent.com/LitoMore/simple-icons-cdn/main/media/kando-screenshot.webp)
+
 #### Terminal
 
 It's possible to use icons from the terminal emulator since iTerm2 has [special image support](https://www.iterm2.com/documentation-images.html).
