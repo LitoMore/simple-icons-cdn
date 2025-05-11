@@ -20,7 +20,7 @@
 	"imports": {
 		"@std/assert": "jsr:@std/assert@^1.0.13",
 		"@std/http": "jsr:@std/http@^1.0.15",
-		"simple-icons": "npm:simple-icons@^14.12.3",
+		"simple-icons": "npm:simple-icons@^14.13.0",
 		"svg-path-bbox": "npm:svg-path-bbox@^2.1.0",
 		"svgpath": "npm:svgpath@^2.6.0"
 	}
