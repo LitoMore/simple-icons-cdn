@@ -22,7 +22,7 @@ You can use `deno test` to run unit tests. And use `deno task test` to test all 
 
 ### Coverage
 
-We require code coverage to be 100% all the time. You can use `deno task test --html` to generate a coverage report in HTML.
+We require code coverage to be 100% all the time. You can use `deno task test` to generate a coverage report in HTML.
 
 ### Development
 

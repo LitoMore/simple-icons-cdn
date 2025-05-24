@@ -4,7 +4,7 @@
 		"dev": "deno serve --watch source/app.ts",
 		"bump": "deno outdated --update --latest",
 		"update-lockfile": "deno cache --reload source/*.ts test/*.ts",
-		"test": "deno fmt --check && deno lint && deno check source/*.ts test/*.ts && deno test --clean --coverage-raw-data-only && deno coverage"
+		"test": "deno fmt --check && deno lint && deno check source/*.ts test/*.ts && deno test --clean --coverage"
 	},
 	"fmt": {
 		"useTabs": true,
