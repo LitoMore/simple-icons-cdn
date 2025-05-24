@@ -40,6 +40,8 @@ export const resetIconPosition = (
 	const actualViewboxWidth = iconWidth > iconHeight
 		? iconWidth * scale
 		: iconWidth;
+	// The "better" value is for those engines does not support decimal values.
+	// For example, the iTerm cannot render the icon correctly if the viewbox width is not an integer.
 	const betterViewboxWidth = Math.ceil(actualViewboxWidth);
 	const betterOffset = (betterViewboxWidth - actualViewboxWidth) / 2;
 	const pathRescale = iconWidth > iconHeight
