@@ -58,7 +58,7 @@ Optional. It's used for customizing the icon size. Use the query parameter `size
 
 #### Auto-sized
 
-This is useful if you want all icons rendered with consitent size.
+This is useful if you want all icons rendered with consistent size.
 
 ```html
 <img height="20" src="https://cdn.simpleicons.org/javascript?viewbox=auto" />
