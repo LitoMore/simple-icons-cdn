@@ -19,8 +19,8 @@
 	},
 	"imports": {
 		"@std/assert": "jsr:@std/assert@^1.0.13",
-		"@std/http": "jsr:@std/http@^1.0.16",
-		"simple-icons": "npm:simple-icons@^14.15.0",
+		"@std/http": "jsr:@std/http@^1.0.17",
+		"simple-icons": "npm:simple-icons@^15.0.0",
 		"svg-path-bbox": "npm:svg-path-bbox@^2.1.0",
 		"svgpath": "npm:svgpath@^2.6.0"
 	}
