@@ -2,7 +2,7 @@
 	"tasks": {
 		"serve": "deno serve source/app.ts",
 		"dev": "deno serve --watch source/app.ts",
-		"bump": "deno outdated --update --latest",
+		"bump": "deno outdated simple-icons --update --latest",
 		"update-lockfile": "deno cache --reload source/*.ts test/*.ts",
 		"test": "deno fmt --check && deno lint && deno check source/*.ts test/*.ts && deno test --clean --coverage"
 	},
