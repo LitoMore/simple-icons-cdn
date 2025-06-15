@@ -12,7 +12,7 @@
     "jsr:@std/net@^1.0.4": "1.0.4",
     "jsr:@std/path@^1.1.0": "1.1.0",
     "jsr:@std/streams@^1.0.9": "1.0.9",
-    "npm:simple-icons@^15.1.0": "15.1.0",
+    "npm:simple-icons@^15.2.0": "15.2.0",
     "npm:svg-path-bbox@^2.1.0": "2.1.0",
     "npm:svgpath@^2.6.0": "2.6.0"
   },
@@ -86,8 +86,8 @@
     }
   },
   "npm": {
-    "simple-icons@15.1.0": {
-      "integrity": "sha512-7wj0OeOJvGSgNEIrMm1MGhoX7CEV5R+T0Q5HmXzfakrue84qCZNV9l9eG092c14BbiuGgljdwFkLy3rQQaDJyg=="
+    "simple-icons@15.2.0": {
+      "integrity": "sha512-g36ByZgkbd1VIP7RTGhBXVLqrPFtwfcKISA1r+sx3rEhrNJBAaEMrAVo/gOJm6DqlCd8YyKWl85g5z4nXngObA=="
     },
     "svg-path-bbox@2.1.0": {
       "integrity": "sha512-PEoSQFbBvL7FOCE4cN8Knej6L7bXdNkjPcUYsfMMpq0HpnqiO0sE2mcXTd7LX160aOyh5HbaeN/SoY8thMk5Kg==",
@@ -104,7 +104,7 @@
     "dependencies": [
       "jsr:@std/assert@^1.0.13",
       "jsr:@std/http@^1.0.17",
-      "npm:simple-icons@^15.1.0",
+      "npm:simple-icons@^15.2.0",
       "npm:svg-path-bbox@^2.1.0",
       "npm:svgpath@^2.6.0"
     ]
