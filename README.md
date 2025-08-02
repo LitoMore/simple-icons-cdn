@@ -45,43 +45,43 @@ Optional. It's used for customizing the icon size. Use the query parameter `size
 
 ### Examples
 
-- <img height="14" src="https://cdn.simpleicons.org/simpleicons/111/eee"/> - https://cdn.simpleicons.org/simpleicons
-- <img height="14" src="https://cdn.simpleicons.org/simpleicons/blue"/> - https://cdn.simpleicons.org/simpleicons/blue
-- <img height="14" src="https://cdn.simpleicons.org/simpleicons/hotpink"/> - https://cdn.simpleicons.org/simpleicons/hotpink
-- <img height="14" src="https://cdn.simpleicons.org/simpleicons/0cf"/> - https://cdn.simpleicons.org/simpleicons/0cf
-- <img height="14" src="https://cdn.simpleicons.org/simpleicons/0cf9"/> - https://cdn.simpleicons.org/simpleicons/0cf9
-- <img height="14" src="https://cdn.simpleicons.org/simpleicons/00ccff"/> - https://cdn.simpleicons.org/simpleicons/00ccff
-- <img height="14" src="https://cdn.simpleicons.org/simpleicons/00ccff99"/> - https://cdn.simpleicons.org/simpleicons/00ccff99
-- <img height="14" src="https://cdn.simpleicons.org/simpleicons/orange/pink"/> - https://cdn.simpleicons.org/simpleicons/orange/pink
-- <img height="14" src="https://cdn.simpleicons.org/simpleicons/_/eee"/> - https://cdn.simpleicons.org/simpleicons/_/eee
-- <img height="14" src="https://cdn.simpleicons.org/simpleicons/eee/_"/> - [https://cdn.simpleicons.org/simpleicons/eee/\_](https://cdn.simpleicons.org/simpleicons/eee/_)
+- <img src="https://cdn.simpleicons.org/simpleicons/111/eee?size=14"/> - https://cdn.simpleicons.org/simpleicons
+- <img src="https://cdn.simpleicons.org/simpleicons/blue?size=14"/> - https://cdn.simpleicons.org/simpleicons/blue
+- <img src="https://cdn.simpleicons.org/simpleicons/hotpink?size=14"/> - https://cdn.simpleicons.org/simpleicons/hotpink
+- <img src="https://cdn.simpleicons.org/simpleicons/0cf?size=14"/> - https://cdn.simpleicons.org/simpleicons/0cf
+- <img src="https://cdn.simpleicons.org/simpleicons/0cf9?size=14"/> - https://cdn.simpleicons.org/simpleicons/0cf9
+- <img src="https://cdn.simpleicons.org/simpleicons/00ccff?size=14"/> - https://cdn.simpleicons.org/simpleicons/00ccff
+- <img src="https://cdn.simpleicons.org/simpleicons/00ccff99?size=14"/> - https://cdn.simpleicons.org/simpleicons/00ccff99
+- <img src="https://cdn.simpleicons.org/simpleicons/orange/pink?size=14"/> - https://cdn.simpleicons.org/simpleicons/orange/pink
+- <img src="https://cdn.simpleicons.org/simpleicons/_/eee?size=14"/> - https://cdn.simpleicons.org/simpleicons/_/eee
+- <img src="https://cdn.simpleicons.org/simpleicons/eee/_?size=14"/> - [https://cdn.simpleicons.org/simpleicons/eee/\_](https://cdn.simpleicons.org/simpleicons/eee/_)
 
 #### Auto-sized
 
 This is useful if you want all icons rendered with consistent size.
 
 ```html
-<img height="20" src="https://cdn.simpleicons.org/javascript?viewbox=auto" />
-<img height="20" src="https://cdn.simpleicons.org/python?viewbox=auto" />
-<img height="20" src="https://cdn.simpleicons.org/kotlin?viewbox=auto" />
-<img height="20" src="https://cdn.simpleicons.org/dart?viewbox=auto" />
-<img height="20" src="https://cdn.simpleicons.org/r?viewbox=auto" />
-<img height="20" src="https://cdn.simpleicons.org/swift?viewbox=auto" />
-<img height="20" src="https://cdn.simpleicons.org/julia?viewbox=auto" />
-<img height="20" src="https://cdn.simpleicons.org/haskell?viewbox=auto" />
-<img height="20" src="https://cdn.simpleicons.org/clojure?viewbox=auto" />
+<img src="https://cdn.simpleicons.org/javascript?viewbox=auto&size=20" />
+<img src="https://cdn.simpleicons.org/python?viewbox=auto&size=20" />
+<img src="https://cdn.simpleicons.org/kotlin?viewbox=auto&size=20" />
+<img src="https://cdn.simpleicons.org/dart?viewbox=auto&size=20" />
+<img src="https://cdn.simpleicons.org/r?viewbox=auto&size=20" />
+<img src="https://cdn.simpleicons.org/swift?viewbox=auto&size=20" />
+<img src="https://cdn.simpleicons.org/julia?viewbox=auto&size=20" />
+<img src="https://cdn.simpleicons.org/haskell?viewbox=auto&size=20" />
+<img src="https://cdn.simpleicons.org/clojure?viewbox=auto&size=20" />
 ```
 
 <p align="center">
-	<img height="20" src="https://cdn.simpleicons.org/javascript?viewbox=auto" />
-	<img height="20" src="https://cdn.simpleicons.org/python?viewbox=auto" />
-	<img height="20" src="https://cdn.simpleicons.org/kotlin?viewbox=auto" />
-	<img height="20" src="https://cdn.simpleicons.org/dart?viewbox=auto" />
-	<img height="20" src="https://cdn.simpleicons.org/r?viewbox=auto" />
-	<img height="20" src="https://cdn.simpleicons.org/swift?viewbox=auto" />
-	<img height="20" src="https://cdn.simpleicons.org/julia?viewbox=auto" />
-	<img height="20" src="https://cdn.simpleicons.org/haskell?viewbox=auto" />
-	<img height="20" src="https://cdn.simpleicons.org/clojure?viewbox=auto" />
+	<img src="https://cdn.simpleicons.org/javascript?viewbox=auto&size=20" />
+	<img src="https://cdn.simpleicons.org/python?viewbox=auto&size=20" />
+	<img src="https://cdn.simpleicons.org/kotlin?viewbox=auto&size=20" />
+	<img src="https://cdn.simpleicons.org/dart?viewbox=auto&size=20" />
+	<img src="https://cdn.simpleicons.org/r?viewbox=auto&size=20" />
+	<img src="https://cdn.simpleicons.org/swift?viewbox=auto&size=20" />
+	<img src="https://cdn.simpleicons.org/julia?viewbox=auto&size=20" />
+	<img src="https://cdn.simpleicons.org/haskell?viewbox=auto&size=20" />
+	<img src="https://cdn.simpleicons.org/clojure?viewbox=auto&size=20" />
 </p>
 
 ### Other usages
