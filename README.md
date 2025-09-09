@@ -1,12 +1,8 @@
 <h1 align="center">simple-icons-cdn</h1>
 <p align="center">Colorable and resizable CDN for Simple Icons</p>
 <p align="center">
-	<a href="https://github.com/LitoMore/simple-icons-cdn/actions">
-		<img src="https://img.shields.io/github/actions/workflow/status/LitoMore/simple-icons-cdn/deno.yml?branch=main&logo=deno&logoColor=000&label=Deno&labelColor=fff"/>
-	</a>
-	<a href="https://fly.io">
-		<img src="https://img.shields.io/badge/Powered_by_Fly.io-24175B?logo=flydotio&logoColor=fff" />
-	</a>
+	<a href="https://github.com/LitoMore/simple-icons-cdn/actions"><img src="https://img.shields.io/github/actions/workflow/status/LitoMore/simple-icons-cdn/deno.yml?branch=main&logo=deno&logoColor=000&label=Deno&labelColor=fff"/></a>
+	<a href="https://fly.io"><img src="https://img.shields.io/badge/Powered_by_Fly.io-24175B?logo=flydotio&logoColor=fff" /></a>
 </p>
 
 ## Disclaimer
