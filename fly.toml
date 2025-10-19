@@ -1,23 +1,23 @@
 app = 'simple-icons-cdn'
-primary_region = 'sjc'
+primary_region = 'sin'
 
 [build]
 
 [env]
-  PORT = '8000'
+PORT = '8000'
 
 [processes]
-  app = 'task serve'
+app = 'task serve'
 
 [http_service]
-  internal_port = 8000
-  force_https = true
-  auto_stop_machines = 'off'
-  auto_start_machines = true
-  min_machines_running = 3
-  processes = ['app']
+internal_port = 8000
+force_https = true
+auto_stop_machines = 'off'
+auto_start_machines = true
+min_machines_running = 3
+processes = ['app']
 
 [[vm]]
-  memory = '256mb'
-  cpu_kind = 'shared'
-  cpus = 1
+memory = '256mb'
+cpu_kind = 'shared'
+cpus = 1
