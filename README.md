@@ -87,7 +87,7 @@ This is useful if you want all icons rendered with consistent size.
 Easily browse, search, and copy icon SVG source, brand color, guidelines, and CDN links with Raycast.
 
 <p align="center">
-	<a title="Install simple-icons Raycast Extension" href="https://www.raycast.com/litomore/simple-icons">
+	<a title="Install simple-icons Raycast Extension" href="https://www.raycast.com/litomore/simple-icons?via=litomore">
 		<img src="https://www.raycast.com/litomore/simple-icons/install_button@2x.png?v=1.1" width="256" style="width: 256px;">
 	</a>
 </p>
