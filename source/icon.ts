@@ -2,6 +2,7 @@ import * as simpleIcons from 'simple-icons';
 import type { SimpleIcon } from 'simple-icons';
 import { svgPathBbox } from 'svg-path-bbox';
 import svgpath from 'svgpath';
+import { baseIconSize, maxIconSize, minIconSize } from './constants.ts';
 import { normalizeColor } from './utils.ts';
 
 const icons = new Map(Object.entries(simpleIcons));
@@ -83,8 +84,8 @@ export const getIconSvg = (icon: SimpleIcon, options: {
 
 			iconSvg = iconSvg
 				.replace(
-					'viewBox="0 0 24 24"',
-					`viewBox="0 0 ${betterViewboxWidth} 24"`,
+					`viewBox="0 0 ${baseIconSize} ${baseIconSize}`,
+					`viewBox="0 0 ${betterViewboxWidth} ${baseIconSize}"`,
 				)
 				.replace(/<path d=".*"\/>/, `<path d="${path}"/>`);
 		}
@@ -97,9 +98,12 @@ export const getIconSvg = (icon: SimpleIcon, options: {
 		const width = Number(sizeMatch?.groups?.width);
 		const height = Number(sizeMatch?.groups?.height);
 		if (width && height) {
-			const maxScale = (2 ** 14 - 1) / 24;
-			const minScale = 3 / 24;
-			const scale = Math.max(Math.min(maxScale, iconSize / 24), minScale);
+			const maxScale = maxIconSize / baseIconSize;
+			const minScale = minIconSize / baseIconSize;
+			const scale = Math.max(
+				Math.min(maxScale, iconSize / baseIconSize),
+				minScale,
+			);
 			const iconWidth = Math.round(width * scale);
 			const iconHeight = Math.round(height * scale);
 			iconSvg = iconSvg.replace(

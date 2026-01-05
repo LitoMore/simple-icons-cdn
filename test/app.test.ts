@@ -1,5 +1,6 @@
 import { assertEquals } from '@std/assert';
 import serve from '../source/app.ts';
+import { maxIconSize, minIconSize } from '../source/constants.ts';
 import {
 	cacheForOneYearHeader,
 	cacheForSevenDaysHeader,
@@ -279,6 +280,32 @@ Deno.test('sized URL', async () => {
 	assertEquals(headResponse.status, getResponse.status);
 	assertEquals(headResponse.headers, getResponse.headers);
 	assertEquals(headResponse.body, null);
+});
+
+Deno.test('size smaller than min-size', async () => {
+	const options = { slug: 'simpleicons', size: `${minIconSize - 1}` };
+	const getResponse = await getIconResponse(options);
+	assertEquals(getResponse.status, 200);
+	assertEquals(getResponse.headers.get('Content-Type'), 'image/svg+xml');
+	const body = await getResponse.text();
+	assertEquals(body.includes('viewBox="0 0 24 24"'), true);
+	assertEquals(
+		body.includes(`width="${minIconSize}" height="${minIconSize}"`),
+		true,
+	);
+});
+
+Deno.test('size larger than max-size', async () => {
+	const options = { slug: 'simpleicons', size: `${maxIconSize + 1}` };
+	const getResponse = await getIconResponse(options);
+	assertEquals(getResponse.status, 200);
+	assertEquals(getResponse.headers.get('Content-Type'), 'image/svg+xml');
+	const body = await getResponse.text();
+	assertEquals(body.includes('viewBox="0 0 24 24"'), true);
+	assertEquals(
+		body.includes(`width="${maxIconSize}" height="${maxIconSize}"`),
+		true,
+	);
 });
 
 Deno.test('both auto viewbox & sized URL', async () => {
