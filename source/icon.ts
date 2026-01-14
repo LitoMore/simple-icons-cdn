@@ -84,7 +84,7 @@ export const getIconSvg = (icon: SimpleIcon, options: {
 
 			iconSvg = iconSvg
 				.replace(
-					`viewBox="0 0 ${baseIconSize} ${baseIconSize}`,
+					`viewBox="0 0 ${baseIconSize} ${baseIconSize}"`,
 					`viewBox="0 0 ${betterViewboxWidth} ${baseIconSize}"`,
 				)
 				.replace(/<path d=".*"\/>/, `<path d="${path}"/>`);
