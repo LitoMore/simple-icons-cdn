@@ -5,7 +5,7 @@ import svgpath from 'svgpath';
 import { baseIconSize, maxIconSize, minIconSize } from './constants.ts';
 import { normalizeColor } from './utils.ts';
 
-const icons = new Map(Object.entries(simpleIcons));
+export const icons = new Map(Object.entries(simpleIcons));
 
 export const getSimpleIcon = (slug?: string) => {
 	if (!slug) {
