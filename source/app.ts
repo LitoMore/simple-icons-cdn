@@ -4,6 +4,7 @@ import {
 	faviconHandler,
 	homepageHandler,
 	iconHandler,
+	statsHandler,
 } from './handlers.ts';
 
 const routes: Route[] = [
@@ -11,6 +12,11 @@ const routes: Route[] = [
 		method: ['GET', 'HEAD'],
 		pattern: new URLPattern({ pathname: '/' }),
 		handler: homepageHandler,
+	},
+	{
+		method: ['GET', 'HEAD'],
+		pattern: new URLPattern({ pathname: '/_stats' }),
+		handler: statsHandler,
 	},
 	{
 		method: ['GET', 'HEAD'],

@@ -1,10 +1,15 @@
 {
+	"permissions": {
+		"default": {
+			"read": ["./deno.lock"]
+		}
+	},
 	"tasks": {
-		"serve": "deno serve source/app.ts",
-		"dev": "deno serve --watch source/app.ts",
+		"serve": "deno serve --permission-set=default source/app.ts",
+		"dev": "deno serve --permission-set=default --watch source/app.ts",
 		"bump": "deno outdated --update --latest",
 		"update-lockfile": "deno cache --reload source/*.ts test/*.ts",
-		"test": "deno fmt --check && deno lint && deno check source/*.ts test/*.ts && deno test --clean --coverage"
+		"test": "deno fmt --check && deno lint && deno check source/*.ts test/*.ts && deno test --permission-set=default --clean --coverage"
 	},
 	"fmt": {
 		"useTabs": true,

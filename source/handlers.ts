@@ -1,5 +1,6 @@
 import { Handler } from '@std/http/unstable-route';
 import { getIconSvg, getSimpleIcon } from './icon.ts';
+import { stats } from './stats.ts';
 
 export const cacheForOneYearHeader =
 	'public, max-age=31536000, s-maxage=31536000, immutable';
@@ -61,5 +62,15 @@ export const iconHandler: Handler = (request, params) => {
 			'Cache-Control': cacheForSevenDaysHeader,
 		},
 		status: 404,
+	});
+};
+
+export const statsHandler: Handler = () => {
+	return new Response(JSON.stringify(stats), {
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+			'Cache-Control': cacheForSevenDaysHeader,
+			'Content-Type': 'application/json',
+		},
 	});
 };
