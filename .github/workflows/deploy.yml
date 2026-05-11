@@ -1,0 +1,74 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - deno.json
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Check simple-icons version
+        id: simple_icons
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          node <<'EOF'
+          const { execFileSync } = require('node:child_process');
+          const { readFileSync, appendFileSync } = require('node:fs');
+
+          const beforeSha = process.env.BEFORE_SHA;
+          const outputPath = process.env.GITHUB_OUTPUT;
+          const zeroSha = /^0{40}$/;
+
+          const getSimpleIconsVersion = (content) => {
+            const denoJson = JSON.parse(content);
+            const specifier = denoJson.imports?.['simple-icons'];
+            return specifier?.match(/@([^@]+)$/)?.[1] ?? null;
+          };
+
+          const currentVersion = getSimpleIconsVersion(readFileSync('deno.json', 'utf8'));
+          let previousVersion = null;
+
+          if (beforeSha && !zeroSha.test(beforeSha)) {
+            try {
+              previousVersion = getSimpleIconsVersion(
+                execFileSync('git', ['show', `${beforeSha}:deno.json`], {
+                  encoding: 'utf8',
+                }),
+              );
+            } catch {
+              previousVersion = null;
+            }
+          }
+
+          const changed = previousVersion !== null &&
+            currentVersion !== null &&
+            previousVersion !== currentVersion;
+
+          appendFileSync(outputPath, `changed=${changed}\n`);
+          appendFileSync(outputPath, `previous=${previousVersion ?? ''}\n`);
+          appendFileSync(outputPath, `current=${currentVersion ?? ''}\n`);
+
+          console.log(`Previous simple-icons version: ${previousVersion || '(missing)'}`);
+          console.log(`Current simple-icons version: ${currentVersion || '(missing)'}`);
+          console.log(`Version changed: ${changed}`);
+          EOF
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.simple_icons.outputs.changed == 'true' }}
+
+      - name: Deploy to Fly
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.simple_icons.outputs.changed == 'true' }}
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_DEPLOY_TOKEN }}
