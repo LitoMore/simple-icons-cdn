@@ -44,7 +44,9 @@ Deno.test('root URL', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD' });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 
 	const postResponse = await getIconResponse({ method: 'POST' });
@@ -67,7 +69,9 @@ Deno.test('basic URL', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -83,7 +87,9 @@ Deno.test('colored icon URL - CSS keywords', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -99,7 +105,9 @@ Deno.test('colored icon URL - hex code', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -117,7 +125,9 @@ Deno.test('colored icon URL - invalid color', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -143,7 +153,9 @@ Deno.test('colored dark mode icon URL - CSS Keywords', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -169,7 +181,9 @@ Deno.test('colored dark mode icon URL - hex code', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -196,7 +210,9 @@ Deno.test('colored dark mode icon URL - invalid color', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -219,7 +235,9 @@ Deno.test('colored dark mode icon URL - both invalid colors', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -241,7 +259,9 @@ Deno.test('colored dark mode icon URL - same result hex code', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -259,7 +279,9 @@ Deno.test('auto viewbox URL', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -278,7 +300,9 @@ Deno.test('sized URL', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -323,7 +347,9 @@ Deno.test('both auto viewbox & sized URL', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -338,7 +364,9 @@ Deno.test('favicon URL', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -353,7 +381,9 @@ Deno.test('404 URL - icon not found', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
@@ -368,7 +398,9 @@ Deno.test('404 URL - trailing slash', async () => {
 
 	const headResponse = await getIconResponse({ method: 'HEAD', ...options });
 	assertEquals(headResponse.status, getResponse.status);
-	assertEquals(headResponse.headers, getResponse.headers);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
 	assertEquals(headResponse.body, null);
 });
 
