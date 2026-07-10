@@ -3,6 +3,7 @@
 		"serve": "deno serve source/app.ts",
 		"dev": "deno serve --watch source/app.ts",
 		"bump": "deno outdated --update --latest",
+		"count-requests": "deno run --allow-env --allow-net --allow-read --allow-write scripts/count-requests.ts",
 		"update-lockfile": "deno cache --reload source/*.ts test/*.ts",
 		"test": "deno fmt --check && deno lint && deno check source/*.ts test/*.ts && deno test --clean --coverage"
 	},
