@@ -2,9 +2,11 @@ import { assertEquals } from '@std/assert';
 import serve from '../source/app.ts';
 import { maxIconSize, minIconSize } from '../source/constants.ts';
 import {
+	cacheForOneDayHeader,
 	cacheForOneYearHeader,
 	cacheForSevenDaysHeader,
 } from '../source/handlers.ts';
+import { lastOneMonthRequests } from '../source/traffic.ts';
 
 const getIconResponse = (
 	{ slug, color, darkModeColor, viewbox, size, method = 'GET', trailingSlash }:
@@ -52,6 +54,102 @@ Deno.test('root URL', async () => {
 	const postResponse = await getIconResponse({ method: 'POST' });
 	assertEquals(postResponse.status, 405);
 	assertEquals(postResponse.body, null);
+});
+
+Deno.test('requests badge handles request failures', async () => {
+	const originalFetch = globalThis.fetch;
+	const originalGetEnv = Deno.env.get;
+	const originalConsoleError = console.error;
+	const environment: Record<string, string> = {
+		CLOUDFLARE_SI_ACCOUNT_ID: 'account-id',
+		CLOUDFLARE_SI_API_TOKEN: 'api-token',
+		CLOUDFLARE_SI_ZONE_ID: 'zone-id',
+	};
+	let fetchCalls = 0;
+	const loggedErrors: unknown[][] = [];
+	globalThis.fetch = () => {
+		fetchCalls++;
+		return Promise.reject(new Error('Cloudflare unavailable'));
+	};
+	Deno.env.get = (name) => environment[name];
+	console.error = (...args) => loggedErrors.push(args);
+
+	try {
+		const getResponse = await serve.fetch(
+			new Request('http://localhost:8000/_badge/requests'),
+		);
+		assertEquals(getResponse.status, 200);
+		assertEquals(getResponse.headers.get('Content-Type'), 'application/json');
+		assertEquals(getResponse.headers.get('Cache-Control'), 'no-store');
+		assertEquals(await getResponse.json(), {
+			schemaVersion: 1,
+			label: 'requests',
+			message: 'unavailable',
+			isError: true,
+		});
+
+		const headResponse = await serve.fetch(
+			new Request('http://localhost:8000/_badge/requests', { method: 'HEAD' }),
+		);
+		assertEquals(headResponse.status, getResponse.status);
+		assertEquals([...headResponse.headers.entries()], [
+			...getResponse.headers.entries(),
+		]);
+		assertEquals(headResponse.body, null);
+	} finally {
+		globalThis.fetch = originalFetch;
+		Deno.env.get = originalGetEnv;
+		console.error = originalConsoleError;
+	}
+
+	assertEquals(fetchCalls, 2);
+	assertEquals(loggedErrors.length, 2);
+});
+
+Deno.test('requests badge', async () => {
+	const environment: Record<string, string> = {
+		CLOUDFLARE_SI_ACCOUNT_ID: 'account-id',
+		CLOUDFLARE_SI_API_TOKEN: 'api-token',
+		CLOUDFLARE_SI_ZONE_ID: 'zone-id',
+	};
+	await lastOneMonthRequests({
+		fetch: () =>
+			Promise.resolve(
+				Response.json({
+					data: {
+						viewer: {
+							accounts: [{ requests: [{ count: 672_000_000 }] }],
+						},
+					},
+				}),
+			),
+		getEnv: (name) => environment[name],
+	});
+	const getResponse = await serve.fetch(
+		new Request('http://localhost:8000/_badge/requests'),
+	);
+
+	assertEquals(getResponse.status, 200);
+	assertEquals(getResponse.headers.get('Content-Type'), 'application/json');
+	assertEquals(
+		getResponse.headers.get('Cache-Control'),
+		cacheForOneDayHeader,
+	);
+	assertEquals(await getResponse.json(), {
+		schemaVersion: 1,
+		label: 'requests',
+		message: '672M/month',
+		color: 'blue',
+	});
+
+	const headResponse = await serve.fetch(
+		new Request('http://localhost:8000/_badge/requests', { method: 'HEAD' }),
+	);
+	assertEquals(headResponse.status, getResponse.status);
+	assertEquals([...headResponse.headers.entries()], [
+		...getResponse.headers.entries(),
+	]);
+	assertEquals(headResponse.body, null);
 });
 
 Deno.test('basic URL', async () => {

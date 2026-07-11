@@ -4,6 +4,7 @@ import {
 	faviconHandler,
 	homepageHandler,
 	iconHandler,
+	requestsBadgeHandler,
 } from './handlers.ts';
 
 const routes: Route[] = [
@@ -16,6 +17,11 @@ const routes: Route[] = [
 		method: ['GET', 'HEAD'],
 		pattern: new URLPattern({ pathname: '/favicon.ico' }),
 		handler: faviconHandler,
+	},
+	{
+		method: ['GET', 'HEAD'],
+		pattern: new URLPattern({ pathname: '/_badge/requests' }),
+		handler: requestsBadgeHandler,
 	},
 	{
 		method: ['GET', 'HEAD'],
