@@ -1,6 +1,7 @@
 import { Handler } from '@std/http/unstable-route';
 import { getIconSvg, getSimpleIcon } from './icon.ts';
-import { formatCount, lastOneMonthRequests } from './traffic.ts';
+import { formatBytes, formatCount, lastOneMonthTraffic } from './traffic.ts';
+import type { Traffic } from './traffic.ts';
 
 export const cacheForOneYearHeader =
 	'public, max-age=31536000, s-maxage=31536000, immutable';
@@ -51,33 +52,53 @@ const createBadgeResponse = (
 	});
 };
 
-export const requestsBadgeHandler: Handler = async (request) => {
-	try {
-		const count = await lastOneMonthRequests();
-		return createBadgeResponse(
-			request,
-			JSON.stringify({
-				schemaVersion: 1,
-				label: 'requests',
-				message: `${formatCount(count)}/month`,
-				color: 'blue',
-			}),
-			cacheForOneDayHeader,
-		);
-	} catch (error) {
-		console.error('Failed to load traffic count:', error);
-		return createBadgeResponse(
-			request,
-			JSON.stringify({
-				schemaVersion: 1,
-				label: 'requests',
-				message: 'unavailable',
-				isError: true,
-			}),
-			'no-store',
-		);
-	}
+const createTrafficBadgeHandler = (
+	label: string,
+	formatMessage: (traffic: Traffic) => string,
+): Handler => {
+	return async (request) => {
+		try {
+			const traffic = await lastOneMonthTraffic();
+			return createBadgeResponse(
+				request,
+				JSON.stringify({
+					schemaVersion: 1,
+					label,
+					message: formatMessage(traffic),
+					color: 'blue',
+				}),
+				cacheForOneDayHeader,
+			);
+		} catch (error) {
+			console.error(`Failed to load ${label}:`, error);
+			return createBadgeResponse(
+				request,
+				JSON.stringify({
+					schemaVersion: 1,
+					label,
+					message: 'unavailable',
+					isError: true,
+				}),
+				'no-store',
+			);
+		}
+	};
 };
+
+export const requestsBadgeHandler = createTrafficBadgeHandler(
+	'requests',
+	(traffic) => `${formatCount(traffic.requests)}/month`,
+);
+
+export const uniqueVisitorsBadgeHandler = createTrafficBadgeHandler(
+	'unique visitors',
+	(traffic) => `${formatCount(traffic.uniqueVisitors)}/month`,
+);
+
+export const dataServedBadgeHandler = createTrafficBadgeHandler(
+	'data served',
+	(traffic) => `${formatBytes(traffic.dataServed)}/month`,
+);
 
 export const iconHandler: Handler = (request, params) => {
 	const url = new URL(request.url);

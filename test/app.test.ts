@@ -6,7 +6,7 @@ import {
 	cacheForOneYearHeader,
 	cacheForSevenDaysHeader,
 } from '../source/handlers.ts';
-import { lastOneMonthRequests } from '../source/traffic.ts';
+import { lastOneMonthTraffic } from '../source/traffic.ts';
 
 const getIconResponse = (
 	{ slug, color, darkModeColor, viewbox, size, method = 'GET', trailingSlash }:
@@ -56,7 +56,29 @@ Deno.test('root URL', async () => {
 	assertEquals(postResponse.body, null);
 });
 
-Deno.test('requests badge handles request failures', async () => {
+Deno.test('listen message', () => {
+	const originalConsoleLog = console.log;
+	const loggedMessages: unknown[][] = [];
+	console.log = (...args) => loggedMessages.push(args);
+
+	try {
+		serve.onListen();
+	} finally {
+		console.log = originalConsoleLog;
+	}
+
+	assertEquals(loggedMessages, [[
+		[
+			'Test URLs:',
+			'- http://0.0.0.0:8000/simpleicons',
+			'- http://0.0.0.0:8000/_badge/requests',
+			'- http://0.0.0.0:8000/_badge/unique-visitors',
+			'- http://0.0.0.0:8000/_badge/data-served',
+		].join('\n'),
+	]]);
+});
+
+Deno.test('traffic badges handle request failures', async () => {
 	const originalFetch = globalThis.fetch;
 	const originalGetEnv = Deno.env.get;
 	const originalConsoleError = console.error;
@@ -75,81 +97,114 @@ Deno.test('requests badge handles request failures', async () => {
 	console.error = (...args) => loggedErrors.push(args);
 
 	try {
-		const getResponse = await serve.fetch(
-			new Request('http://localhost:8000/_badge/requests'),
-		);
-		assertEquals(getResponse.status, 200);
-		assertEquals(getResponse.headers.get('Content-Type'), 'application/json');
-		assertEquals(getResponse.headers.get('Cache-Control'), 'no-store');
-		assertEquals(await getResponse.json(), {
-			schemaVersion: 1,
-			label: 'requests',
-			message: 'unavailable',
-			isError: true,
-		});
+		for (
+			const { path, label } of [
+				{ path: 'requests', label: 'requests' },
+				{ path: 'unique-visitors', label: 'unique visitors' },
+				{ path: 'data-served', label: 'data served' },
+			]
+		) {
+			const url = `http://localhost:8000/_badge/${path}`;
+			const getResponse = await serve.fetch(new Request(url));
+			assertEquals(getResponse.status, 200);
+			assertEquals(getResponse.headers.get('Content-Type'), 'application/json');
+			assertEquals(getResponse.headers.get('Cache-Control'), 'no-store');
+			assertEquals(await getResponse.json(), {
+				schemaVersion: 1,
+				label,
+				message: 'unavailable',
+				isError: true,
+			});
 
-		const headResponse = await serve.fetch(
-			new Request('http://localhost:8000/_badge/requests', { method: 'HEAD' }),
-		);
-		assertEquals(headResponse.status, getResponse.status);
-		assertEquals([...headResponse.headers.entries()], [
-			...getResponse.headers.entries(),
-		]);
-		assertEquals(headResponse.body, null);
+			const headResponse = await serve.fetch(
+				new Request(url, { method: 'HEAD' }),
+			);
+			assertEquals(headResponse.status, getResponse.status);
+			assertEquals([...headResponse.headers.entries()], [
+				...getResponse.headers.entries(),
+			]);
+			assertEquals(headResponse.body, null);
+		}
 	} finally {
 		globalThis.fetch = originalFetch;
 		Deno.env.get = originalGetEnv;
 		console.error = originalConsoleError;
 	}
 
-	assertEquals(fetchCalls, 2);
-	assertEquals(loggedErrors.length, 2);
+	assertEquals(fetchCalls, 6);
+	assertEquals(loggedErrors.length, 6);
 });
 
-Deno.test('requests badge', async () => {
+Deno.test('traffic badges', async () => {
 	const environment: Record<string, string> = {
 		CLOUDFLARE_SI_ACCOUNT_ID: 'account-id',
 		CLOUDFLARE_SI_API_TOKEN: 'api-token',
 		CLOUDFLARE_SI_ZONE_ID: 'zone-id',
 	};
-	await lastOneMonthRequests({
+	await lastOneMonthTraffic({
 		fetch: () =>
 			Promise.resolve(
 				Response.json({
 					data: {
 						viewer: {
-							accounts: [{ requests: [{ count: 672_000_000 }] }],
+							accounts: [{
+								traffic: [{
+									count: 700_000_000,
+									sum: { edgeResponseBytes: 9_000_000_000 },
+								}],
+							}],
+							zones: [{
+								uniqueVisitors: [{
+									uniq: { uniques: 45_000_000 },
+								}],
+							}],
 						},
 					},
 				}),
 			),
 		getEnv: (name) => environment[name],
 	});
-	const getResponse = await serve.fetch(
-		new Request('http://localhost:8000/_badge/requests'),
-	);
 
-	assertEquals(getResponse.status, 200);
-	assertEquals(getResponse.headers.get('Content-Type'), 'application/json');
-	assertEquals(
-		getResponse.headers.get('Cache-Control'),
-		cacheForOneDayHeader,
-	);
-	assertEquals(await getResponse.json(), {
-		schemaVersion: 1,
-		label: 'requests',
-		message: '672M/month',
-		color: 'blue',
-	});
+	for (
+		const { path, label, message } of [
+			{ path: 'requests', label: 'requests', message: '700M/month' },
+			{
+				path: 'unique-visitors',
+				label: 'unique visitors',
+				message: '45M/month',
+			},
+			{
+				path: 'data-served',
+				label: 'data served',
+				message: '9GB/month',
+			},
+		]
+	) {
+		const url = `http://localhost:8000/_badge/${path}`;
+		const getResponse = await serve.fetch(new Request(url));
 
-	const headResponse = await serve.fetch(
-		new Request('http://localhost:8000/_badge/requests', { method: 'HEAD' }),
-	);
-	assertEquals(headResponse.status, getResponse.status);
-	assertEquals([...headResponse.headers.entries()], [
-		...getResponse.headers.entries(),
-	]);
-	assertEquals(headResponse.body, null);
+		assertEquals(getResponse.status, 200);
+		assertEquals(getResponse.headers.get('Content-Type'), 'application/json');
+		assertEquals(
+			getResponse.headers.get('Cache-Control'),
+			cacheForOneDayHeader,
+		);
+		assertEquals(await getResponse.json(), {
+			schemaVersion: 1,
+			label,
+			message,
+			color: 'blue',
+		});
+
+		const headResponse = await serve.fetch(
+			new Request(url, { method: 'HEAD' }),
+		);
+		assertEquals(headResponse.status, getResponse.status);
+		assertEquals([...headResponse.headers.entries()], [
+			...getResponse.headers.entries(),
+		]);
+		assertEquals(headResponse.body, null);
+	}
 });
 
 Deno.test('basic URL', async () => {

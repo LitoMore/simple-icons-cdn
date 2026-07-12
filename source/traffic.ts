@@ -4,15 +4,37 @@ const CLOUDFLARE_SI_HOSTNAME = 'cdn.simpleicons.org';
 const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const LAST_ONE_MONTH_IN_DAYS = 30;
 
-let cache: { count: number; expiresAt: number } | undefined;
-let inFlightRequest: Promise<number> | undefined;
+export type Traffic = {
+	dataServed: number;
+	requests: number;
+	uniqueVisitors: number;
+};
+
+type CloudflareSite = {
+	accountTag: string;
+	hostname: string;
+	zoneTag: string;
+};
+
+let cache: { expiresAt: number; traffic: Traffic } | undefined;
+let inFlightRequest: Promise<Traffic> | undefined;
 
 type CloudflareGraphqlResponse = {
 	data?: {
 		viewer?: {
 			accounts?: Array<{
-				requests?: Array<{
+				traffic?: Array<{
 					count?: number | string | null;
+					sum?: {
+						edgeResponseBytes?: number | string | null;
+					};
+				}>;
+			}>;
+			zones?: Array<{
+				uniqueVisitors?: Array<{
+					uniq?: {
+						uniques?: number | string | null;
+					};
 				}>;
 			}>;
 		};
@@ -27,27 +49,31 @@ type Fetch = (
 	init?: RequestInit,
 ) => Promise<Response>;
 
-type LastOneMonthRequestsOptions = {
+type LastOneMonthTrafficOptions = {
 	fetch?: Fetch;
 	getEnv?: (name: string) => string | undefined;
 	now?: () => Date;
 };
 
-type FetchLastOneMonthRequestsOptions =
-	& Omit<LastOneMonthRequestsOptions, 'now'>
+type FetchLastOneMonthTrafficOptions =
+	& Omit<LastOneMonthTrafficOptions, 'now'>
 	& { now: () => Date };
 
-const lastOneMonthRequestsQuery = `
-	query LastOneMonthRequests(
+// Cloudflare exposes unique IPs only through its zone rollups, whose filters do
+// not include hostnames. Requests and data served remain hostname-scoped.
+const lastOneMonthTrafficQuery = `
+	query LastOneMonthTraffic(
 		$accountTag: string
 		$zoneTag: string
 		$hostname: string
 		$start: Time
 		$end: Time
+		$startDate: Date
+		$endDate: Date
 	) {
 		viewer {
 			accounts(filter: { accountTag: $accountTag }) {
-				requests: httpRequestsAdaptiveGroups(
+				traffic: httpRequestsAdaptiveGroups(
 					limit: 1
 					filter: {
 						zoneTag: $zoneTag
@@ -58,6 +84,22 @@ const lastOneMonthRequestsQuery = `
 					}
 				) {
 					count
+					sum {
+						edgeResponseBytes
+					}
+				}
+			}
+			zones(filter: { zoneTag: $zoneTag }) {
+				uniqueVisitors: httpRequests1dGroups(
+					limit: 1
+					filter: {
+						date_geq: $startDate
+						date_lt: $endDate
+					}
+				) {
+					uniq {
+						uniques
+					}
 				}
 			}
 		}
@@ -79,6 +121,22 @@ const getRequiredEnv = (
 		`Missing required environment variable: ${names.join(' or ')}`,
 	);
 };
+
+const getCloudflareSite = (
+	getEnv: (name: string) => string | undefined,
+): CloudflareSite => ({
+	accountTag: getRequiredEnv(
+		getEnv,
+		'CLOUDFLARE_SI_ACCOUNT_ID',
+		'CLOUDFLARE_ACCOUNT_ID',
+	),
+	hostname: CLOUDFLARE_SI_HOSTNAME,
+	zoneTag: getRequiredEnv(
+		getEnv,
+		'CLOUDFLARE_SI_ZONE_ID',
+		'CLOUDFLARE_ZONE_ID',
+	),
+});
 
 const toCloudflareTime = (date: Date) =>
 	date.toISOString().replace(/\.\d{3}Z$/, 'Z');
@@ -128,7 +186,8 @@ export const formatCount = (value: number) => {
 	};
 
 	if (absoluteValue >= 1_000_000_000) {
-		return formatWithSuffix(1_000_000_000, 'B');
+		const formatted = (value / 1_000_000_000).toFixed(2).replace(/\.?0+$/, '');
+		return `${formatted} billion`;
 	}
 
 	if (absoluteValue >= 1_000_000) {
@@ -140,6 +199,40 @@ export const formatCount = (value: number) => {
 	}
 
 	return String(value);
+};
+
+export const formatBytes = (value: number) => {
+	const absoluteValue = Math.abs(value);
+	const formatWithUnit = (divisor: number, unit: string) => {
+		const formatted = (value / divisor).toFixed(0);
+		return `${formatted}${unit}`;
+	};
+
+	if (absoluteValue >= 1_000_000_000_000_000) {
+		return formatWithUnit(1_000_000_000_000_000, 'PB');
+	}
+
+	if (absoluteValue >= 1_000_000_000_000) {
+		const formatted = (value / 1_000_000_000_000).toFixed(2).replace(
+			/\.?0+$/,
+			'',
+		);
+		return `${formatted}TB`;
+	}
+
+	if (absoluteValue >= 1_000_000_000) {
+		return formatWithUnit(1_000_000_000, 'GB');
+	}
+
+	if (absoluteValue >= 1_000_000) {
+		return formatWithUnit(1_000_000, 'MB');
+	}
+
+	if (absoluteValue >= 1_000) {
+		return formatWithUnit(1_000, 'KB');
+	}
+
+	return `${value}B`;
 };
 
 const getLastOneMonthDateRange = (now: Date) => {
@@ -154,45 +247,40 @@ const getLastOneMonthDateRange = (now: Date) => {
 
 	return {
 		end: toCloudflareTime(end),
+		endDate: end.toISOString().slice(0, 10),
 		start: toCloudflareTime(start),
+		startDate: start.toISOString().slice(0, 10),
 	};
 };
 
-const fetchLastOneMonthRequests = async (
+const fetchSiteTraffic = async (
 	{
-		fetch: fetcher = globalThis.fetch,
-		getEnv = (name) => Deno.env.get(name),
-		now,
-	}: FetchLastOneMonthRequestsOptions,
-) => {
-	const dateRange = getLastOneMonthDateRange(now());
+		apiToken,
+		dateRange,
+		fetcher,
+		site,
+	}: {
+		apiToken: string;
+		dateRange: ReturnType<typeof getLastOneMonthDateRange>;
+		fetcher: Fetch;
+		site: CloudflareSite;
+	},
+): Promise<Traffic> => {
 	const response = await fetcher(CLOUDFLARE_GRAPHQL_API_URL, {
 		body: JSON.stringify({
-			query: lastOneMonthRequestsQuery,
+			query: lastOneMonthTrafficQuery,
 			variables: {
-				accountTag: getRequiredEnv(
-					getEnv,
-					'CLOUDFLARE_SI_ACCOUNT_ID',
-					'CLOUDFLARE_ACCOUNT_ID',
-				),
+				accountTag: site.accountTag,
 				end: dateRange.end,
-				hostname: CLOUDFLARE_SI_HOSTNAME,
+				endDate: dateRange.endDate,
+				hostname: site.hostname,
 				start: dateRange.start,
-				zoneTag: getRequiredEnv(
-					getEnv,
-					'CLOUDFLARE_SI_ZONE_ID',
-					'CLOUDFLARE_ZONE_ID',
-				),
+				startDate: dateRange.startDate,
+				zoneTag: site.zoneTag,
 			},
 		}),
 		headers: {
-			'Authorization': `Bearer ${
-				getRequiredEnv(
-					getEnv,
-					'CLOUDFLARE_SI_API_TOKEN',
-					'CLOUDFLARE_API_TOKEN',
-				)
-			}`,
+			'Authorization': `Bearer ${apiToken}`,
 			'Content-Type': 'application/json',
 		},
 		method: 'POST',
@@ -223,19 +311,61 @@ const fetchLastOneMonthRequests = async (
 		);
 	}
 
-	return account.requests?.reduce(
-		(total, request) => total + parseCountValue(request.count),
-		0,
-	) ?? 0;
+	const zone = payload.data?.viewer?.zones?.[0];
+	if (!zone) {
+		throw new Error(
+			'Cloudflare GraphQL API did not return zone traffic data.',
+		);
+	}
+
+	return {
+		dataServed: account.traffic?.reduce(
+			(total, group) => total + parseCountValue(group.sum?.edgeResponseBytes),
+			0,
+		) ?? 0,
+		requests: account.traffic?.reduce(
+			(total, group) => total + parseCountValue(group.count),
+			0,
+		) ?? 0,
+		uniqueVisitors: zone.uniqueVisitors?.reduce(
+			(total, group) => total + parseCountValue(group.uniq?.uniques),
+			0,
+		) ?? 0,
+	};
 };
 
-export const lastOneMonthRequests = (
-	options: LastOneMonthRequestsOptions = {},
-): Promise<number> => {
+const fetchLastOneMonthTraffic = async (
+	{
+		fetch: fetcher = globalThis.fetch,
+		getEnv = (name) => Deno.env.get(name),
+		now,
+	}: FetchLastOneMonthTrafficOptions,
+) => {
+	const dateRange = getLastOneMonthDateRange(now());
+	const site = getCloudflareSite(getEnv);
+	const apiToken = getRequiredEnv(
+		getEnv,
+		'CLOUDFLARE_SI_API_TOKEN',
+		'CLOUDFLARE_API_TOKEN',
+	);
+	const fetchedData = await fetchSiteTraffic({
+		apiToken,
+		dateRange,
+		fetcher,
+		site,
+	});
+
+	console.log(fetchedData);
+
+	return fetchedData;
+};
+
+export const lastOneMonthTraffic = (
+	options: LastOneMonthTrafficOptions = {},
+): Promise<Traffic> => {
 	const now = options.now ?? (() => new Date());
 	if (cache && now().getTime() < cache.expiresAt) {
-		console.log('cache hit');
-		return Promise.resolve(cache.count);
+		return Promise.resolve(cache.traffic);
 	}
 
 	if (inFlightRequest) {
@@ -244,12 +374,12 @@ export const lastOneMonthRequests = (
 
 	const request = (async () => {
 		try {
-			const count = await fetchLastOneMonthRequests({ ...options, now });
+			const traffic = await fetchLastOneMonthTraffic({ ...options, now });
 			cache = {
-				count,
 				expiresAt: now().getTime() + DAY_IN_MILLISECONDS,
+				traffic,
 			};
-			return count;
+			return traffic;
 		} finally {
 			inFlightRequest = undefined;
 		}
@@ -258,3 +388,7 @@ export const lastOneMonthRequests = (
 	inFlightRequest = request;
 	return request;
 };
+
+export const lastOneMonthRequests = async (
+	options: LastOneMonthTrafficOptions = {},
+) => (await lastOneMonthTraffic(options)).requests;
