@@ -2,7 +2,7 @@
 	"tasks": {
 		"serve": "deno serve --allow-env --allow-net source/app.ts",
 		"dev": "deno serve --allow-env --allow-net --watch source/app.ts",
-		"bump": "deno outdated --update --latest",
+		"bump": "deno outdated --minimum-dependency-age 0 --update --latest",
 		"update-lockfile": "deno cache --reload source/*.ts test/*.ts",
 		"test": "deno fmt --check && deno lint && deno check source/*.ts test/*.ts && deno test --clean --coverage --coverage-threshold=100"
 	},
@@ -20,7 +20,7 @@
 	"imports": {
 		"@std/assert": "jsr:@std/assert@^1.0.19",
 		"@std/http": "jsr:@std/http@^1.1.2",
-		"simple-icons": "npm:simple-icons@^16.25.0",
+		"simple-icons": "npm:simple-icons@^16.26.0",
 		"svg-path-bbox": "npm:svg-path-bbox@^2.1.0",
 		"svgpath": "npm:svgpath@^2.6.0"
 	}
