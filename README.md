@@ -5,9 +5,9 @@
 	<a href="https://fly.io"><img src="https://img.shields.io/badge/Hosted_on_Fly.io-24175B?logo=flydotio&logoColor=fff" /></a>
 	<a href="https://cloudflare.com"><img src="https://img.shields.io/badge/Accelerated%20by%20Cloudflare-F38020?logo=cloudflare&logoColor=fff&logoSize=auto" /></a>
 	<br />
-	<a href="#"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ficons.ly%2F_badge%2Frequests&cacheSeconds=86400" /></a>
-	<a href="#"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ficons.ly%2F_badge%2Funique-visitors&cacheSeconds=86400" /></a>
-	<a href="#"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Ficons.ly%2F_badge%2Fdata-served&cacheSeconds=86400" /></a>
+	<a href="#"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fcdn.simpleicons.org%2F_badge%2Frequests&cacheSeconds=86400" /></a>
+	<a href="#"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fcdn.simpleicons.org%2F_badge%2Funique-visitors&cacheSeconds=86400" /></a>
+	<a href="#"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fcdn.simpleicons.org%2F_badge%2Fdata-served&cacheSeconds=86400" /></a>
 </p>
 
 ## Disclaimer
