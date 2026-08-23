@@ -167,16 +167,16 @@ Deno.test('traffic badges', async () => {
 
 	for (
 		const { path, label, message } of [
-			{ path: 'requests', label: 'requests', message: '700M/month' },
+			{ path: 'requests', label: 'requests', message: '700 million/month' },
 			{
 				path: 'unique-visitors',
 				label: 'unique visitors',
-				message: '45M/month',
+				message: '45 million/month',
 			},
 			{
 				path: 'data-served',
 				label: 'data served',
-				message: '9GB/month',
+				message: '9 GB/month',
 			},
 		]
 	) {

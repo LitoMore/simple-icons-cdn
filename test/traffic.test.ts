@@ -67,18 +67,18 @@ Deno.test('Cloudflare traffic', async (test) => {
 		assertEquals(formatCount(1_500_000_000), '1.5 billion');
 		assertEquals(formatCount(1_250_000_000), '1.25 billion');
 		assertEquals(formatCount(1_000_000_000), '1 billion');
-		assertEquals(formatCount(1_500_000), '2M');
-		assertEquals(formatCount(1_500), '2K');
+		assertEquals(formatCount(1_500_000), '2 million');
+		assertEquals(formatCount(1_500), '2k');
 		assertEquals(formatCount(999), '999');
 
-		assertEquals(formatBytes(1_500_000_000_000_000), '2PB');
-		assertEquals(formatBytes(1_500_000_000_000), '1.5TB');
-		assertEquals(formatBytes(1_250_000_000_000), '1.25TB');
-		assertEquals(formatBytes(1_000_000_000_000), '1TB');
-		assertEquals(formatBytes(1_500_000_000), '2GB');
-		assertEquals(formatBytes(1_500_000), '2MB');
-		assertEquals(formatBytes(1_500), '2KB');
-		assertEquals(formatBytes(999), '999B');
+		assertEquals(formatBytes(1_500_000_000_000_000), '2 PB');
+		assertEquals(formatBytes(1_500_000_000_000), '1.5 TB');
+		assertEquals(formatBytes(1_250_000_000_000), '1.25 TB');
+		assertEquals(formatBytes(1_000_000_000_000), '1 TB');
+		assertEquals(formatBytes(1_500_000_000), '2 GB');
+		assertEquals(formatBytes(1_500_000), '2 MB');
+		assertEquals(formatBytes(1_500), '2 KB');
+		assertEquals(formatBytes(999), '999 B');
 	});
 
 	await test.step('queries Cloudflare and parses all traffic metrics', async () => {

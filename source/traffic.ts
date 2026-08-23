@@ -191,11 +191,11 @@ export const formatCount = (value: number) => {
 	}
 
 	if (absoluteValue >= 1_000_000) {
-		return formatWithSuffix(1_000_000, 'M');
+		return formatWithSuffix(1_000_000, ' million');
 	}
 
 	if (absoluteValue >= 1_000) {
-		return formatWithSuffix(1_000, 'K');
+		return formatWithSuffix(1_000, 'k');
 	}
 
 	return String(value);
@@ -205,7 +205,7 @@ export const formatBytes = (value: number) => {
 	const absoluteValue = Math.abs(value);
 	const formatWithUnit = (divisor: number, unit: string) => {
 		const formatted = (value / divisor).toFixed(0);
-		return `${formatted}${unit}`;
+		return `${formatted} ${unit}`;
 	};
 
 	if (absoluteValue >= 1_000_000_000_000_000) {
@@ -217,7 +217,7 @@ export const formatBytes = (value: number) => {
 			/\.?0+$/,
 			'',
 		);
-		return `${formatted}TB`;
+		return `${formatted} TB`;
 	}
 
 	if (absoluteValue >= 1_000_000_000) {
@@ -232,7 +232,7 @@ export const formatBytes = (value: number) => {
 		return formatWithUnit(1_000, 'KB');
 	}
 
-	return `${value}B`;
+	return `${value} B`;
 };
 
 const getLastOneMonthDateRange = (now: Date) => {
