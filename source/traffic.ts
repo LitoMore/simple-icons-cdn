@@ -354,9 +354,6 @@ const fetchLastOneMonthTraffic = async (
 		fetcher,
 		site,
 	});
-
-	console.log(fetchedData);
-
 	return fetchedData;
 };
 
