@@ -67,7 +67,31 @@ Deno.test('Cloudflare traffic', async (test) => {
 		assertEquals(formatCount(1_500_000_000), '1.5 billion');
 		assertEquals(formatCount(1_250_000_000), '1.25 billion');
 		assertEquals(formatCount(1_000_000_000), '1 billion');
-		assertEquals(formatCount(1_500_000), '2 million');
+		assertEquals(formatCount(1_500_000), '1.5 million');
+		for (
+			const [divisor, suffix] of [
+				[1_000_000, 'million'],
+				[1_000_000_000, 'billion'],
+			] as const
+		) {
+			for (
+				const [value, expected] of [
+					[1, '1'],
+					[1.234567, '1.23'],
+					[1.239999, '1.23'],
+					[1.24, '1.24'],
+					[9.999999, '9.99'],
+					[10, '10'],
+					[12.345678, '12.3'],
+					[99.999999, '99.9'],
+					[100, '100'],
+					[123.456789, '123'],
+					[999.999999, '999'],
+				] as const
+			) {
+				assertEquals(formatCount(value * divisor), `${expected} ${suffix}`);
+			}
+		}
 		assertEquals(formatCount(1_500), '2k');
 		assertEquals(formatCount(999), '999');
 

@@ -181,13 +181,20 @@ const parseCountValue = (value: number | string | null | undefined) => {
 export const formatCount = (value: number) => {
 	const absoluteValue = Math.abs(value);
 	const formatWithSuffix = (divisor: number, suffix: string) => {
-		const formatted = (value / divisor).toFixed(0);
+		// Truncate the original count to three significant digits before scaling.
+		const step = 10 ** (Math.floor(Math.log10(absoluteValue)) - 2);
+		const decimalPlaces = Math.max(
+			0,
+			2 - Math.floor(Math.log10(absoluteValue / divisor)),
+		);
+		const formatted = Number(
+			(Math.trunc(value / step) * step / divisor).toFixed(decimalPlaces),
+		);
 		return `${formatted}${suffix}`;
 	};
 
 	if (absoluteValue >= 1_000_000_000) {
-		const formatted = (value / 1_000_000_000).toFixed(2).replace(/\.?0+$/, '');
-		return `${formatted} billion`;
+		return formatWithSuffix(1_000_000_000, ' billion');
 	}
 
 	if (absoluteValue >= 1_000_000) {
@@ -195,7 +202,7 @@ export const formatCount = (value: number) => {
 	}
 
 	if (absoluteValue >= 1_000) {
-		return formatWithSuffix(1_000, 'k');
+		return `${(value / 1_000).toFixed(0)}k`;
 	}
 
 	return String(value);
