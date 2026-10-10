@@ -7,7 +7,7 @@ primary_region = 'sin'
 PORT = '8000'
 
 [processes]
-app = 'task serve'
+app = 'npm run serve'
 
 [http_service]
 internal_port = 8000

@@ -1,0 +1,26 @@
+{
+	"private": true,
+	"type": "module",
+	"engines": {
+		"node": ">=24.11.0"
+	},
+	"scripts": {
+		"serve": "node source/serve.ts",
+		"dev": "node --watch source/serve.ts",
+		"lint": "xo",
+		"check": "tsc --noEmit",
+		"test": "node --test test/*.test.ts",
+		"test:coverage": "node --test --experimental-test-coverage --test-coverage-include='source/**/*.ts' --test-coverage-lines=100 --test-coverage-functions=100 test/*.test.ts"
+	},
+	"dependencies": {
+		"simple-icons": "^16.34.0",
+		"svg-path-bbox": "^2.1.0",
+		"svgpath": "^2.6.0"
+	},
+	"devDependencies": {
+		"@types/node": "^24.19.2",
+		"@typescript/native": "npm:typescript@^7.0.2",
+		"typescript": "npm:@typescript/typescript6@^6.0.2",
+		"xo": "^5.0.1"
+	}
+}

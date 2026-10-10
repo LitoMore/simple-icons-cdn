@@ -1,26 +1,10 @@
-# Based on https://github.com/denoland/deno_docker/blob/main/alpine.dockerfile
+FROM node:24-alpine
 
-ARG BIN_IMAGE=denoland/deno:bin
-FROM ${BIN_IMAGE} AS bin
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+COPY source ./source
 
-FROM frolvlad/alpine-glibc:alpine-3.13
-
-RUN apk --no-cache add ca-certificates
-
-RUN addgroup --gid 1000 deno \
-  && adduser --uid 1000 --disabled-password deno --ingroup deno \
-  && mkdir /deno-dir/ \
-  && chown deno:deno /deno-dir/
-
-ENV DENO_DIR /deno-dir/
-ENV DENO_INSTALL_ROOT /usr/local
-
-ARG DENO_VERSION
-ENV DENO_VERSION=${DENO_VERSION}
-COPY --from=bin /deno /bin/deno
-
-WORKDIR /deno-dir
-COPY . .
-
-ENTRYPOINT ["/bin/deno"]
-CMD ["task", "serve"]
+USER node
+EXPOSE 8000
+CMD ["npm", "run", "serve"]

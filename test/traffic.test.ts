@@ -1,4 +1,5 @@
-import { assertEquals, assertRejects, assertStringIncludes } from '@std/assert';
+import {test, type TestContext} from 'node:test';
+import process from 'node:process';
 import {
 	formatBytes,
 	formatCount,
@@ -10,17 +11,17 @@ const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const CLOUDFLARE_GRAPHQL_API_URL =
 	'https://api.cloudflare.com/client/v4/graphql';
 
-const primaryEnvironment: Record<string, string> = {
-	CLOUDFLARE_SI_ACCOUNT_ID: 'account-id',
-	CLOUDFLARE_SI_API_TOKEN: 'api-token',
-	CLOUDFLARE_SI_ZONE_ID: 'zone-id',
-};
+const primaryEnvironment: Record<string, string> = Object.fromEntries([
+	['CLOUDFLARE_SI_ACCOUNT_ID', 'account-id'],
+	['CLOUDFLARE_SI_API_TOKEN', 'api-token'],
+	['CLOUDFLARE_SI_ZONE_ID', 'zone-id'],
+]);
 
-const fallbackEnvironment: Record<string, string> = {
-	CLOUDFLARE_ACCOUNT_ID: 'fallback-account-id',
-	CLOUDFLARE_API_TOKEN: 'fallback-api-token',
-	CLOUDFLARE_ZONE_ID: 'fallback-zone-id',
-};
+const fallbackEnvironment: Record<string, string> = Object.fromEntries([
+	['CLOUDFLARE_ACCOUNT_ID', 'fallback-account-id'],
+	['CLOUDFLARE_API_TOKEN', 'fallback-api-token'],
+	['CLOUDFLARE_ZONE_ID', 'fallback-zone-id'],
+]);
 
 const getEnvFrom = (environment: Record<string, string>) => (name: string) =>
 	environment[name];
@@ -28,7 +29,7 @@ const getEnvFrom = (environment: Record<string, string>) => (name: string) =>
 const responseWithPayload = (payload: unknown) => {
 	const response = new Response();
 	Object.defineProperty(response, 'json', {
-		value: () => Promise.resolve(payload),
+		value: async () => payload,
 	});
 	return response;
 };
@@ -39,9 +40,9 @@ const createTrafficPayload = (
 		uniqueVisitors,
 		dataServed,
 	}: {
-		requests: number | string | null;
-		uniqueVisitors: number | string | null;
-		dataServed: number | string | null;
+		requests: number | string | undefined;
+		uniqueVisitors: number | string | undefined;
+		dataServed: number | string | undefined;
 	},
 ) => ({
 	data: {
@@ -49,102 +50,102 @@ const createTrafficPayload = (
 			accounts: [{
 				traffic: [{
 					count: requests,
-					sum: { edgeResponseBytes: dataServed },
+					sum: {edgeResponseBytes: dataServed},
 				}],
 			}],
 			zones: [{
-				uniqueVisitors: [{ uniq: { uniques: uniqueVisitors } }],
+				uniqueVisitors: [{uniq: {uniques: uniqueVisitors}}],
 			}],
 		},
 	},
 });
 
-Deno.test('Cloudflare traffic', async (test) => {
+await test('Cloudflare traffic', async (t: TestContext) => {
 	let currentTime = new Date('2000-01-31T12:34:56Z');
 	const now = () => currentTime;
 
-	await test.step('formats counts and byte sizes', () => {
-		assertEquals(formatCount(1_500_000_000), '1.5 billion');
-		assertEquals(formatCount(1_250_000_000), '1.25 billion');
-		assertEquals(formatCount(1_000_000_000), '1 billion');
-		assertEquals(formatCount(1_500_000), '1.5 million');
-		for (
-			const [divisor, suffix] of [
-				[1_000_000, 'million'],
-				[1_000_000_000, 'billion'],
-			] as const
-		) {
-			for (
-				const [value, expected] of [
-					[1, '1'],
-					[1.234567, '1.23'],
-					[1.239999, '1.23'],
-					[1.24, '1.24'],
-					[9.999999, '9.99'],
-					[10, '10'],
-					[12.345678, '12.3'],
-					[99.999999, '99.9'],
-					[100, '100'],
-					[123.456789, '123'],
-					[999.999999, '999'],
-				] as const
-			) {
-				assertEquals(formatCount(value * divisor), `${expected} ${suffix}`);
-			}
-		}
-		assertEquals(formatCount(1_500), '2k');
-		assertEquals(formatCount(999), '999');
+	await t.test('formats counts and byte sizes', async (t: TestContext) => {
+		t.assert.strictEqual(formatCount(1_500_000_000), '1.5 billion');
+		t.assert.strictEqual(formatCount(1_250_000_000), '1.25 billion');
+		t.assert.strictEqual(formatCount(1_000_000_000), '1 billion');
+		t.assert.strictEqual(formatCount(1_500_000), '1.5 million');
+		const units = [[1_000_000, 'million'], [1_000_000_000, 'billion']] as const;
+		const values = [
+			[1, '1'],
+			[1.234567, '1.23'],
+			[1.239999, '1.23'],
+			[1.24, '1.24'],
+			[9.999999, '9.99'],
+			[10, '10'],
+			[12.345678, '12.3'],
+			[99.999999, '99.9'],
+			[100, '100'],
+			[123.456789, '123'],
+			[999.999999, '999'],
+		] as const;
+		const cases = units.flatMap(([divisor, suffix]) =>
+			values.map(([value, expected]) => ({
+				value: value * divisor,
+				expected: `${expected} ${suffix}`,
+			})),
+		);
+		await Promise.all(cases.map(async ({value, expected}) => {
+			await t.test(`formats ${value} as ${expected}`, (t: TestContext) => {
+				t.assert.strictEqual(formatCount(value), expected);
+			});
+		}));
 
-		assertEquals(formatBytes(1_500_000_000_000_000), '2 PB');
-		assertEquals(formatBytes(1_500_000_000_000), '1.5 TB');
-		assertEquals(formatBytes(1_250_000_000_000), '1.25 TB');
-		assertEquals(formatBytes(1_000_000_000_000), '1 TB');
-		assertEquals(formatBytes(1_500_000_000), '2 GB');
-		assertEquals(formatBytes(1_500_000), '2 MB');
-		assertEquals(formatBytes(1_500), '2 KB');
-		assertEquals(formatBytes(999), '999 B');
+		t.assert.strictEqual(formatCount(1500), '2k');
+		t.assert.strictEqual(formatCount(999), '999');
+
+		t.assert.strictEqual(formatBytes(1_500_000_000_000_000), '2 PB');
+		t.assert.strictEqual(formatBytes(1_500_000_000_000), '1.5 TB');
+		t.assert.strictEqual(formatBytes(1_250_000_000_000), '1.25 TB');
+		t.assert.strictEqual(formatBytes(1_000_000_000_000), '1 TB');
+		t.assert.strictEqual(formatBytes(1_500_000_000), '2 GB');
+		t.assert.strictEqual(formatBytes(1_500_000), '2 MB');
+		t.assert.strictEqual(formatBytes(1500), '2 KB');
+		t.assert.strictEqual(formatBytes(999), '999 B');
 	});
 
-	await test.step('queries Cloudflare and parses all traffic metrics', async () => {
+	await t.test('queries Cloudflare and parses all traffic metrics', async (t: TestContext) => {
 		const requestedUrls: string[] = [];
 		const requestedInits: RequestInit[] = [];
-		const mockFetch: typeof fetch = (input, init) => {
-			requestedUrls.push(String(input));
+		const mockFetch: typeof fetch = async (input, init) => {
+			requestedUrls.push(input instanceof Request ? input.url : input.toString());
 			requestedInits.push(init ?? {});
-			return Promise.resolve(
-				responseWithPayload({
-					errors: [],
-					data: {
-						viewer: {
-							accounts: [{
-								traffic: [
-									{ count: 123, sum: { edgeResponseBytes: 500 } },
-									{
-										count: Number.NaN,
-										sum: { edgeResponseBytes: Number.NaN },
-									},
-									{ count: null, sum: { edgeResponseBytes: null } },
-									{ count: '   ', sum: { edgeResponseBytes: '   ' } },
-									{ count: '1K', sum: { edgeResponseBytes: '1K' } },
-									{ count: '2M', sum: { edgeResponseBytes: '2M' } },
-									{ count: '3B', sum: { edgeResponseBytes: '3B' } },
-									{ count: '456', sum: { edgeResponseBytes: '456' } },
-									{ count: 'invalid', sum: { edgeResponseBytes: 'invalid' } },
-								],
-							}],
-							zones: [{
-								uniqueVisitors: [
-									{ uniq: { uniques: 12 } },
-									{ uniq: { uniques: null } },
-									{ uniq: { uniques: '1K' } },
-									{ uniq: { uniques: '34' } },
-									{ uniq: { uniques: 'invalid' } },
-								],
-							}],
-						},
+			return responseWithPayload({
+				errors: [],
+				data: {
+					viewer: {
+						accounts: [{
+							traffic: [
+								{count: 123, sum: {edgeResponseBytes: 500}},
+								{
+									count: NaN,
+									sum: {edgeResponseBytes: NaN},
+								},
+								{count: null, sum: {edgeResponseBytes: null}},
+								{count: ' '.repeat(3), sum: {edgeResponseBytes: ' '.repeat(3)}},
+								{count: '1K', sum: {edgeResponseBytes: '1K'}},
+								{count: '2M', sum: {edgeResponseBytes: '2M'}},
+								{count: '3B', sum: {edgeResponseBytes: '3B'}},
+								{count: '456', sum: {edgeResponseBytes: '456'}},
+								{count: 'invalid', sum: {edgeResponseBytes: 'invalid'}},
+							],
+						}],
+						zones: [{
+							uniqueVisitors: [
+								{uniq: {uniques: 12}},
+								{uniq: {uniques: null}},
+								{uniq: {uniques: '1K'}},
+								{uniq: {uniques: '34'}},
+								{uniq: {uniques: 'invalid'}},
+							],
+						}],
 					},
-				}),
-			);
+				},
+			});
 		};
 
 		const traffic = await lastOneMonthTraffic({
@@ -153,55 +154,40 @@ Deno.test('Cloudflare traffic', async (test) => {
 			now,
 		});
 
-		assertEquals(traffic, {
+		t.assert.deepStrictEqual(traffic, {
 			requests: 3_002_001_579,
-			uniqueVisitors: 1_046,
+			uniqueVisitors: 1046,
 			dataServed: 3_002_001_956,
 		});
-		assertEquals(requestedUrls, [CLOUDFLARE_GRAPHQL_API_URL]);
-		for (const init of requestedInits) {
-			assertEquals(init.method, 'POST');
-			assertEquals(
-				new Headers(init.headers).get('Authorization'),
-				'Bearer api-token',
-			);
-			assertEquals(
-				new Headers(init.headers).get('Content-Type'),
-				'application/json',
-			);
-		}
-
-		const requestBodies = requestedInits.map((init) =>
-			JSON.parse(String(init.body))
-		);
-		const requestBody = requestBodies[0];
-		assertStringIncludes(
-			requestBody.query,
-			'traffic: httpRequestsAdaptiveGroups',
-		);
-		assertStringIncludes(requestBody.query, 'count');
-		assertStringIncludes(requestBody.query, 'edgeResponseBytes');
-		assertStringIncludes(
-			requestBody.query,
-			'uniqueVisitors: httpRequests1dGroups',
-		);
-		assertStringIncludes(requestBody.query, 'uniques');
-		assertStringIncludes(
-			requestBody.query,
-			'clientRequestHTTPHost: $hostname',
-		);
-		assertStringIncludes(requestBody.query, '$hostname: string');
-		assertEquals(
-			requestBody.query.match(/clientRequestHTTPHost/g)?.length,
+		t.assert.deepStrictEqual(requestedUrls, [CLOUDFLARE_GRAPHQL_API_URL]);
+		t.assert.strictEqual(requestedInits.length, 1);
+		const requestedInit = requestedInits[0];
+		t.assert.strictEqual(requestedInit.method, 'POST');
+		t.assert.strictEqual(new Headers(requestedInit.headers).get('Authorization'), 'Bearer api-token');
+		t.assert.strictEqual(new Headers(requestedInit.headers).get('Content-Type'), 'application/json');
+		t.assert.strictEqual(typeof requestedInit.body, 'string');
+		const requestBody = JSON.parse(requestedInit.body as string) as {
+			query: string;
+			variables: Record<string, string>;
+		};
+		t.assert.ok(requestBody.query.includes('traffic: httpRequestsAdaptiveGroups'));
+		t.assert.ok(requestBody.query.includes('count'));
+		t.assert.ok(requestBody.query.includes('edgeResponseBytes'));
+		t.assert.ok(requestBody.query.includes('uniqueVisitors: httpRequests1dGroups'));
+		t.assert.ok(requestBody.query.includes('uniques'));
+		t.assert.ok(requestBody.query.includes('clientRequestHTTPHost: $hostname'));
+		t.assert.ok(requestBody.query.includes('$hostname: string'));
+		t.assert.strictEqual(
+			requestBody.query.match(/clientRequestHTTPHost/gv)?.length,
 			1,
 		);
-		assertEquals(requestBody.query.match(/zoneTag: \$zoneTag/g)?.length, 2);
-		assertStringIncludes(requestBody.query, 'datetime_geq: $start');
-		assertStringIncludes(requestBody.query, 'datetime_lt: $end');
-		assertStringIncludes(requestBody.query, 'date_geq: $startDate');
-		assertStringIncludes(requestBody.query, 'date_lt: $endDate');
-		assertStringIncludes(requestBody.query, 'requestSource: "eyeball"');
-		assertEquals(requestBody.variables, {
+		t.assert.strictEqual(requestBody.query.match(/zoneTag: \$zoneTag/gv)?.length, 2);
+		t.assert.ok(requestBody.query.includes('datetime_geq: $start'));
+		t.assert.ok(requestBody.query.includes('datetime_lt: $end'));
+		t.assert.ok(requestBody.query.includes('date_geq: $startDate'));
+		t.assert.ok(requestBody.query.includes('date_lt: $endDate'));
+		t.assert.ok(requestBody.query.includes('requestSource: "eyeball"'));
+		t.assert.deepStrictEqual(requestBody.variables, {
 			accountTag: 'account-id',
 			end: '2000-01-31T00:00:00Z',
 			endDate: '2000-01-31',
@@ -212,21 +198,22 @@ Deno.test('Cloudflare traffic', async (test) => {
 		});
 	});
 
-	await test.step('caches all metrics and merges concurrent requests', async () => {
-		currentTime = new Date(currentTime.getTime() + 2 * DAY_IN_MILLISECONDS);
+	await t.test('caches all metrics and merges concurrent requests', async (t: TestContext) => {
+		currentTime = new Date(currentTime.getTime() + (2 * DAY_IN_MILLISECONDS));
 		const firstResponse = Promise.withResolvers<Response>();
 		const refreshedPayload = createTrafficPayload({
 			requests: 456,
 			uniqueVisitors: 78,
-			dataServed: 9_000,
+			dataServed: 9000,
 		});
 		let fetchCalls = 0;
-		const mockFetch: typeof fetch = () => {
+		const mockFetch: typeof fetch = async () => {
 			const callIndex = fetchCalls++;
 			return callIndex === 0
 				? firstResponse.promise
 				: Promise.resolve(Response.json(refreshedPayload));
 		};
+
 		const options = {
 			fetch: mockFetch,
 			getEnv: getEnvFrom(primaryEnvironment),
@@ -235,153 +222,159 @@ Deno.test('Cloudflare traffic', async (test) => {
 
 		const firstTraffic = lastOneMonthTraffic(options);
 		const concurrentRequests = lastOneMonthRequests(options);
-		assertEquals(fetchCalls, 1);
+		t.assert.strictEqual(fetchCalls, 1);
 		firstResponse.resolve(
 			Response.json(
 				createTrafficPayload({
 					requests: 123,
 					uniqueVisitors: 45,
-					dataServed: 6_000,
+					dataServed: 6000,
 				}),
 			),
 		);
-		assertEquals(await Promise.all([firstTraffic, concurrentRequests]), [
-			{ requests: 123, uniqueVisitors: 45, dataServed: 6_000 },
+		t.assert.deepStrictEqual(await Promise.all([firstTraffic, concurrentRequests]), [
+			{requests: 123, uniqueVisitors: 45, dataServed: 6000},
 			123,
 		]);
 
 		currentTime = new Date(
 			currentTime.getTime() + DAY_IN_MILLISECONDS - 1,
 		);
-		assertEquals(await lastOneMonthTraffic(options), {
+		t.assert.deepStrictEqual(await lastOneMonthTraffic(options), {
 			requests: 123,
 			uniqueVisitors: 45,
-			dataServed: 6_000,
+			dataServed: 6000,
 		});
-		assertEquals(fetchCalls, 1);
+		t.assert.strictEqual(fetchCalls, 1);
 
 		currentTime = new Date(currentTime.getTime() + 1);
-		assertEquals(await lastOneMonthTraffic(options), {
+		t.assert.deepStrictEqual(await lastOneMonthTraffic(options), {
 			requests: 456,
 			uniqueVisitors: 78,
-			dataServed: 9_000,
+			dataServed: 9000,
 		});
-		assertEquals(fetchCalls, 2);
+		t.assert.strictEqual(fetchCalls, 2);
 	});
 
-	await test.step('does not cache missing environment errors', async () => {
-		currentTime = new Date(currentTime.getTime() + 2 * DAY_IN_MILLISECONDS);
+	await t.test('does not cache missing environment errors', async (t: TestContext) => {
+		currentTime = new Date(currentTime.getTime() + (2 * DAY_IN_MILLISECONDS));
 		let fetchCalls = 0;
-		await assertRejects(
-			() =>
+		await t.assert.rejects(
+			async () =>
 				lastOneMonthTraffic({
-					fetch: () => {
+					async fetch() {
 						fetchCalls++;
-						return Promise.resolve(new Response());
+						return new Response();
 					},
 					getEnv: () => undefined,
 					now,
 				}),
-			Error,
-			'Missing required environment variable: CLOUDFLARE_SI_ACCOUNT_ID or CLOUDFLARE_ACCOUNT_ID',
+			{
+				name: 'Error',
+				message: 'Missing required environment variable: CLOUDFLARE_SI_ACCOUNT_ID or CLOUDFLARE_ACCOUNT_ID',
+			},
 		);
-		assertEquals(fetchCalls, 0);
+		t.assert.strictEqual(fetchCalls, 0);
 	});
 
-	await test.step('reports Cloudflare HTTP errors', async () => {
-		await assertRejects(
-			() =>
+	await t.test('reports Cloudflare HTTP errors', async (t: TestContext) => {
+		await t.assert.rejects(
+			async () =>
 				lastOneMonthTraffic({
-					fetch: () =>
-						Promise.resolve(new Response('Forbidden', { status: 403 })),
+					fetch: async () =>
+						new Response('Forbidden', {status: 403}),
 					getEnv: getEnvFrom(primaryEnvironment),
 					now,
 				}),
-			Error,
-			'Cloudflare GraphQL API request failed with 403: Forbidden',
+			{
+				name: 'Error',
+				message: 'Cloudflare GraphQL API request failed with 403: Forbidden',
+			},
 		);
 	});
 
-	await test.step('reports Cloudflare GraphQL errors', async () => {
-		await assertRejects(
-			() =>
+	await t.test('reports Cloudflare GraphQL errors', async (t: TestContext) => {
+		await t.assert.rejects(
+			async () =>
 				lastOneMonthTraffic({
-					fetch: () =>
-						Promise.resolve(
-							Response.json({
-								errors: [{ message: 'Known error' }, {}],
-							}),
-						),
+					fetch: async () =>
+						Response.json({
+							errors: [{message: 'Known error'}, {}],
+						}),
 					getEnv: getEnvFrom(primaryEnvironment),
 					now,
 				}),
-			Error,
-			'Cloudflare GraphQL API returned errors: Known error, Unknown error',
+			{
+				name: 'Error',
+				message: 'Cloudflare GraphQL API returned errors: Known error, Unknown error',
+			},
 		);
 	});
 
-	await test.step('reports missing account data', async () => {
-		await assertRejects(
-			() =>
+	await t.test('reports missing account data', async (t: TestContext) => {
+		await t.assert.rejects(
+			async () =>
 				lastOneMonthTraffic({
-					fetch: () => Promise.resolve(Response.json({})),
+					fetch: async () => Response.json({}),
 					getEnv: getEnvFrom(primaryEnvironment),
 					now,
 				}),
-			Error,
-			'Cloudflare GraphQL API did not return account traffic data.',
+			{
+				name: 'Error',
+				message: 'Cloudflare GraphQL API did not return account traffic data.',
+			},
 		);
 	});
 
-	await test.step('reports missing zone data', async () => {
-		await assertRejects(
-			() =>
+	await t.test('reports missing zone data', async (t: TestContext) => {
+		await t.assert.rejects(
+			async () =>
 				lastOneMonthTraffic({
-					fetch: () =>
-						Promise.resolve(
-							Response.json({
-								data: { viewer: { accounts: [{}] } },
-							}),
-						),
+					fetch: async () =>
+						Response.json({
+							data: {viewer: {accounts: [{}]}},
+						}),
 					getEnv: getEnvFrom(primaryEnvironment),
 					now,
 				}),
-			Error,
-			'Cloudflare GraphQL API did not return zone traffic data.',
+			{
+				name: 'Error',
+				message: 'Cloudflare GraphQL API did not return zone traffic data.',
+			},
 		);
 	});
 
-	await test.step('uses fallback environment names and handles no traffic', async () => {
+	await t.test('uses fallback environment names and handles no traffic', async (t: TestContext) => {
 		const requestedInits: RequestInit[] = [];
 		const traffic = await lastOneMonthTraffic({
-			fetch: (_input, init) => {
+			async fetch(_input, init) {
 				requestedInits.push(init ?? {});
-				return Promise.resolve(
-					Response.json({
-						errors: [],
-						data: {
-							viewer: { accounts: [{}], zones: [{}] },
-						},
-					}),
-				);
+				return Response.json({
+					errors: [],
+					data: {
+						viewer: {accounts: [{}], zones: [{}]},
+					},
+				});
 			},
 			getEnv: getEnvFrom(fallbackEnvironment),
 			now,
 		});
 
-		assertEquals(traffic, {
+		t.assert.deepStrictEqual(traffic, {
 			requests: 0,
 			uniqueVisitors: 0,
 			dataServed: 0,
 		});
-		assertEquals(requestedInits.length, 1);
+		t.assert.strictEqual(requestedInits.length, 1);
 		const requestedInit = requestedInits[0];
-		assertEquals(
+		t.assert.strictEqual(
 			new Headers(requestedInit.headers).get('Authorization'),
 			'Bearer fallback-api-token',
 		);
-		assertEquals(
-			JSON.parse(String(requestedInit.body)).variables,
+		t.assert.strictEqual(typeof requestedInit.body, 'string');
+		const requestBody = JSON.parse(requestedInit.body as string) as {variables: Record<string, string>};
+		t.assert.deepStrictEqual(
+			requestBody.variables,
 			{
 				accountTag: 'fallback-account-id',
 				end: '2000-02-05T00:00:00Z',
@@ -394,35 +387,27 @@ Deno.test('Cloudflare traffic', async (test) => {
 		);
 	});
 
-	await test.step('uses default dependencies without network access', async () => {
-		const originalFetch = globalThis.fetch;
-		const originalGetEnv = Deno.env.get;
+	await t.test('uses default dependencies without network access', async (t: TestContext) => {
 		let fetchCalls = 0;
-		globalThis.fetch = () => {
+		t.mock.method(globalThis, 'fetch', async () => {
 			fetchCalls++;
-			return Promise.resolve(
-				Response.json(
-					createTrafficPayload({
-						requests: 789,
-						uniqueVisitors: 67,
-						dataServed: 8_900,
-					}),
-				),
+			return Response.json(
+				createTrafficPayload({
+					requests: 789,
+					uniqueVisitors: 67,
+					dataServed: 8900,
+				}),
 			);
-		};
-		Deno.env.get = getEnvFrom(primaryEnvironment);
+		});
 
-		try {
-			assertEquals(await lastOneMonthTraffic(), {
-				requests: 789,
-				uniqueVisitors: 67,
-				dataServed: 8_900,
-			});
-			assertEquals(await lastOneMonthRequests(), 789);
-			assertEquals(fetchCalls, 1);
-		} finally {
-			globalThis.fetch = originalFetch;
-			Deno.env.get = originalGetEnv;
-		}
+		t.mock.property(process, 'env', primaryEnvironment);
+
+		t.assert.deepStrictEqual(await lastOneMonthTraffic(), {
+			requests: 789,
+			uniqueVisitors: 67,
+			dataServed: 8900,
+		});
+		t.assert.strictEqual(await lastOneMonthRequests(), 789);
+		t.assert.strictEqual(fetchCalls, 1);
 	});
 });

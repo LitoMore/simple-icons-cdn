@@ -4,7 +4,7 @@
 </p>
 <p align="center">Colorable and resizable CDN for Simple Icons</p>
 <p align="center">
-	<a href="https://github.com/LitoMore/simple-icons-cdn/actions"><img src="https://img.shields.io/github/actions/workflow/status/LitoMore/simple-icons-cdn/deno.yml?branch=main&logo=deno&logoColor=000&label=Deno&labelColor=fff"/></a>
+	<a href="https://github.com/LitoMore/simple-icons-cdn/actions"><img src="https://img.shields.io/github/actions/workflow/status/LitoMore/simple-icons-cdn/node.yml?branch=main&logo=nodedotjs&logoColor=fff&label=Node.js&labelColor=5FA04E"/></a>
 	<a href="https://fly.io"><img src="https://img.shields.io/badge/Hosted_on_Fly.io-24175B?logo=flydotio&logoColor=fff" /></a>
 	<a href="https://cloudflare.com"><img src="https://img.shields.io/badge/Accelerated%20by%20Cloudflare-F38020?logo=cloudflare&logoColor=fff&logoSize=auto" /></a>
 	<br />
@@ -19,7 +19,7 @@ We ask that all users read the [legal disclaimer](https://github.com/simple-icon
 
 ## Usage
 
-```
+```text
 GET https://cdn.simpleicons.org/:icon_slug/:color?/:dark_mode_color?
 ```
 

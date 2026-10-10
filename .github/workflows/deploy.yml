@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - deno.json
+      - package.json
 
 jobs:
   deploy:
@@ -31,18 +31,16 @@ jobs:
           const zeroSha = /^0{40}$/;
 
           const getSimpleIconsVersion = (content) => {
-            const denoJson = JSON.parse(content);
-            const specifier = denoJson.imports?.['simple-icons'];
-            return specifier?.match(/@([^@]+)$/)?.[1] ?? null;
+            return JSON.parse(content).dependencies?.['simple-icons'] ?? null;
           };
 
-          const currentVersion = getSimpleIconsVersion(readFileSync('deno.json', 'utf8'));
+          const currentVersion = getSimpleIconsVersion(readFileSync('package.json', 'utf8'));
           let previousVersion = null;
 
           if (beforeSha && !zeroSha.test(beforeSha)) {
             try {
               previousVersion = getSimpleIconsVersion(
-                execFileSync('git', ['show', `${beforeSha}:deno.json`], {
+                execFileSync('git', ['show', `${beforeSha}:package.json`], {
                   encoding: 'utf8',
                 }),
               );

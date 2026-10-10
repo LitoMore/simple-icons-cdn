@@ -1,4 +1,3 @@
-import { Route, route } from '@std/http/unstable-route';
 import {
 	dataServedBadgeHandler,
 	defaultHandler,
@@ -7,49 +6,59 @@ import {
 	iconHandler,
 	requestsBadgeHandler,
 	uniqueVisitorsBadgeHandler,
+	type Handler,
 } from './handlers.ts';
 
-const routes: Route[] = [
+const routes: Array<{method: string[]; pattern: URLPattern; handler: Handler}> = [
 	{
 		method: ['GET', 'HEAD'],
-		pattern: new URLPattern({ pathname: '/' }),
+		pattern: new URLPattern({pathname: '/'}),
 		handler: homepageHandler,
 	},
 	{
 		method: ['GET', 'HEAD'],
-		pattern: new URLPattern({ pathname: '/favicon.ico' }),
+		pattern: new URLPattern({pathname: '/favicon.ico'}),
 		handler: faviconHandler,
 	},
 	{
 		method: ['GET', 'HEAD'],
-		pattern: new URLPattern({ pathname: '/_badge/requests' }),
+		pattern: new URLPattern({pathname: '/_badge/requests'}),
 		handler: requestsBadgeHandler,
 	},
 	{
 		method: ['GET', 'HEAD'],
-		pattern: new URLPattern({ pathname: '/_badge/unique-visitors' }),
+		pattern: new URLPattern({pathname: '/_badge/unique-visitors'}),
 		handler: uniqueVisitorsBadgeHandler,
 	},
 	{
 		method: ['GET', 'HEAD'],
-		pattern: new URLPattern({ pathname: '/_badge/data-served' }),
+		pattern: new URLPattern({pathname: '/_badge/data-served'}),
 		handler: dataServedBadgeHandler,
 	},
 	{
 		method: ['GET', 'HEAD'],
-		pattern: new URLPattern({ pathname: '/:iconSlug/:color?/:darkModeColor?' }),
+		pattern: new URLPattern({pathname: '/:iconSlug/:color?/:darkModeColor?'}),
 		handler: iconHandler,
 	},
 ];
 
-const handler = route(routes, defaultHandler);
+const app = {
+	async fetch(request: Request) {
+		for (const {method, pattern, handler} of routes) {
+			if (!method.includes(request.method)) {
+				continue;
+			}
 
-export default {
-	fetch(req) {
-		return handler(req);
+			const parameters = pattern.exec(request.url);
+			if (parameters) {
+				return handler(request, parameters);
+			}
+		}
+
+		return defaultHandler(request);
 	},
-	onListen() {
-		const urlPrefix = 'http://0.0.0.0:8000';
+	onListen(hostname = '0.0.0.0', port = 8000) {
+		const urlPrefix = `http://${hostname}:${port}`;
 		const badgeEndpoint = `${urlPrefix}/_badge`;
 		console.log(
 			[
@@ -61,4 +70,6 @@ export default {
 			].join('\n'),
 		);
 	},
-} satisfies Deno.ServeDefaultExport;
+};
+
+export default app;

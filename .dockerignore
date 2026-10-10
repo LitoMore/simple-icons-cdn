@@ -1,3 +1,5 @@
 .vscode
 fly.toml
 coverage
+node_modules
+.git

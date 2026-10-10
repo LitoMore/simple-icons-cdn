@@ -1,14 +1,20 @@
 {
-	"name": "Deno",
+	"name": "Node.js",
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "24"
+		}
+	},
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"denoland.vscode-deno"
+				"dbaeumer.vscode-eslint"
 			]
 		}
 	},
+	"postCreateCommand": "npm ci",
 	"forwardPorts": [8000]
 }

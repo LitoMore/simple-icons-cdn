@@ -1,35 +1,31 @@
 import * as simpleIcons from 'simple-icons';
-import type { SimpleIcon } from 'simple-icons';
-import { svgPathBbox } from 'svg-path-bbox';
+import type {SimpleIcon} from 'simple-icons';
+import {svgPathBbox} from 'svg-path-bbox';
 import svgpath from 'svgpath';
-import { baseIconSize, maxIconSize, minIconSize } from './constants.ts';
-import { normalizeColor } from './utils.ts';
+import {baseIconSize, maxIconSize, minIconSize} from './constants.ts';
+import {normalizeColor} from './utils.ts';
 
 const icons = new Map(Object.entries(simpleIcons));
 
 export const getSimpleIcon = (slug?: string) => {
-	if (!slug) {
+	if (slug === undefined || slug.length === 0) {
 		return null;
 	}
 
-	const normaizedSlug = slug
+	const normalizedSlug = slug
 		.toLowerCase()
-		.replaceAll(/[ +]/g, 'plus')
+		.replaceAll(/[ +]/gv, 'plus')
 		.replaceAll('.', 'dot');
 
-	const iconKey = 'si' + normaizedSlug.charAt(0).toUpperCase() +
-		normaizedSlug.slice(1) as keyof typeof simpleIcons;
+	const iconKey = 'si' + normalizedSlug.charAt(0).toUpperCase()
+		+ normalizedSlug.slice(1) as keyof typeof simpleIcons;
 
-	if (icons.has(iconKey)) {
-		return icons.get(iconKey) as SimpleIcon;
-	}
-
-	return null;
+	return icons.has(iconKey) ? (icons.get(iconKey) as SimpleIcon) : null;
 };
 
 export const getIconSize = (path: typeof svgpath) => {
 	const [x0, y0, x1, y1] = svgPathBbox(path);
-	return { width: x1 - x0, height: y1 - y0 };
+	return {width: x1 - x0, height: y1 - y0};
 };
 
 export const resetIconPosition = (
@@ -55,7 +51,7 @@ export const resetIconPosition = (
 	)
 		.round(3)
 		.toString();
-	return { path: pathReset, betterViewboxWidth };
+	return {path: pathReset, betterViewboxWidth};
 };
 
 export const getIconSvg = (icon: SimpleIcon, options: {
@@ -65,18 +61,18 @@ export const getIconSvg = (icon: SimpleIcon, options: {
 	size?: string;
 }) => {
 	const defaultColor = `#${icon.hex}`;
-	const { color = '', darkModeColor = '', viewbox = '', size = '' } = options;
-	const hex = color ? normalizeColor(color, defaultColor) : defaultColor;
-	const darkModeHex = darkModeColor
+	const {color = '', darkModeColor = '', viewbox = '', size = ''} = options;
+	const hex = color.length > 0 ? normalizeColor(color, defaultColor) : defaultColor;
+	const darkModeHex = darkModeColor.length > 0
 		? normalizeColor(darkModeColor, defaultColor)
 		: defaultColor;
 	let iconSvg = icon.svg;
 
 	if (viewbox === 'auto') {
 		const pathInstance = svgpath(icon.path);
-		const { width: iconWidth, height: iconHeight } = getIconSize(pathInstance);
+		const {width: iconWidth, height: iconHeight} = getIconSize(pathInstance);
 		if (iconWidth !== iconHeight) {
-			const { path, betterViewboxWidth } = resetIconPosition(
+			const {path, betterViewboxWidth} = resetIconPosition(
 				pathInstance,
 				iconWidth,
 				iconHeight,
@@ -85,19 +81,19 @@ export const getIconSvg = (icon: SimpleIcon, options: {
 			iconSvg = iconSvg
 				.replace(
 					`viewBox="0 0 ${baseIconSize} ${baseIconSize}"`,
-					`viewBox="0 0 ${betterViewboxWidth} ${baseIconSize}"`,
+					() => `viewBox="0 0 ${betterViewboxWidth} ${baseIconSize}"`,
 				)
-				.replace(/<path d=".*"\/>/, `<path d="${path}"/>`);
+				.replace(/<path d=".*"\/>/v, () => `<path d="${path}"/>`);
 		}
 	}
 
-	const iconSize = parseInt(size, 10);
-	if (iconSize && iconSize > 0) {
-		const sizePattern = /viewBox="0 0 (?<width>\d+) (?<height>\d+)"/;
+	const iconSize = Math.trunc(Number(size));
+	if (iconSize > 0) {
+		const sizePattern = /viewBox="0 0 (?<width>\d+) (?<height>\d+)"/v;
 		const sizeMatch = sizePattern.exec(iconSvg);
 		const width = Number(sizeMatch?.groups?.width);
 		const height = Number(sizeMatch?.groups?.height);
-		if (width && height) {
+		if (width > 0 && height > 0) {
 			const maxScale = maxIconSize / baseIconSize;
 			const minScale = minIconSize / baseIconSize;
 			const scale = Math.max(
@@ -108,17 +104,17 @@ export const getIconSvg = (icon: SimpleIcon, options: {
 			const iconHeight = Math.round(height * scale);
 			iconSvg = iconSvg.replace(
 				'<svg ',
-				`<svg width="${iconWidth}" height="${iconHeight}" `,
+				() => `<svg width="${iconWidth}" height="${iconHeight}" `,
 			);
 		}
 	}
 
-	if (darkModeColor && hex !== darkModeHex) {
+	if (hex !== darkModeHex && darkModeColor.length > 0) {
 		return iconSvg.replace(
 			'<path ',
-			`<style>path{fill:${hex}} @media (prefers-color-scheme:dark){path{fill:${darkModeHex}}}</style><path `,
+			() => `<style>path{fill:${hex}} @media (prefers-color-scheme:dark){path{fill:${darkModeHex}}}</style><path `,
 		);
 	}
 
-	return iconSvg.replace('<svg ', `<svg fill="${hex}" `);
+	return iconSvg.replace('<svg ', () => `<svg fill="${hex}" `);
 };

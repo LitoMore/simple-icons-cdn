@@ -9,21 +9,21 @@
 
 ## Coding guidelines
 
-### Deno
+### Node.js
 
-This project written in Deno. You can get Deno from [deno.com](https://deno.com).
-We usually use the latest version of Deno for development, so please feel free to install the latest version.
+This project requires Node.js 24.11.0 or later. Install dependencies with `npm ci`.
+Node.js runs the TypeScript source files directly; `npm run check` checks types without generating JavaScript files.
 
 ### Tests
 
-When adding or changing features please write tests. We're using Deno's built-in [`Deno.test()`](https://docs.deno.com/runtime/fundamentals/testing/) utilities for testing.
+When adding or changing features please write tests. We use Node.js's built-in [`node:test`](https://nodejs.org/api/test.html) runner and `node:assert/strict` assertions.
 
-You can use `deno test` to run unit tests. And use `deno task test` to test all code formats, linting, types, and unit tests.
+Run `npm test` to run all unit and HTTP integration tests. Use `npm run check` to check types and `npm run lint` to check code style with XO.
 
 ### Coverage
 
-We require code coverage to be 100% all the time. You can use `deno task test` to generate a coverage report in HTML.
+Line and function coverage must remain at 100%. Use `npm run test:coverage` to generate a coverage report and enforce these thresholds with Node.js's built-in test runner.
 
 ### Development
 
-Use `deno task dev` to start a development server, watching for changes and running on a specific port.
+Use `npm run dev` to start a development server with file watching, or `npm run serve` to start it normally. The server listens on `0.0.0.0:8000` by default; set `PORT` to use another port.

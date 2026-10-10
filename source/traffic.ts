@@ -1,3 +1,5 @@
+import process from 'node:process';
+
 const CLOUDFLARE_GRAPHQL_API_URL =
 	'https://api.cloudflare.com/client/v4/graphql';
 const CLOUDFLARE_SI_HOSTNAME = 'cdn.simpleicons.org';
@@ -16,7 +18,7 @@ type CloudflareSite = {
 	zoneTag: string;
 };
 
-let cache: { expiresAt: number; traffic: Traffic } | undefined;
+let cache: {expiresAt: number; traffic: Traffic} | undefined;
 let inFlightRequest: Promise<Traffic> | undefined;
 
 type CloudflareGraphqlResponse = {
@@ -24,16 +26,16 @@ type CloudflareGraphqlResponse = {
 		viewer?: {
 			accounts?: Array<{
 				traffic?: Array<{
-					count?: number | string | null;
+					count?: number | string | undefined;
 					sum?: {
-						edgeResponseBytes?: number | string | null;
+						edgeResponseBytes?: number | string | undefined;
 					};
 				}>;
 			}>;
 			zones?: Array<{
 				uniqueVisitors?: Array<{
 					uniq?: {
-						uniques?: number | string | null;
+						uniques?: number | string | undefined;
 					};
 				}>;
 			}>;
@@ -57,7 +59,7 @@ type LastOneMonthTrafficOptions = {
 
 type FetchLastOneMonthTrafficOptions =
 	& Omit<LastOneMonthTrafficOptions, 'now'>
-	& { now: () => Date };
+	& {now: () => Date};
 
 // Cloudflare exposes unique IPs only through its zone rollups, whose filters do
 // not include hostnames. Requests and data served remain hostname-scoped.
@@ -112,7 +114,7 @@ const getRequiredEnv = (
 ) => {
 	for (const name of names) {
 		const value = getEnv(name);
-		if (value) {
+		if (value !== undefined && value.length > 0) {
 			return value;
 		}
 	}
@@ -139,9 +141,9 @@ const getCloudflareSite = (
 });
 
 const toCloudflareTime = (date: Date) =>
-	date.toISOString().replace(/\.\d{3}Z$/, 'Z');
+	date.toISOString().replace(/\.\d{3}Z$/v, 'Z');
 
-const parseCountValue = (value: number | string | null | undefined) => {
+const parseCountValue = (value: number | string | undefined) => {
 	if (typeof value === 'number') {
 		return Number.isFinite(value) ? value : 0;
 	}
@@ -151,27 +153,19 @@ const parseCountValue = (value: number | string | null | undefined) => {
 	}
 
 	const trimmedValue = value.trim();
-	if (!trimmedValue) {
+	if (trimmedValue.length === 0) {
 		return 0;
 	}
 
-	const suffixMatch = trimmedValue.match(/^([+-]?\d+(?:\.\d+)?)\s*([KMB])$/i);
+	const suffixMatch = /^(?<base>[+\-]?\d+(?:\.\d+)?)\s*(?<suffix>[bkm])$/iv.exec(trimmedValue);
 	if (suffixMatch) {
-		const [, baseValue, suffix] = suffixMatch;
-		let multiplier = 1;
-		switch (suffix.toUpperCase()) {
-			case 'K':
-				multiplier = 1_000;
-				break;
-			case 'M':
-				multiplier = 1_000_000;
-				break;
-			case 'B':
-				multiplier = 1_000_000_000;
-				break;
-		}
-
-		return Number(baseValue) * multiplier;
+		const {base: baseValue, suffix} = suffixMatch.groups as {base: string; suffix: string};
+		const multipliers: Record<string, number> = {
+			k: 1000,
+			m: 1_000_000,
+			b: 1_000_000_000,
+		};
+		return Number(baseValue) * multipliers[suffix.toLowerCase()];
 	}
 
 	const numericValue = Number(trimmedValue);
@@ -201,11 +195,7 @@ export const formatCount = (value: number) => {
 		return formatWithSuffix(1_000_000, ' million');
 	}
 
-	if (absoluteValue >= 1_000) {
-		return `${(value / 1_000).toFixed(0)}k`;
-	}
-
-	return String(value);
+	return absoluteValue >= 1000 ? `${(value / 1000).toFixed(0)}k` : String(value);
 };
 
 export const formatBytes = (value: number) => {
@@ -221,7 +211,7 @@ export const formatBytes = (value: number) => {
 
 	if (absoluteValue >= 1_000_000_000_000) {
 		const formatted = (value / 1_000_000_000_000).toFixed(2).replace(
-			/\.?0+$/,
+			/(?:\.00|0)$/v,
 			'',
 		);
 		return `${formatted} TB`;
@@ -235,11 +225,7 @@ export const formatBytes = (value: number) => {
 		return formatWithUnit(1_000_000, 'MB');
 	}
 
-	if (absoluteValue >= 1_000) {
-		return formatWithUnit(1_000, 'KB');
-	}
-
-	return `${value} B`;
+	return absoluteValue >= 1000 ? formatWithUnit(1000, 'KB') : `${value} B`;
 };
 
 const getLastOneMonthDateRange = (now: Date) => {
@@ -249,7 +235,7 @@ const getLastOneMonthDateRange = (now: Date) => {
 		now.getUTCDate(),
 	));
 	const start = new Date(
-		end.getTime() - LAST_ONE_MONTH_IN_DAYS * DAY_IN_MILLISECONDS,
+		end.getTime() - (LAST_ONE_MONTH_IN_DAYS * DAY_IN_MILLISECONDS),
 	);
 
 	return {
@@ -287,7 +273,7 @@ const fetchSiteTraffic = async (
 			},
 		}),
 		headers: {
-			'Authorization': `Bearer ${apiToken}`,
+			authorization: `Bearer ${apiToken}`,
 			'Content-Type': 'application/json',
 		},
 		method: 'POST',
@@ -301,10 +287,11 @@ const fetchSiteTraffic = async (
 	}
 
 	const payload = await response.json() as CloudflareGraphqlResponse;
-	if (payload.errors?.length) {
+	const errors = payload.errors ?? [];
+	if (errors.length > 0) {
 		throw new Error(
 			`Cloudflare GraphQL API returned errors: ${
-				payload.errors.map((error) => error.message ?? 'Unknown error').join(
+				errors.map(error => error.message ?? 'Unknown error').join(
 					', ',
 				)
 			}`,
@@ -343,8 +330,8 @@ const fetchSiteTraffic = async (
 
 const fetchLastOneMonthTraffic = async (
 	{
-		fetch: fetcher = globalThis.fetch,
-		getEnv = (name) => Deno.env.get(name),
+		fetch: fetcher = fetch,
+		getEnv = name => process.env[name],
 		now,
 	}: FetchLastOneMonthTrafficOptions,
 ) => {
@@ -364,12 +351,12 @@ const fetchLastOneMonthTraffic = async (
 	return fetchedData;
 };
 
-export const lastOneMonthTraffic = (
+export const lastOneMonthTraffic = async (
 	options: LastOneMonthTrafficOptions = {},
 ): Promise<Traffic> => {
 	const now = options.now ?? (() => new Date());
 	if (cache && now().getTime() < cache.expiresAt) {
-		return Promise.resolve(cache.traffic);
+		return cache.traffic;
 	}
 
 	if (inFlightRequest) {
@@ -378,7 +365,7 @@ export const lastOneMonthTraffic = (
 
 	const request = (async () => {
 		try {
-			const traffic = await fetchLastOneMonthTraffic({ ...options, now });
+			const traffic = await fetchLastOneMonthTraffic({...options, now});
 			cache = {
 				expiresAt: now().getTime() + DAY_IN_MILLISECONDS,
 				traffic,
@@ -395,4 +382,7 @@ export const lastOneMonthTraffic = (
 
 export const lastOneMonthRequests = async (
 	options: LastOneMonthTrafficOptions = {},
-) => (await lastOneMonthTraffic(options)).requests;
+) => {
+	const traffic = await lastOneMonthTraffic(options);
+	return traffic.requests;
+};

@@ -1,0 +1,15 @@
+name: Node.js
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Node.js
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run test:coverage
