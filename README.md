@@ -134,7 +134,9 @@ imgcat -u 'https://cdn.simpleicons.org/go?viewbox=auto&size=48'
 
 ### Domain aliases
 
-- [cdn.simpleicons.org](https://cdn.simpleicons.org/simpleicons)
+> [!IMPORTANT]\
+> The icons.ly domain is expensive to renew. If this project does not receive sponsorship, the domain will be taken offline after December 31, 2027.
+
 - [icons.ly](https://icons.ly/simpleicons)
 
 ## Related
