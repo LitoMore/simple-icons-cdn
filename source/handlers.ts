@@ -28,7 +28,7 @@ export const homepageHandler: Handler = () => new Response(
 		headers: {
 			'Cache-Control': cacheForOneYearHeader,
 			// eslint-disable-next-line @typescript-eslint/naming-convention
-			Location: 'https://github.com/LitoMore/simple-icons-cdn',
+			Location: 'https://simpleicons.org/cdn',
 		},
 		status: 307,
 	},

@@ -47,7 +47,7 @@ await test('root URL', async (t: TestContext) => {
 	t.assert.strictEqual(response.headers.get('Cache-Control'), cacheForOneYearHeader);
 	t.assert.strictEqual(
 		response.headers.get('Location'),
-		'https://github.com/LitoMore/simple-icons-cdn',
+		'https://simpleicons.org/cdn',
 	);
 	t.assert.strictEqual(response.body, null);
 

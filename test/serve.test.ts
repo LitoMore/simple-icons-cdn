@@ -124,7 +124,7 @@ await test('Node.js HTTP server', async (t: TestContext) => {
 				t.assert.strictEqual(root.status, 307);
 				t.assert.strictEqual(
 					root.headers.location,
-					'https://github.com/LitoMore/simple-icons-cdn',
+					'https://simpleicons.org/cdn',
 				);
 				t.assert.strictEqual(root.headers['cache-control'], cacheForOneYearHeader);
 				t.assert.strictEqual(root.body, '');
